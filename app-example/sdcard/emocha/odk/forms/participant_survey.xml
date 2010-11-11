@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+	<h:head>
+		<h:title>Appendix XII: Participant Survey</h:title>
+
+		<model>
+			<itext>
+			  <translation lang="English">
+			    <text id="intro">
+			      <value>To learn if doing HIV testing, counseling, and referrals in people’s homes help people. We want to learn more about what you all thought about the approach used in this study. (When ready, slide to the next screen)</value>
+			    </text>
+			  </translation>
+			</itext>
+			<instance>
+				<data>
+					<meta>
+						<form_name>Participant Survey</form_name>
+						<form_version>0.0.3</form_version>
+						<start />
+						<end />
+						<today />
+						<device_id />
+						<subscriber_id />
+						<sim_id />
+					</meta>
+
+					<intro />
+					<reason_agreed />
+					<reason_agreed_other />
+					<mobile_acceptable />
+					<referrals_acceptable />
+					<follow_up_freq />
+					<recommends_study />
+				</data>
+			</instance>
+
+			<bind nodeset="/data/meta/start" type="dateTime" jr:preload="timestamp" jr:preloadParams="start" />
+			<bind nodeset="/data/meta/end" type="dateTime" jr:preload="timestamp" jr:preloadParams="end" />
+			<bind nodeset="/data/meta/today" type="date" jr:preload="date" jr:preloadParams="today" />
+			<bind nodeset="/data/meta/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid" />
+			<bind nodeset="/data/meta/subscriber_id" type="string" jr:preload="property" jr:preloadParams="subscriberid" />
+			<bind nodeset="/data/meta/sim_id" type="string" jr:preload="property" jr:preloadParams="simserial" />
+
+			<!-- Questions -->
+			<bind nodeset="/data/intro" type="string" readonly="true()" />
+			<bind nodeset="/data/reason_agreed" type="string" />
+			<bind nodeset="/data/reason_agreed_other" type="string" relevant="/data/reason_agreed = '5'" />
+			<bind nodeset="/data/mobile_acceptable" type="string" />
+			<bind nodeset="/data/referrals_acceptable" type="string" />
+			<bind nodeset="/data/follow_up_freq" type="string" />
+			<bind nodeset="/data/recommends_study" type="string" />
+
+		</model>
+	</h:head>
+	<h:body>
+		<input ref="intro">
+			<label>In this study, we tried</label>
+			<hint ref="jr:itext('intro')"></hint>
+		</input>
+
+		<select1 ref="reason_agreed">
+			<label>What was your main reason for agreeing to do the home-based testing?</label>
+			<item>
+				<value>1</value>
+				<label>I wanted to know my HIV status</label>
+			</item>
+			<item>
+				<value>2</value>
+				<label>My partner wanted me to do it</label>
+			</item>
+			<item>
+				<value>3</value>
+				<label>The rural parish mobilizer asked me to do it</label>
+			</item>
+			<item>
+				<value>4</value>
+				<label>It is more convenient than going to a VCT site</label>
+			</item>
+			<item>
+				<value>5</value>
+				<label>Other</label>
+			</item>
+		</select1>
+
+		<input ref="reason_agreed_other">
+			<label>So what was your main reason for agreeing?</label>
+		</input>
+
+		<select1 ref="mobile_acceptable">
+			<label>How acceptable was it to you to have the staff use the mobile phone that was used in this study?</label>
+			<item>
+				<value>0</value>
+				<label>Not acceptable</label>
+			</item>
+			<item>
+				<value>1</value>
+				<label>Somewhat not acceptable</label>
+			</item>
+			<item>
+				<value>2</value>
+				<label>Average acceptable</label>
+			</item>
+			<item>
+				<value>3</value>
+				<label>Quite acceptable</label>
+			</item>
+			<item>
+				<value>4</value>
+				<label>Very acceptable</label>
+			</item>
+		</select1>
+
+		<select1 ref="referrals_acceptable">
+			<label>What did you think about getting referrals for HIV prevention and care services after HBCT?</label>
+			<item>
+				<value>0</value>
+				<label>Not acceptable</label>
+			</item>
+			<item>
+				<value>1</value>
+				<label>Somewhat not acceptable</label>
+			</item>
+			<item>
+				<value>2</value>
+				<label>Average acceptable</label>
+			</item>
+			<item>
+				<value>3</value>
+				<label>Quite acceptable</label>
+			</item>
+			<item>
+				<value>4</value>
+				<label>Very acceptable</label>
+			</item>
+		</select1>
+
+		<select1 ref="follow_up_freq">
+			<label>How often do you think we should follow-up with people after the initial home visit to see how the referrals went?</label>
+			<item>
+				<value>0</value>
+				<label>Never</label>
+			</item>
+			<item>
+				<value>1</value>
+				<label>Within a month</label>
+			</item>
+			<item>
+				<value>2</value>
+				<label>Between 1-3 months</label>
+			</item>
+			<item>
+				<value>3</value>
+				<label>Between 3-6 months</label>
+			</item>
+			<item>
+				<value>4</value>
+				<label>More than 6 months</label>
+			</item>
+		</select1>
+
+		<select1 ref="recommends_study">
+			<label>Having been a part of this study where you received home based testing and prevention service referral, would you recommend participation to someone else?</label>
+			<item>
+				<value>0</value>
+				<label>No</label>
+			</item>
+			<item>
+				<value>1</value>
+				<label>Yes</label>
+			</item>
+			<item>
+				<value>77</value>
+				<label>Not sure</label>
+			</item>
+		</select1>
+
+	</h:body>
+</h:html>

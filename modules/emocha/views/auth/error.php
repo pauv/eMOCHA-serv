@@ -1,0 +1,1 @@
+<h1>Error</h1><?php if(isset($errors)) { 	echo View::factory('alert/errors')->set('errors', $errors)->render();}?>Please contact the administrator

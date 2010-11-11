@@ -1,0 +1,1 @@
+Log notes from telemed session

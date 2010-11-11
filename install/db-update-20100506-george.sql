@@ -1,0 +1,1 @@
+ALTER TABLE `uploaded_data` ADD `study_id` VARCHAR( 100 ) NOT NULL AFTER `form_id` ;

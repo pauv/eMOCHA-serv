@@ -1,0 +1,86 @@
+{
+    "forms": [
+        {
+            "id": "1",
+            "name": "Core.xml",
+            "description": "Household",
+            "parent": "",
+            "label": "" 
+        },
+        {
+            "id": "2",
+            "name": "Core_individual.xml",
+            "description": "Patient",
+            "parent": "1" 
+        },
+        {
+            "id": "3",
+            "name": "Circ_Initial.xml",
+            "description": "Patient",
+            "parent": "2",
+            "conditions": {
+                "required_forms": "2",
+                "required_answers": [
+                    {
+                        "form_id": "2",
+                        "xpath": "/data/show_circ_form",
+                        "value": "1" 
+                    } 
+                ] 
+            } 
+        },
+        {
+            "id": "4",
+            "name": "Circ_FU.xml",
+            "description": "Patient",
+            "parent": "2",
+            "conditions": {
+                "required_forms": "2,3" 
+            } 
+        },
+        {
+            "id": "5",
+            "name": "HIV_Pos_Initial.xml",
+            "description": "Patient",
+            "parent": "2",
+            "conditions": {
+                "required_forms": "2",
+                "required_answers": [
+                    {
+                        "form_id": "2",
+                        "xpath": "/data/show_hiv_form",
+                        "value": "1" 
+                    } 
+                ] 
+            } 
+        },
+        {
+            "id": "6",
+            "name": "HIV_Pos_FU.xml",
+            "description": "Patient",
+            "parent": "2",
+            "conditions": {
+                "required_forms": "2,5" 
+            } 
+        },
+        {
+            "id": "7",
+            "name": "participant_survey.xml",
+            "description": "Patient",
+            "parent": "2",
+            "conditions": {
+                
+            } 
+        } 
+    ],
+    "contacts": {
+        "consultation": "+256777667444",
+        "hospital": "+256777667444" 
+    },
+    "interval": {
+        "update_gps": 7200,
+        "call_server": 30,
+        "upd_download": 5 
+    },
+    "test_mode": "true"
+}

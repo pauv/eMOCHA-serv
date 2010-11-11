@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa">
+	<h:head>
+		<h:title>Social Harm Questionnaire</h:title>
+
+		<model>
+			<instance>
+				<data>
+					<meta>
+						<form_name>Social Harm Questionnaire</form_name>
+						<form_version>0.0.3</form_version>
+						<start />
+						<end />
+						<today />
+						<device_id />
+						<subscriber_id />
+						<sim_id />
+					</meta>
+
+					<patient_abused />	
+					<abuse_group />
+					<abuse_description>
+						<by_whom />
+						<verbally_abused />
+						<physically_abused />
+						<consequences />
+						<consequences_description />
+						<concise_description />
+					</abuse_description>
+					
+					<emocha_data>
+						<phone_id />										
+						<village_code />
+						<household_code />
+						<patient_code />										
+						<referral_done />										
+					</emocha_data>
+				</data>
+			</instance>
+
+			<bind nodeset="/data/meta/start" type="dateTime" jr:preload="timestamp" jr:preloadParams="start" />
+			<bind nodeset="/data/meta/end" type="dateTime" jr:preload="timestamp" jr:preloadParams="end" />
+			<bind nodeset="/data/meta/today" type="date" jr:preload="date" jr:preloadParams="today" />
+			<bind nodeset="/data/meta/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid" />
+			<bind nodeset="/data/meta/subscriber_id" type="string" jr:preload="property" jr:preloadParams="subscriberid" />
+			<bind nodeset="/data/meta/sim_id" type="string" jr:preload="property" jr:preloadParams="simserial" />
+
+			<!-- Questions -->
+			<bind nodeset="/data/patient_abused" type="string" />
+			<bind nodeset="/data/abuse_group" relevant="/data/patient_abused = '1'" />
+			<bind nodeset="/data/abuse_description/by_whom" type="string" />
+			<bind nodeset="/data/abuse_description/verbally_abused" type="string" />
+			<bind nodeset="/data/abuse_description/physically_abused" type="string" />
+			<bind nodeset="/data/abuse_description/consequences" type="string" />
+			<bind nodeset="/data/abuse_description/consequences_description" type="string" relevant="/data/abuse_description/consequences = '6' "/>
+			<bind nodeset="/data/abuse_description/concise_description" type="string" />
+
+			<!-- emocha related data -->
+			<bind nodeset="/data/emocha_data/phone_id" type="int" calculate="-1" />
+			<bind nodeset="/data/emocha_data/village_code" type="int" calculate="-1" />
+			<bind nodeset="/data/emocha_data/household_code" type="string" calculate="-1" />
+			<bind nodeset="/data/emocha_data/patient_code" type="string" calculate="-1" />
+			<bind nodeset="/data/emocha_data/referral_done" type="int" calculate="0" />
+			<!-- end emocha data-->
+		</model>
+	</h:head>
+	<h:body>
+
+		<select1 ref="/data/patient_abused">
+			<label>Since we last saw you, have you been verbally and/or physically abused as a result of learning your HIV results?</label>
+			<item><value>0</value><label>No</label></item>
+			<item><value>1</value><label>Yes</label></item>
+		</select1>
+
+		<group ref="/data/abuse_group">
+			<!-- Q2 -->
+			<input ref="/data/abuse_description/by_whom">
+				<label>By whom were you abused?</label>
+			</input>
+
+			<!-- Q3 -->
+			<select1 ref="/data/abuse_description/verbally_abused">
+				<label>Were you verbally abused by this person?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+
+			<!-- Q4 -->
+			<select1 ref="/data/abuse_description/physically_abused">
+				<label>Were you physically abused by this person?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+
+			<!-- Q4 -->
+			<select1 ref="/data/abuse_description/consequences">
+				<label>What were the consequences of the abuse?</label>
+				<item><value>0</value><label>None</label></item>
+				<item><value>1</value><label>Relationship break up</label></item>
+				<item><value>2</value><label>Loss of income or economic support</label></item>
+				<item><value>3</value><label>Loss of employment</label></item>
+				<item><value>4</value><label>Change of residence</label></item>
+				<item><value>5</value><label>Loss of custody of children</label></item>
+				<item><value>6</value><label>Other (specify)</label></item>
+			</select1>
+
+			<!-- Q4.1 -->
+			<input type="text" ref="/data/abuse_description/consequences_description">
+				<label>Please specify the consequences</label>
+			</input>
+
+			<!-- Q5 -->
+			<input type="text" ref="/data/abuse_description/concise_description">
+				<label>Concisely describe the social harm</label>
+			</input>
+
+		</group>
+	</h:body>
+</h:html>

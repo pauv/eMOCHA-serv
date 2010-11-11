@@ -1,0 +1,3 @@
+ALTER TABLE `forms` CHANGE `date_created` `last_modified` TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+
+ ALTER TABLE `uploaded_data` DROP INDEX `creator_phone_id`;

@@ -1,0 +1,938 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" 
+				xmlns:h="http://www.w3.org/1999/xhtml" 
+				xmlns:ev="http://www.w3.org/2001/xml-events" 
+				xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+				xmlns:jr="http://openrosa.org/javarosa">
+	<h:head>
+		<h:title>Core - individual</h:title>
+
+		<model>
+			<itext>
+			  <translation lang="English">
+			    <text id="warning_too_young">
+			      <value>No further questions will be asked. (When ready, slide to the next screen)</value>
+			    </text>
+			    <text id="warning_too_old">
+			      <value>Please confirm age you have entered, or go back to the previous screen and change it</value>
+			    </text>
+			    <text id="warning_ages_dont_match">
+			      <value>Please check the introduced ages by going back to the age screen</value>
+			    </text>
+			    <text id="warning_consent_provided">
+			      <value>No further questions will be asked. (When ready, slide to the next screen)</value>
+			    </text>
+			    <text id="warning_too_many_education_years">
+			      <value>Please confirm value you have entered, or go back to the previous screen and change it</value>
+			    </text>
+			    <text id="warning_education_years_dont_match">
+			      <value>Please check the introduced values by going back to the Years of education screen</value>
+			    </text>
+			    <text id="warning_sex_partners_num_dont_match">
+			      <value>Please check the introduced values by going back to the Number of sex partners screen</value>
+			    </text>
+			    <text id="discuss_confidentiality">
+			      <value>I want to assure you that the information that you share with me is confidential. Think about your most recent sexual partner. (When ready, slide to the next screen)</value>
+			    </text>
+			    <text id="discuss_p1">
+			      <value>Now I want to ask you the same questions for this sexual partner. (When ready, slide to the next screen)</value>
+			    </text>
+			    <text id="discuss_p2">
+			      <value>Now I want to ask you the same questions for this sexual partner. (When ready, slide to the next screen)</value>
+			    </text>
+			    <text id="hiv_status">
+			      <value>The calculated status based on the Determine / Statpak / Unigold tests is presented above in parenthesis</value>
+			    </text>
+			  </translation>
+			</itext>
+			<instance>
+				<data>
+			    <meta>
+						<form_name>Core Questionnaire - individual</form_name>
+						<form_version>0.0.3</form_version>
+						<start/>
+						<end/>
+						<today/>
+						<device_id/>
+						<subscriber_id/>
+						<sim_id/>
+					</meta>
+					
+					<individual>
+						<age />
+						<warning_too_young />
+						<warning_too_old />
+						<warning_ages_dont_match />
+						<sex />
+						<consent_provided />
+						<warning_consent_provided />
+						<HBCT_eligible />
+						<first_name />
+						<last_name />
+						<is_household_head />
+						<relationship_to_head />
+						<education_years />
+						<warning_too_many_education_years />
+						<warning_education_years_dont_match />
+						<occupation_type />
+						<occupation_other />					
+						<marital_status />
+						<spouses_num />
+						<sex_partners />
+						<sex_partners_num />
+						<sex_partners_num_validation />
+						<warning_sex_partners_num_dont_match />
+						<used_condom_last_time />
+						<tested_HIV_before />
+						<previous_HIV_result />
+						<shared_HIV_result />
+						<partner_has_HIV />
+						<is_pregnant />
+						<is_circumcised />
+						<recommend_circ />
+					</individual>
+										
+					<partners>
+						<start_time_stamp />
+						<discuss_confidentiality />
+						<p0>
+							<last_int_unit />
+							<last_int_days />
+							<last_int_months />
+							<last_int_years />
+							<first_int_unit />
+							<first_int_days />
+							<first_int_months />
+							<first_int_years />
+							<still_int />
+							<where_lives />
+							<age_type />
+							<age_diff_type />
+							<age_diff_years />
+						</p0>
+						<discuss_p1 />
+						<p1>
+							<last_int_unit />
+							<last_int_days />
+							<last_int_months />
+							<last_int_years />
+							<first_int_unit />
+							<first_int_days />
+							<first_int_months />
+							<first_int_years />
+							<still_int />
+							<where_lives />
+							<age_type />
+							<age_diff_type />
+							<age_diff_years />
+						</p1>
+						<discuss_p2 />
+						<p2>
+							<last_int_unit />
+							<last_int_days />
+							<last_int_months />
+							<last_int_years />
+							<first_int_unit />
+							<first_int_days />
+							<first_int_months />
+							<first_int_years />
+							<still_int />
+							<where_lives />
+							<age_type />
+							<age_diff_type />
+							<age_diff_years />
+						</p2>
+						<end_time_stamp />
+					</partners>
+					
+					<post_que>
+						<counselling_completed />
+						<HIV>
+							<test_done />
+							<Determine />
+							<Statpak />
+							<Unigold />
+							<Calculated />
+							<Status />
+							<result_received />
+						</HIV>
+						<has_non_present_partner />
+						<made_appointment_with_partner />
+						<why_no_appointment />
+						<partner_appointment_date />
+					</post_que>
+
+					<counselor_initials />
+					
+					<main_group />
+					<p0 />
+					<p1 />
+					<p2 />
+
+					<show_circ_form />
+					<show_hiv_form />
+					<show_social_harm_form />
+
+					<emocha_data>
+						<phone_id />
+						<village_code />
+						<household_code />
+						<patient_code />
+						<referral_done />
+					</emocha_data>
+				</data>
+			</instance>
+
+			<bind nodeset="/data/meta/start" type="dateTime" jr:preload="timestamp" jr:preloadParams="start"/>
+			<bind nodeset="/data/meta/end" type="dateTime" jr:preload="timestamp" jr:preloadParams="end"/>
+			<bind nodeset="/data/meta/today" type="date" jr:preload="date" jr:preloadParams="today"/>
+			<bind nodeset="/data/meta/device_id" type="string" jr:preload="property" jr:preloadParams="deviceid"/>
+			<bind nodeset="/data/meta/subscriber_id" type="string" jr:preload="property" jr:preloadParams="subscriberid"/>
+			<bind nodeset="/data/meta/sim_id" type="string" jr:preload="property" jr:preloadParams="simserial"/>
+
+			<bind nodeset="/data/individual/age" type="int" />
+			<bind nodeset="/data/individual/warning_too_young" type="string" readonly="true()" relevant="/data/individual/age &lt; 18" />
+			<bind nodeset="/data/individual/warning_too_old" type="int" relevant="/data/individual/age &gt; 99" />
+			<bind nodeset="/data/individual/warning_ages_dont_match" type="string" readonly="true()" relevant="/data/individual/age &gt; 99 and /data/individual/age != /data/individual/warning_too_old" />
+			<bind nodeset="/data/individual/sex" type="string" relevant="/data/individual/age &gt;= 18" />
+			
+			<bind nodeset="/data/individual/consent_provided" type="string" relevant="/data/individual/age &gt;= 18" />
+			<bind id="warning_consent_provided" nodeset="/data/individual/warning_consent_provided" type="string" readonly="true()" relevant="/data/individual/consent_provided = '0'" />
+			<bind nodeset="/data/individual/HBCT_eligible" type="string" relevant="/data/individual/consent_provided = '1' and /data/individual/age &gt;= 18" />
+			
+			<bind nodeset="/data/main_group" relevant="/data/individual/consent_provided = '1' and /data/individual/HBCT_eligible = '1' and /data/individual/age &gt;= 18" />
+			
+			<bind nodeset="/data/individual/first_name" type="string" />
+			<bind nodeset="/data/individual/last_name" type="string" />
+			<bind nodeset="/data/individual/is_household_head" type="string" />
+			<bind nodeset="/data/individual/relationship_to_head" type="string" relevant="/data/individual/is_household_head = '0'" />
+			<bind nodeset="/data/individual/education_years" type="int" />
+			<bind nodeset="/data/individual/warning_too_many_education_years" type="int" relevant="/data/individual/education_years &gt; 20" />
+			<bind nodeset="/data/individual/warning_education_years_dont_match" type="string" readonly="true()" relevant="/data/individual/education_years &gt; 20 and /data/individual/education_years != /data/individual/warning_too_many_education_years" />
+			<bind nodeset="/data/individual/occupation_type" type="string" />
+			<bind nodeset="/data/individual/occupation_other" type="string" relevant="/data/individual/occupation_type = '7'" />					
+			<bind nodeset="/data/individual/marital_status" type="string" />
+			<bind nodeset="/data/individual/spouses_num" type="int" relevant="/data/individual/marital_status = '2'" />
+			<bind nodeset="/data/individual/sex_partners" type="string" />
+			<bind nodeset="/data/individual/sex_partners_num" type="int" relevant="/data/individual/sex_partners = '1'" />
+			<bind nodeset="/data/individual/sex_partners_num_validation" type="int" relevant="/data/individual/sex_partners = '1'" />
+			<bind nodeset="/data/individual/warning_sex_partners_num_dont_match" type="string" readonly="true()" relevant="/data/individual/sex_partners = '1' and /data/individual/sex_partners_num != /data/individual/sex_partners_num_validation" />
+			<bind nodeset="/data/individual/used_condom_last_time" type="string" />
+			<bind nodeset="/data/individual/tested_HIV_before" type="string" />
+			<bind nodeset="/data/individual/previous_HIV_result" type="string" relevant="/data/individual/tested_HIV_before = '1'" />
+			<bind nodeset="/data/individual/shared_HIV_result" type="string" relevant="/data/individual/tested_HIV_before = '1' and /data/individual/previous_HIV_result != '99' and /data/individual/previous_HIV_result != '77'" />
+			<bind nodeset="/data/individual/partner_has_HIV" type="string" />
+			<bind nodeset="/data/individual/is_pregnant" type="string" relevant="/data/individual/sex = '1'" />
+			<bind nodeset="/data/individual/is_circumcised" type="string" relevant="/data/individual/sex = '0'" />
+			
+			<bind nodeset="/data/partners/start_time_stamp" type="int" calculate="now()" />			
+			<bind nodeset="/data/partners/discuss_confidentiality" type="string" readonly="true()" />
+			
+			<bind nodeset="/data/partners/p0/last_int_unit" type="string" />
+			<bind nodeset="/data/p0" relevant="/data/partners/p0/last_int_unit != '88'" />			
+			<bind nodeset="/data/partners/p0/last_int_days" type="int" relevant="/data/partners/p0/last_int_unit = '0'" />
+			<bind nodeset="/data/partners/p0/last_int_months" type="int" relevant="/data/partners/p0/last_int_unit = '1'" />
+			<bind nodeset="/data/partners/p0/last_int_years" type="int" relevant="/data/partners/p0/last_int_unit = '2'" />
+			<bind nodeset="/data/partners/p0/first_int_unit" type="string" />
+			<bind nodeset="/data/partners/p0/first_int_days" type="int" relevant="/data/partners/p0/first_int_unit = '0'" />
+			<bind nodeset="/data/partners/p0/first_int_months" type="int" relevant="/data/partners/p0/first_int_unit = '1'" />
+			<bind nodeset="/data/partners/p0/first_int_years" type="int" relevant="/data/partners/p0/first_int_unit = '2'"/>
+			<bind nodeset="/data/partners/p0/still_int" type="string" />
+			<bind nodeset="/data/partners/p0/where_lives" type="string" />
+			<bind nodeset="/data/partners/p0/age_type" type="string" />
+			<bind nodeset="/data/partners/p0/age_diff_type" type="string" relevant="/data/partners/p0/age_type = '1' or /data/partners/p0/age_type = '2'" />
+			<bind nodeset="/data/partners/p0/age_diff_years" type="int" relevant="/data/partners/p0/age_diff_type = '1'" />
+
+			<bind nodeset="/data/partners/discuss_p1" type="string" relevant="/data/partners/p0/last_int_unit != '88'" readonly="true()" />
+
+			<bind nodeset="/data/partners/p1/last_int_unit" type="string" relevant="/data/partners/p0/last_int_unit != '88'" />
+			<bind nodeset="/data/p1" relevant="/data/partners/p0/last_int_unit != '88' and /data/partners/p1/last_int_unit != '88'" />			
+			<bind nodeset="/data/partners/p1/last_int_days" type="int" relevant="/data/partners/p1/last_int_unit = '0'" />
+			<bind nodeset="/data/partners/p1/last_int_months" type="int" relevant="/data/partners/p1/last_int_unit = '1'" />
+			<bind nodeset="/data/partners/p1/last_int_years" type="int" relevant="/data/partners/p1/last_int_unit = '2'" />
+			<bind nodeset="/data/partners/p1/first_int_unit" type="string" />
+			<bind nodeset="/data/partners/p1/first_int_days" type="int" relevant="/data/partners/p1/first_int_unit = '0'" />
+			<bind nodeset="/data/partners/p1/first_int_months" type="int" relevant="/data/partners/p1/first_int_unit = '1'" />
+			<bind nodeset="/data/partners/p1/first_int_years" type="int" relevant="/data/partners/p1/first_int_unit = '2'"/>
+			<bind nodeset="/data/partners/p1/still_int" type="string" />
+			<bind nodeset="/data/partners/p1/where_lives" type="string" />
+			<bind nodeset="/data/partners/p1/age_type" type="string" />
+			<bind nodeset="/data/partners/p1/age_diff_type" type="string" relevant="/data/partners/p1/age_type = '1' or /data/partners/p1/age_type = '2'" />
+			<bind nodeset="/data/partners/p1/age_diff_years" type="int" relevant="/data/partners/p1/age_diff_type = '1'" />
+
+			<bind nodeset="/data/partners/discuss_p2" type="string" relevant="/data/partners/p0/last_int_unit != '88' and /data/partners/p1/last_int_unit != '88'" readonly="true()" />
+
+			<bind nodeset="/data/partners/p2/last_int_unit" type="string" relevant="/data/partners/p0/last_int_unit != '88' and /data/partners/p1/last_int_unit != '88'" />
+			<bind nodeset="/data/p2" relevant="/data/partners/p0/last_int_unit != '88' and /data/partners/p1/last_int_unit != '88' and /data/partners/p2/last_int_unit != '88'" />			
+			<bind nodeset="/data/partners/p2/last_int_days" type="int" relevant="/data/partners/p2/last_int_unit = '0'" />
+			<bind nodeset="/data/partners/p2/last_int_months" type="int" relevant="/data/partners/p2/last_int_unit = '1'" />
+			<bind nodeset="/data/partners/p2/last_int_years" type="int" relevant="/data/partners/p2/last_int_unit = '2'" />
+			<bind nodeset="/data/partners/p2/first_int_unit" type="string" />
+			<bind nodeset="/data/partners/p2/first_int_days" type="int" relevant="/data/partners/p2/first_int_unit = '0'" />
+			<bind nodeset="/data/partners/p2/first_int_months" type="int" relevant="/data/partners/p2/first_int_unit = '1'" />
+			<bind nodeset="/data/partners/p2/first_int_years" type="int" relevant="/data/partners/p2/first_int_unit = '2'"/>
+			<bind nodeset="/data/partners/p2/still_int" type="string" />
+			<bind nodeset="/data/partners/p2/where_lives" type="string" />
+			<bind nodeset="/data/partners/p2/age_type" type="string" />
+			<bind nodeset="/data/partners/p2/age_diff_type" type="string" relevant="/data/partners/p2/age_type = '1' or /data/partners/p2/age_type = '2'" />
+			<bind nodeset="/data/partners/p2/age_diff_years" type="int" relevant="/data/partners/p2/age_diff_type = '1'" />
+
+			<bind nodeset="/data/partners/end_time_stamp" type="int" calculate="now()" />
+
+			<bind nodeset="/data/post_que/counselling_completed" type="string" />								
+			<bind nodeset="/data/post_que/HIV/test_done" type="string" />
+			<bind nodeset="/data/post_que/HIV/Determine" type="string" relevant="/data/post_que/HIV/test_done = '1'" />
+			<bind nodeset="/data/post_que/HIV/Statpak" type="string" relevant="/data/post_que/HIV/test_done = '1' and /data/post_que/HIV/Determine != '0'" />
+			<bind nodeset="/data/post_que/HIV/Unigold" type="string" relevant="/data/post_que/HIV/test_done = '1' and /data/post_que/HIV/Determine != '0' and /data/post_que/HIV/Statpak != '1'" />
+			<bind nodeset="/data/post_que/HIV/Calculated" type="string" relevant="/data/post_que/HIV/test_done = '1'" calculate="
+				if (/data/post_que/HIV/Determine='0', 'negative', 
+					if(/data/post_que/HIV/Statpak='1', 'positive', 
+						if(/data/post_que/HIV/Unigold='1', 'positive', 'negative')
+					)
+				)" />
+			<bind nodeset="/data/post_que/HIV/Status" type="string" relevant="/data/post_que/HIV/test_done = '1'" />
+			<bind nodeset="/data/post_que/HIV/result_received" type="string" relevant="/data/post_que/HIV/test_done = '1'" />
+			
+			<bind nodeset="/data/post_que/has_non_present_partner" type="string" />
+			<bind nodeset="/data/post_que/made_appointment_with_partner" type="string" relevant="/data/post_que/has_non_present_partner = '1'" />
+			<bind nodeset="/data/post_que/why_no_appointment" type="string" relevant="/data/post_que/has_non_present_partner='1' and /data/post_que/made_appointment_with_partner='0'" />
+			<bind nodeset="/data/post_que/partner_appointment_date" type="date" relevant="/data/post_que/has_non_present_partner='1' and /data/post_que/made_appointment_with_partner='1'" constraint=". &gt;= today()" jr:constraintMsg="only future dates allowed" />
+
+			<bind nodeset="/data/individual/recommend_circ" type="string" calculate="if ((/data/individual/sex='0' and /data/individual/is_circumcised='0' and /data/post_que/HIV/Status='0') and ((/data/individual/marital_status != '2' and /data/individual/sex_partners_num &gt; 1) or (/data/individual/marital_status = '2' and /data/individual/sex_partners_num &gt; 2)), '1', '0')" /> 
+
+			<bind nodeset="/data/counselor_initials" type="string" />
+
+			<!-- conditions are: 
+					1) HIV positive
+			-->
+			<bind nodeset="/data/show_hiv_form" type="string" calculate="if (/data/post_que/HIV/Status='1','1','0')" />
+			<!-- conditions are: 
+					1) male, uncircumcised, HIV negative, married non-polygamous/single and > 1 partner
+					2) male, uncircumcised, HIV negative, polygamous, and SP > 2 
+			-->
+			<bind nodeset="/data/show_circ_form" type="string" calculate="if (/data/individual/sex='0' and /data/individual/is_circumcised='0' and /data/post_que/HIV/Status='0' and ((/data/individual/marital_status !='2' and /data/individual/sex_partners_num &gt; 1) or (/data/individual/marital_status = '2' and /data/individual/sex_partners_num &gt; 2)),'1','0')" />
+
+			<!--  show only when HIV negative (HIV positive cases have these questions in the HIV_Pos_FU form) -->
+			<bind nodeset="/data/show_social_harm_form" type="string" calculate="if (/data/post_que/HIV/Status='0','1','0')" />
+
+			<!-- emocha related data -->
+			<bind nodeset="/data/emocha_data/phone_id" type="int" calculate="-1" />
+			<bind nodeset="/data/emocha_data/village_code" type="int" calculate="-1" />
+			<bind nodeset="/data/emocha_data/household_code" type="string" calculate="-1" />
+			<bind nodeset="/data/emocha_data/patient_code" type="string" calculate="-1" />
+			<bind nodeset="/data/emocha_data/referral_done" type="int" calculate="0" />
+			<!-- end emocha data-->
+		</model>
+	</h:head>
+	<h:body>
+
+		<!-- Screen 2: Pre-questionnaire information collected per individual within household -->
+
+		<!-- Individual Identifier Information -->
+
+		<!--number Q13-->
+		<input ref="/data/individual/age">
+			<label>Age</label>
+		</input>
+
+		<!-- warning too young -->
+		<input ref="/data/individual/warning_too_young">
+			<label>Individual under 18 years old</label>
+			<hint ref="jr:itext('warning_too_young')"></hint>
+		</input>
+
+		<!-- warning too old -->
+		<input ref="/data/individual/warning_too_old">
+			<label>Individual over 99 years old</label>
+			<hint ref="jr:itext('warning_too_old')"></hint>
+		</input>
+
+		<!-- warning ages don't match -->
+		<input ref="/data/individual/warning_ages_dont_match">
+			<label>Introduced ages don't match</label>
+			<hint ref="jr:itext('warning_ages_dont_match')"></hint>
+		</input>
+
+		<!-- Q14 -->
+		<select1 ref="/data/individual/sex">
+			<label>Sex</label>
+			<item><value>0</value><label>Male</label></item>
+			<item><value>1</value><label>Female</label></item>
+		</select1>
+
+		<!-- Q15 -->
+		<select1 ref="/data/individual/consent_provided">
+			<label>Consent provided?</label>
+			<item><value>0</value><label>No</label></item>
+			<item><value>1</value><label>Yes</label></item>
+		</select1>
+
+		<!-- warning consent must be provided -->
+		<input bind="warning_consent_provided">
+			<label>Consent must be provided</label>
+			<hint ref="jr:itext('warning_consent_provided')"></hint>
+		</input>
+		<!-- Q16 -->
+		<select1 ref="/data/individual/HBCT_eligible">
+			<label>Eligible for HBCT</label>
+			<item><value>0</value><label>No</label></item>
+			<item><value>1</value><label>Yes</label></item>
+		</select1>
+
+		<group ref="/data/main_group">
+
+			<!--text Q17-->
+			<input ref="/data/individual/first_name">
+				<label>First Name</label>
+			</input>
+	
+			<!--text Q18-->
+			<input ref="/data/individual/last_name">
+				<label>Last Name</label>
+			</input>
+	
+			<!-- Q19 -->
+			<select1 ref="/data/individual/is_household_head">
+				<label>Is this individual the head of household?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+		
+			<!-- Q20 TODO: how to link ID? -->
+			<select1 ref="/data/individual/relationship_to_head">
+				<label>Relationship to head of household</label>
+				<item><value>1</value><label>Sexual partner / wife / husband</label></item>
+				<item><value>2</value><label>Sibling</label></item>
+				<item><value>3</value><label>Parent</label></item>
+				<item><value>4</value><label>Relative</label></item>
+				<item><value>5</value><label>Child (must be greater than or equal to age 18)</label></item>
+			</select1>
+	
+			<!-- Demographic Information -->
+	
+			<!--number Q21-->
+			<input ref="/data/individual/education_years">
+				<label>Years of education</label>
+			</input>
+	
+		<!-- warning too many education years -->
+		<input ref="/data/individual/warning_too_many_education_years">
+			<label>Individual has more than 20 years of education?</label>
+			<hint ref="jr:itext('warning_too_many_education_years')"></hint>
+		</input>
+
+		<!-- warning years of education don't match -->
+		<input ref="/data/individual/warning_education_years_dont_match">
+			<label>Introduced years of education don't match</label>
+			<hint ref="jr:itext('warning_education_years_dont_match')"></hint>
+		</input>
+
+			<!-- Q22 -->
+			<select1 ref="/data/individual/occupation_type">
+				<label>Occupation</label>
+				<item><value>1</value><label>professional</label></item>
+				<item><value>2</value><label>trade / sales</label></item>
+				<item><value>3</value><label>laborer / semi-skilled</label></item>
+				<item><value>4</value><label>farming / animal raising</label></item>
+				<item><value>5</value><label>homemaker</label></item>
+				<item><value>6</value><label>student</label></item>
+				<item><value>7</value><label>other</label></item>
+			</select1>
+		
+			<input ref="/data/individual/occupation_other">
+				<label>Occupation (other)</label>
+			</input>
+	
+			<!-- Screen 3: Core questionnaire -->
+	
+			<!-- Q23 -->
+			<select1 ref="/data/individual/marital_status"> 
+				<label>What is your marital status?</label>
+				<item><value>1</value><label>Married, one spouse</label></item>
+				<item><value>2</value><label>Married, polygamous</label></item>
+				<item><value>3</value><label>Living together, not married</label></item>
+				<item><value>4</value><label>Divorced</label></item>
+				<item><value>5</value><label>Widowed</label></item>
+				<item><value>6</value><label>Single</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+	
+			<input ref="/data/individual/spouses_num"> 
+				<label>How many spouses do you have?</label>
+			</input>
+	
+			<!-- Q24 -->
+			<select1 ref="/data/individual/sex_partners">
+				<label>How many sex partners do you have now (as of today)?</label>
+				<item><value>1</value><label>The number is...</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+	
+			<input ref="/data/individual/sex_partners_num"> 
+				<label>Number of sex partners</label>
+			</input>
+	
+			<input ref="/data/individual/sex_partners_num_validation"> 
+				<label>Please, enter again the number of sex partners</label>
+			</input>
+
+		<!-- warning number of sexual partners don't match -->
+		<input ref="/data/individual/warning_sex_partners_num_dont_match">
+			<label>Introduced number of sex partners don't match</label>
+			<hint ref="jr:itext('warning_sex_partners_num_dont_match')"></hint>
+		</input>
+
+			<!-- Q25 -->
+			<select1 ref="/data/individual/used_condom_last_time">
+				<label>The last time you had sexual intercourse, was a condom used?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+		
+			<!-- Q26 -->
+			<select1 ref="/data/individual/tested_HIV_before">
+				<label>Before today, have you ever tested for HIV before?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+		
+			<!-- Q27 -->
+			<select1 ref="/data/individual/previous_HIV_result">
+				<label>What were the results of the HIV test?</label>
+				<item><value>0</value><label>Negative</label></item>
+				<item><value>1</value><label>Positive</label></item>
+				<item><value>2</value><label>Results were indeterminate</label></item>
+				<item><value>77</value><label>Don't know, didn't receive the results</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+		
+			<!-- Q28 -->
+			<select1 ref="/data/individual/shared_HIV_result">
+				<label>Did you tell any of your sexual partner(s) the results of your HIV test?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+	
+			<!-- Q29 -->
+			<select1 ref="/data/individual/partner_has_HIV">
+				<label>Does your main partner have HIV?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>2</value><label>I don't think so</label></item>
+				<item><value>3</value><label>I think so</label></item>
+				<item><value>4</value><label>I do not have a main sexual partner</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+		
+			<!-- Q30 -->
+			<select1 ref="/data/individual/is_pregnant">
+				<label>Are you pregnant?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+		
+			<!-- Q31 -->
+			<select1 ref="/data/individual/is_circumcised">
+				<label>Circumcision is the removal of the foreskin on the male penis. Are you circumcised?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+				<item><value>2</value><label>Partial</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+			</select1>
+	
+			<!-- Screen 4: Concurrency questions -->
+	
+			<input ref="/data/partners/discuss_confidentiality">
+				<label>Now I want to ask you some questions about your current and past sexual partners.</label>
+				<hint ref="jr:itext('discuss_confidentiality')"></hint>
+			</input>
+	
+			<!-- Q32 -->
+			<select1 ref="/data/partners/p0/last_int_unit">
+				<label>When was the last time you had sexual intercourse with this person?</label>
+				<item><value>0</value><label>Days ago</label></item>
+				<item><value>1</value><label>Months ago</label></item>
+				<item><value>2</value><label>Years ago</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+				<item><value>88</value><label>Has never had a partner</label></item>
+			</select1>
+	
+			<group ref="/data/p0">
+
+				<input ref="/data/partners/p0/last_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p0/last_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p0/last_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+			
+				<!-- Q33 -->
+				<select1 ref="/data/partners/p0/first_int_unit">
+					<label>When was the first time you had sexual intercourse with this person?</label>
+					<item><value>0</value><label>Days ago</label></item>
+					<item><value>1</value><label>Months ago</label></item>
+					<item><value>2</value><label>Years ago</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+	
+				<input ref="/data/partners/p0/first_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p0/first_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p0/first_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+				
+				<!-- Q34 -->
+				<select1 ref="/data/partners/p0/still_int">
+					<label>Are you still having sex with this person?</label>
+					<item><value>0</value><label>No</label></item>
+					<item><value>1</value><label>Yes</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q35 -->
+				<select1 ref="/data/partners/p0/where_lives">
+					<label>Where does this person live?</label>
+					<item><value>1</value><label>In this household</label></item>
+					<item><value>2</value><label>In this village</label></item>
+					<item><value>3</value><label>In a different village that is in this district</label></item>
+					<item><value>4</value><label>Outside this district</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q36 -->
+				<select1 ref="/data/partners/p0/age_type">
+					<label>Is this person older/younger/about the same age as you?</label>
+					<item><value>1</value><label>Older</label></item>
+					<item><value>2</value><label>Younger</label></item>
+					<item><value>3</value><label>About same age</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+				
+				<!-- Q37 -->
+				<select1 ref="/data/partners/p0/age_diff_type">
+					<label>How many years older/younger?</label>
+					<item><value>1</value><label>Replied, answer is...</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<input ref="/data/partners/p0/age_diff_years"> 
+					<label>How many years older/younger?</label>
+				</input>
+				
+			</group>
+	
+	
+			<input ref="/data/partners/discuss_p1">
+				<label>Now, think about the person you had sex with before the person we just talked about.</label>
+				<hint ref="jr:itext('discuss_p1')"></hint>
+			</input>
+		
+			<!-- Q38 -->
+			<select1 ref="/data/partners/p1/last_int_unit">
+				<label>When was the last time you had sexual intercourse with this person?</label>
+				<item><value>0</value><label>Days ago</label></item>
+				<item><value>1</value><label>Months ago</label></item>
+				<item><value>2</value><label>Years ago</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+				<item><value>88</value><label>There aren't any additional sexual partners</label></item>
+			</select1>
+
+			<group ref="/data/p1">
+	
+				<input ref="/data/partners/p1/last_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p1/last_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p1/last_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+		
+				<!-- Q39 -->
+				<select1 ref="/data/partners/p1/first_int_unit">
+					<label>When was the first time you had sexual intercourse with this person?</label>
+					<item><value>0</value><label>Days ago</label></item>
+					<item><value>1</value><label>Months ago</label></item>
+					<item><value>2</value><label>Years ago</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<input ref="/data/partners/p1/first_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p1/first_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p1/first_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+		
+				<!-- Q40 -->
+				<select1 ref="/data/partners/p1/still_int">
+					<label>Are you still having sex with this person?</label>
+					<item><value>0</value><label>No</label></item>
+					<item><value>1</value><label>Yes</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q41 -->
+				<select1 ref="/data/partners/p1/where_lives">
+					<label>Where does this person live?</label>
+					<item><value>1</value><label>In this household</label></item>
+					<item><value>2</value><label>In this village</label></item>
+					<item><value>3</value><label>In a different village that is in this district</label></item>
+					<item><value>4</value><label>Outside this district</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q42 -->
+				<select1 ref="/data/partners/p1/age_type">
+					<label>Is this person older/younger/about the same age as you?</label>
+					<item><value>1</value><label>Older</label></item>
+					<item><value>2</value><label>Younger</label></item>
+					<item><value>3</value><label>About same age</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+				
+				<!-- Q43 -->
+				<select1 ref="/data/partners/p1/age_diff_type">
+					<label>How many years older/younger?</label>
+					<item><value>1</value><label>Replied, answer is...</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!--number-->
+				<input ref="/data/partners/p1/age_diff_years"> 
+					<label>How many years older/younger?</label>
+				</input>
+	
+			</group>
+	
+			<input ref="/data/partners/discuss_p2">
+				<label>Now, think about the person you had sex with before the person we just talked about.</label>
+				<hint ref="jr:itext('discuss_p2')"></hint>
+			</input>
+		
+			<!-- Q44 -->
+			<select1 ref="/data/partners/p2/last_int_unit">
+				<label>When was the last time you had sexual intercourse with this person?</label>
+				<item><value>0</value><label>Days ago</label></item>
+				<item><value>1</value><label>Months ago</label></item>
+				<item><value>2</value><label>Years ago</label></item>
+				<item><value>77</value><label>Don't know</label></item>
+				<item><value>99</value><label>Declined to answer</label></item>
+				<item><value>88</value><label>There aren't any additional sexual partners</label></item>
+			</select1>
+
+			<group ref="/data/p2">
+	
+				<input ref="/data/partners/p2/last_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p2/last_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p2/last_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+		
+				<!-- Q45 -->
+				<select1 ref="/data/partners/p2/first_int_unit">
+					<label>When was the first time you had sexual intercourse with this person?</label>
+					<item><value>0</value><label>Days ago</label></item>
+					<item><value>1</value><label>Months ago</label></item>
+					<item><value>2</value><label>Years ago</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<input ref="/data/partners/p2/first_int_days"> 
+					<label>How many days ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p2/first_int_months"> 
+					<label>How many months ago?</label>
+				</input>
+		
+				<input ref="/data/partners/p2/first_int_years"> 
+					<label>How many years ago?</label>
+				</input>
+				
+				<!-- Q46 -->
+				<select1 ref="/data/partners/p2/still_int">
+					<label>Are you still having sex with this person?</label>
+					<item><value>0</value><label>No</label></item>
+					<item><value>1</value><label>Yes</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q47 -->
+				<select1 ref="/data/partners/p2/where_lives">
+					<label>Where does this person live?</label>
+					<item><value>1</value><label>In this household</label></item>
+					<item><value>2</value><label>In this village</label></item>
+					<item><value>3</value><label>In a different village that is in this district</label></item>
+					<item><value>4</value><label>Outside this district</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<!-- Q48 -->
+				<select1 ref="/data/partners/p2/age_type">
+					<label>Is this person older/younger/about the same age as you?</label>
+					<item><value>1</value><label>Older</label></item>
+					<item><value>2</value><label>Younger</label></item>
+					<item><value>3</value><label>About same age</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+				
+				<!-- Q49 -->
+				<select1 ref="/data/partners/p2/age_diff_type">
+					<label>How many years older/younger?</label>
+					<item><value>1</value><label>Replied, answer is...</label></item>
+					<item><value>77</value><label>Don't know</label></item>
+					<item><value>99</value><label>Declined to answer</label></item>
+				</select1>
+		
+				<input ref="/data/partners/p2/age_diff_years"> 
+					<label>How many years older/younger?</label>
+				</input>
+				
+			</group>
+		
+			<!-- Screen 5: Post-questionnaire checklist -->
+	
+			<!-- Q50 -->
+			<select1 ref="/data/post_que/counselling_completed">
+				<label>Counseling completed</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+	
+			<!-- Q51 -->
+			<select1 ref="/data/post_que/HIV/test_done">
+				<label>HIV Test done</label>
+				<item><value>0</value><label>No, refused</label></item>
+				<item><value>2</value><label>No, other reason</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+	
+			<select1 ref="/data/post_que/HIV/Determine">
+				<label>HIV Results. Determine</label>
+				<item><value>0</value><label>nonreactive</label></item>
+				<item><value>1</value><label>reactive</label></item>
+				<item><value>2</value><label>invalid</label></item>
+			</select1>
+	
+			<select1 ref="/data/post_que/HIV/Statpak">
+				<label>HIV Results. Stat Pak</label>
+				<item><value>0</value><label>nonreactive</label></item>
+				<item><value>1</value><label>reactive</label></item>
+				<item><value>2</value><label>invalid</label></item>
+			</select1>
+	
+			<select1 ref="/data/post_que/HIV/Unigold">
+				<label>HIV Results. Unigold</label>
+				<item><value>0</value><label>nonreactive</label></item>
+				<item><value>1</value><label>reactive</label></item>
+				<item><value>2</value><label>invalid</label></item>
+			</select1>
+		
+			<select1 ref="/data/post_que/HIV/Status">
+				<label>HIV Status (<output value="/data/post_que/HIV/Calculated" />)</label>
+				<hint ref="jr:itext('hiv_status')"></hint>
+ 				<item><value>0</value><label>negative</label></item>
+				<item><value>1</value><label>positive</label></item>
+			</select1>
+	
+			<!-- Q53 -->
+			<select1 ref="/data/post_que/HIV/result_received">
+				<label>Results received by the individual</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+	
+			<!-- Q54 -->
+			<select1 ref="/data/post_que/has_non_present_partner">
+				<label>Does this individual have a sexual partner who was not present today?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+	
+			<!-- Q55 -->
+			<select1 ref="/data/post_que/made_appointment_with_partner">
+				<label>Did you make an appointment to return to test the sexual partner who was not present today?</label>
+				<item><value>0</value><label>No</label></item>
+				<item><value>1</value><label>Yes</label></item>
+			</select1>
+	
+			<!-- Q56  -->
+			<select1 ref="/data/post_que/why_no_appointment">
+				<label>Why not?</label>
+				<item><value>1</value><label>Individual's sexual partner lives elsewhere</label></item>
+				<item><value>2</value><label>Individual not willing</label></item>
+				<item><value>3</value><label>Individual has multiple partners</label></item>
+			</select1>
+	
+			<!--dd/mmm/yy-->
+			<input ref="/data/post_que/partner_appointment_date">
+				<label>Enter sexual partners appointment date</label>
+			</input>
+
+		</group>
+
+		<!--text-->
+		<input ref="/data/counselor_initials">
+			<label>Initials of individual conducting sessions</label>
+		</input>
+
+		<!--
+		Programming: Module Triggers
+		1.) Male Circ PrevRx Module: /data/individual/recommend_circ = '1'
+		2.) HIV Positive PrevRx Module: /data/post_que/HIV/Status = '1'
+		-->
+	</h:body>
+</h:html>
