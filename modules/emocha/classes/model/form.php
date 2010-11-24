@@ -11,7 +11,8 @@ class Model_Form extends ORM {
 	ORM Relationships
 	*/
 	protected $_has_many = array (
-								'form_datas'=>array()
+								'form_datas'=>array(),
+								'form_files'=>array()
 							);
 							
 	// this relationship is really a 'has_one' relationship
@@ -74,7 +75,6 @@ class Model_Form extends ORM {
 						->filter('description', 'trim')
 						->filter('conditions', 'trim')
 						->filter('label', 'trim')
-						->filter('parent_id', 'trim')
 						->filter('code', 'trim');
 		
 		if($mode=='create') {
@@ -112,30 +112,6 @@ class Model_Form extends ORM {
 	
 	
 	
-	
-	
-		/*
-		 * read instance files into an array or arrays
-		 */
-		 /*
-	public function get_rows() {
-			
-			$row_num = 0;
-			
-			foreach($this->data AS $row) {	
-				$row_xml = simplexml_load_string(stripslashes($row->xml_content));
-							if ($row_xml) {
-								$this->_get_row($row_num, $row_xml, '');	
-							}
-						} 
-						$row_num++;
-					}
-				}
-			}
-			
-			return $this->rows;
-		}
-		*/
 		
 		/*
 		 * read from data a single instance result file
@@ -161,9 +137,18 @@ class Model_Form extends ORM {
 			$config['group'] = $this->group;
 			$config['code'] = $this->code;
 			$config['description'] = $this->description;
-			$config['parent'] = $this->parent_id;
 			$config['conditions'] = json_decode($this->conditions);
 			$config['label'] = $this->label;
+			$config['template'] = $this->file->api_array();
+			$config['files'] = array();
+			/*echo "<hr>";
+			echo $this->name."<br>";
+			echo Kohana::debug($this->form_files->find_all());*/
+			foreach ($this->form_files->find_all() as $form_file) {
+				if ($form_file->loaded()) {
+					$config['files'][] = $form_file->api_array();
+				}
+			}
 			
 			return $config;
 		}

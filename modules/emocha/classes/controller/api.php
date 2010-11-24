@@ -50,29 +50,6 @@ class Controller_Api extends Controller {
     }   
     
     
-    /*
-    TODO DEPRECATE
-    */
-    public function action_get_sdcard_file_list() {
- 		
-	  	$last_server_update = Sdcard::get_last_server_update();
-	  	$responseA['last_server_upd'] = $last_server_update;
-	
-		if ($last_server_update != Arr::get($_POST, 'last_server_upd')) {
-			$responseA['files'] = Sdcard::get_file_list_from_db();			
-		} 
-
-		// we return the last form-data upload timestamp
-		// so the phone knows he must send us all form-data
-		// newer than that timestamp
-		$ts = $this->phone->get_last_upload_ts();
-		$responseA['last_form_data_upload'] = $ts;
-		
-		$json = View::factory('json/display', Json::response('OK', 'get_sdcard_file_list', $responseA))->render();
-		$this->request->response = $json;
-    }
-    
-    
     public function action_get_server_updated_times() {
     	$response = Api::get_server_updated_times();
     	$json = View::factory('json/display', Json::response('OK', 'get_server_updated_times', $response))->render();
@@ -112,7 +89,7 @@ class Controller_Api extends Controller {
 			$files_arr = array();
 			foreach ($forms as $form) {
 				if ($form->file->loaded()) {
-					$files_arr[] = $this->file_as_array($form->file);
+					$files_arr[] = $form->file->api_array();
 				}
 			}
 			$responseA['files'] = $files_arr;			
@@ -132,7 +109,7 @@ class Controller_Api extends Controller {
 			$files_arr = array();
 			foreach ($medias as $media) {
 				if ($media->file->loaded()) {
-					$files_arr[] = $this->file_as_array($media->file);
+					$files_arr[] = $media->file->api_array();
 				}
 			}
 			$responseA['files'] = $files_arr;			
@@ -142,16 +119,6 @@ class Controller_Api extends Controller {
 		
     }
     
-    
-    private function file_as_array ($file) {
-    	$arr = Array(
-					"path"		=> $file->path, 
-					"ts"		=> $file->ts, 
-					"size"		=> $file->size, 
-					"md5"		=> $file->md5
-		  			);
-		return $arr;
-    }
     
     
     
@@ -238,58 +205,6 @@ class Controller_Api extends Controller {
 		$this->request->response = $json;
 		
 	}
-	
-	
-	/*
-	 * Upload file from phone
-	 */
-	 /*
-    function action_upload_file() {
-
-		if(! $path0 = Arr::get($_POST, "path0")) {
-			$json = View::factory('json/display', Json::response('ERR', "path0 is empty"))->render();
-		}
-		
-		else {
-			$path = pathinfo(trim($path0, '/'));
-			$directory = 'sdcard/'.$this->phone->id.'/'.$path['dirname'];
-			if (!is_dir($directory)) {
-				if (!mkdir($directory, 0755, true)) {
-					$json = View::factory('json/display', Json::response('ERR', "Can not create user directory $directory"))->render();
-					$this->request->response = $json;
-					return;    
-				}
-			}
-		
-			$validation = Validate::factory($_FILES)
-						->rules('file0', array(
-												'upload::not_empty'=>NULL,
-												'upload::valid'=>NULL, 
-												'upload::type'=>array(array('txt','xml','png','jpg')), 
-												'upload::size'=>array('1M')
-												));
-			if ( ! $validation->check()){
-				$json = View::factory('json/display', Json::response('ERR', "Invalid or non-existent file"))->render();
-			} 
-			else {
-				// save the file
-				if(! upload::save($_FILES['file0'], $path['filename'], $directory) ) {
-					$json = View::factory('json/display', Json::response('ERR', "file upload failed"))->render();
-				}
-				
-				else {
-					$json = View::factory('json/display', Json::response('OK', "uploaded"))->render();
-				}
-			
-			}
-		}
-		
-		$this->request->response = $json;
-	}
-	*/
-	
-	
-	
 	
 	
 	

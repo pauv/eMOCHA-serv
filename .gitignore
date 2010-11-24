@@ -1,13 +1,10 @@
-client/bin
-client/gen/org/emocha/R.java
-client/default.properties
 _*/
 .DS_Store
-server/app-example/application/bootstrap.php
-server/modules/emocha/config/auth.php
-server/modules/emocha/config/googlemaps.php
-server/modules/emocha/config/email.php
-server/modules/emocha/config/emocha.php
-server/modules/emocha/config/sms.php
-server/app-example/sdcard/**/*
+app-example/application/bootstrap.php
+modules/emocha/config/auth.php
+modules/emocha/config/googlemaps.php
+modules/emocha/config/email.php
+modules/emocha/config/emocha.php
+modules/emocha/config/sms.php
+app-example/sdcard/**/*
 

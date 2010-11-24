@@ -14,5 +14,16 @@ class Model_File extends ORM {
 		parent::delete();
 	}
 	
+	
+	 public function api_array () {
+    	$arr = Array(
+					"path"		=> $this->path, 
+					"ts"		=> $this->ts, 
+					"size"		=> $this->size, 
+					"md5"		=> $this->md5
+		  			);
+		return $arr;
+    }
+	
 
 }

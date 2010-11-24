@@ -210,6 +210,15 @@ class Controller_Admin extends Controller_Site {
 	}
 	
 	
+	public function action_form_files($id, $action=false)
+	{	
+		$this->template->curr_nav = 'forms';
+		//Load the view
+		$content = $this->template->content = View::factory('admin/form_files');
+		$content->form = ORM::factory('form', $id);
+		$content->action = $action;
+	}
+	
 	// phones list
 	public function action_phones($action=false) {
 		$data['phones'] = ORM::factory('phone')->order_by('creation_ts', 'DESC')->find_all();

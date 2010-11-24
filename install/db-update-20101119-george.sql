@@ -1,0 +1,13 @@
+ALTER TABLE `forms` DROP `parent_id` ;
+
+CREATE TABLE `form_files` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`form_id` INT NOT NULL ,
+`file_id` INT NOT NULL ,
+`type` VARCHAR( 100 ) NOT NULL ,
+`label` VARCHAR( 100 ) NOT NULL ,
+`config` TEXT NOT NULL
+) ENGINE = MYISAM ;
+
+
+ALTER TABLE form_files ADD COLUMN `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP ;

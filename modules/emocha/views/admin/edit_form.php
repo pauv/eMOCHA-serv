@@ -50,12 +50,6 @@ if(isset($errors)) {
         </tr>
         
         
-        <tr>
-
-            <td>Parent</td>
-
-            <td><?php echo Form::select('parent_id', $parents, Arr::get($form_vals, 'parent_id', '')); ?></td>
-        </tr>
 
         <tr>
 
