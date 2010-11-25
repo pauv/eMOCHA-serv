@@ -228,7 +228,7 @@ class Controller_Admin extends Controller_Site {
 		$this->template->curr_nav = 'form_files';
 		$content = $this->template->content = View::factory('admin/edit_form_file');
 		
-		$form = ORM::factory('form_file', $form_id);
+		$form = ORM::factory('form', $form_id);
 		
 		if($id) {
 			$form_file = ORM::factory('form_file', $id);
