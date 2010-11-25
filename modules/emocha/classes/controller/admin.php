@@ -171,10 +171,6 @@ class Controller_Admin extends Controller_Site {
 		$content->mode = $mode;
 		$content->id = $id ? $id:'';
 		$content->file_path = $form->file->loaded() ? $form->file->path:'';
-		// assign parent options
-		$parents = Model_Form::get_id_val_array();
-		$parents_empty_option = array(0=>'');
-		$content->parents = $parents_empty_option+$parents;
 		
 	}
 
@@ -198,7 +194,7 @@ class Controller_Admin extends Controller_Site {
 	public function action_delete_form_confirmed ($id=false) {
 	
 		if(!$id) {
-			redirect('edu/forms');
+			redirect('admin/forms');
 		}
 		
 		$form = ORM::factory('form', $id);
@@ -224,6 +220,149 @@ class Controller_Admin extends Controller_Site {
 		$data['phones'] = ORM::factory('phone')->order_by('creation_ts', 'DESC')->find_all();
 		$data['action'] = $action;
 		$this->template->content = View::factory('admin/phones', $data);
+	}
+	
+	
+	public function action_edit_form_file($form_id, $id=false)
+	{	
+		$this->template->curr_nav = 'form_files';
+		$content = $this->template->content = View::factory('admin/edit_form_file');
+		
+		$form = ORM::factory('form_file', $form_id);
+		
+		if($id) {
+			$form_file = ORM::factory('form_file', $id);
+			$mode = 'edit';
+		}
+		else {
+			$form_file = ORM::factory('form_file');
+			$mode = 'create';
+		}
+ 
+		//If there is a post and $_POST is not empty
+		if ($_POST)
+		{
+		
+			$errors = array();
+			
+ 			// xss clean post vars
+ 			$post = Arr::xss($_POST);
+ 			// return posted values to form_file
+ 			// in case of error
+			$content->form_vals = $post;
+			
+			$vars = array_merge($post, $_FILES);
+ 			
+ 			//var_dump($vars);
+ 			//exit;
+ 			
+			//Load the validation rules, filters etc...
+			$validation = $form_file->validate($vars, $mode);	
+			
+ 
+			//If the validation data validates using the rules setup in the user model
+			if ( ! $validation->check())
+			{
+				$errors = $validation->errors('form_file');
+			}
+			else 
+			{
+			
+				$form_file->values($validation);
+	
+				
+				// file
+				if(Arr::get($_FILES['newfile'], 'name')) {
+				
+					// delete old form_file file
+					if ($form_file->file->loaded()) $form_file->file->delete();
+					
+					$path_from_root = 'sdcard/emocha/odk/form_files/';
+					$target_path = DOCROOT.$path_from_root;
+					$destination_file = upload::save($_FILES['newfile'], $_FILES['newfile']['name'], $target_path);
+					// writing thumbnail failed, report error
+					if( ! $destination_file) {
+						$errors = array(Kohana::message('sdcard', 'upload_file'));
+					}
+					else {
+						// save file db info
+						$file = ORM::factory('file');
+						$file->filename = basename($destination_file);
+						$file->path = $path_from_root.$file->filename;
+						$file->ts = filectime($destination_file);
+						$file->size = filesize($destination_file);
+						$file->md5 = md5_file($destination_file);
+						$file->save();
+						
+						$form_file->file_id = $file->id;
+					}
+				}
+			}
+			
+			/*
+			 * Check for errors
+			 */
+			if (count($errors)) {
+			
+				$content->errors = $errors;
+			
+			}
+			
+			else 
+			{
+				$form_file->form_id = $form->id;
+				$form_file->save();
+				Request::instance()->redirect('admin/form_files/'.$form_id.'/saved');
+				
+			}
+			
+	
+		}
+		
+		else 
+		{
+			// assign current form data
+			$content->form_vals = $form_file->as_array();
+			
+		}
+		
+		
+		// assign vars to form
+		$content->mode = $mode;
+		$content->form_id = $form_id;
+		$content->id = $id ? $id:'';
+		$content->file_path = $form_file->file->loaded() ? $form_file->file->path:'';
+		
+	}
+	
+	
+	// confirm delete request
+	public function action_delete_form_file ($form_id, $id=false) {
+	
+		$this->template->curr_nav = 'forms';
+		if(!$id) {
+			Request::instance()->redirect('admin/form_files');
+		}
+		
+		$content = $this->template->content = View::factory('admin/delete_form_file_confirm');
+		$content->form_file = ORM::factory('form_file', $id);
+
+	}
+	
+	
+	// confirmed: delete both file and db record
+	public function action_delete_form_file_confirmed ($form_id, $id=false) {
+	
+		if(!$id) {
+			redirect('admin/form_files');
+		}
+		
+		$form_file = ORM::factory('form_file', $id);
+		// delete media (dependent files handled by delete method)
+		$form_file->delete();
+		Request::instance()->redirect('admin/form_files/'.$form_id.'/deleted');
+		
+		
 	}
 	
 	

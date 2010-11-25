@@ -79,7 +79,7 @@ class Model_Form extends ORM {
 		
 		if($mode=='create') {
 			
-			$array->rules('file', array(
+			$array->rules('newfile', array(
 										'Upload::valid' => array(),
 										'upload::not_empty'=>NULL,
 								  		'Upload::type' =>array('Upload::type' => array('xml')), 
@@ -88,7 +88,7 @@ class Model_Form extends ORM {
 		}
 		else {
 		
-			$array->rules('file', array(
+			$array->rules('newfile', array(
 										'Upload::valid' => array(),
 								  		'Upload::type' =>array('Upload::type' => array('xml')), 
 								  		'Upload::size' => array('1M')

@@ -32,4 +32,46 @@ class Model_Form_File extends ORM {
     }
 	
 	
+	/*
+ 	 * Validation for editing form details
+ 	 */
+	public function validate(& $array, $mode) 
+	{
+		// Initialise the validation library and use some rules
+		$array = Validate::factory($array)
+						->rules('type', array(
+												'not_empty'=>NULL
+												))
+						->filter('config', 'trim')
+						->filter('label', 'trim');
+		
+		if($mode=='create') {
+			
+			$array->rules('newfile', array(
+										'Upload::valid' => array(),
+										'upload::not_empty'=>NULL, 
+								  		'Upload::size' => array('1M')
+								  		));
+		}
+		else {
+		
+			$array->rules('newfile', array(
+										'Upload::valid' => array(), 
+								  		'Upload::size' => array('1M')
+								  		));
+		
+		}
+	
+ 
+		return $array;
+	}
+	
+	// override delete method to handle files
+	public function delete($id = NULL) {
+	
+		if($this->file->loaded()){
+			$this->file->delete();
+		}
+		parent::delete();
+	}
 }
