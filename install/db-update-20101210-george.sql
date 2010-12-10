@@ -1,0 +1,1 @@
+ALTER TABLE `forms` CHANGE `group` `group` ENUM( 'household_core', 'household_data', 'patient_core', 'patient_data', 'training', 'training_data' ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;

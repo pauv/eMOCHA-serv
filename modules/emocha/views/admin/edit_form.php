@@ -29,7 +29,7 @@ if(isset($errors)) {
 
             <td>Group</td>
 
-            <td><?php echo Form::select('group', array(''=>'','household'=>'household','patient'=>'patient','training'=>'training'), Arr::get($form_vals, 'group', '')); ?></td>
+            <td><?php echo Form::select('group', array(''=>'','household_core'=>'household_core','household_data'=>'household_data','patient_core'=>'patient_core','patient_data'=>'patient_data','training'=>'training','training_data'=>'training_data'), Arr::get($form_vals, 'group', '')); ?></td>
 
         </tr>
         

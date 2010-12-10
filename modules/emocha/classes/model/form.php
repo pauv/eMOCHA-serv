@@ -71,11 +71,14 @@ class Model_Form extends ORM {
 						->rules('group', array(
 												'not_empty'=>NULL
 												))
+						->rules('code', array(
+												'not_empty'=>NULL
+												))
+						->callback('code', array($this, 'code_unique'))
 						->filter('name', 'trim')
 						->filter('description', 'trim')
 						->filter('conditions', 'trim')
-						->filter('label', 'trim')
-						->filter('code', 'trim');
+						->filter('label', 'trim');
 		
 		if($mode=='create') {
 			
@@ -98,6 +101,28 @@ class Model_Form extends ORM {
 	
  
 		return $array;
+	}
+	
+	/**
+	 * Code validation callback
+	 * @param    Validate  $array   validate object
+	 * @param    string    $field   field name
+	 * @param    array     $errors  current validation errors
+	 * @return   array
+	 */
+	public function code_unique(Validate $array, $field)
+	{
+		// check the database for existing records
+		   $code_exists = (bool) ORM::factory('form')
+		   						->where('code', '=', $array[$field])
+		   						->and_where('id', '!=', $this->id)
+		   						->count_all();
+		 
+		   if ($code_exists)
+		   {
+			   // add error to validation object
+			   $array->error($field, 'code_unique');
+		   }
 	}
 	
 	
