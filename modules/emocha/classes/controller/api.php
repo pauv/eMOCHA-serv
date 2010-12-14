@@ -166,10 +166,10 @@ class Controller_Api extends Controller {
 			TODO: these form id numbers probably should not be hardwired
 			as the only way to recognise the core forms
 			*/
-			if($form->code=='household_core') {
+			if($form->code=='hcore') {
 				$household = Model_Household::save_from_form_data($form_data);
 			}
-			if($form->code=='patient_core') {
+			if($form->code=='pcore') {
 				$patient = Model_Patient::save_from_form_data($form_data);
 				/*
 				Deal with patient image upload
@@ -180,7 +180,7 @@ class Controller_Api extends Controller {
 						->rules('image', array(
 												'upload::valid'=>NULL, 
 												'upload::type'=>array(array('jpg')), 
-												'upload::size'=>array('1M')
+												'upload::size'=>array('2M')
 												));
 					if ($validation->check()){
 						$patient->save_profile_image($_FILES['image']);
