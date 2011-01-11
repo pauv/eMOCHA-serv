@@ -93,7 +93,7 @@
 	device_id: <input type="text" name="device_id" value="<?php echo $usr; ?>" /><br/>
 	household_code: <input type="text" name="household_code" value="" /><br/>
 	patient_code: <input type="text" name="patient_code" value="" /><br/>
-	form_id: <input type="text" name="form_id" value="1" /><br/>
+	form_code: <input type="text" name="form_code" value="hcore" /><br/>
 	xml_content: <textarea name="xml_content"></textarea><br/>
 	file_path: <input type="text" name="file_path" value="/sdcard/odk/instances/2010/" /><br/>
 	last_modified: <input type="text" name="last_modified" value="<?php echo time(); ?>" /><br/>

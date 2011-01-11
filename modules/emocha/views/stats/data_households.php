@@ -43,7 +43,7 @@ Household code:<br/>
 					print sprintf('<ul id="list_%s">', $household->id);
 					foreach($files AS $file) {
 						// only show non-patient forms
-						if($file->form->group=='household') {
+						if(strstr($file->form->group,'household')) {
 							print sprintf('<li><a href="javascript:;" onClick="display_xml(%s); return false" class="linkToXML">%s</a></li>', $file->id, $file->get_form_name()); 
 						}
 					}

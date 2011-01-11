@@ -100,7 +100,22 @@
 		}
 		
 		
+        /*
+         * Get phone based on usr
+         * return mixed - phone object or false
+         */
+        public static function get_by_user($usr) {
         
+        	if(! $usr) return FALSE;
+        	
+			$phone = ORM::factory('phone')
+								->where('imei_md5', '=', $usr)
+								->and_where('validated', '=', 1)
+								->find();
+			
+			return $phone->loaded() ? $phone: FALSE;
+		}
+		
         /*
          * Get phone based on usr and password
          * return mixed - phone object or false
