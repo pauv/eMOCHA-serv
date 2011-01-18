@@ -2,6 +2,15 @@
 
     class Phone 
     {   	    
+    
+   		public static function get_id_val_array() {
+			$arr = array(''=>'');
+			$phones = ORM::factory('phone')->find_all();
+			foreach($phones as $phone) {
+				$arr[$phone->id] = $phone->imei;
+			}
+			return $arr;
+		}
        
         public static function get_phone_list() {
         	return ORM::factory('phone')->find_all();

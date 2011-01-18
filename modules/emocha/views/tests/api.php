@@ -102,6 +102,16 @@
 	<input type="submit" />
 </form>
 
+<h2>upload_phone_locations</h2>
+<?php echo Form::open('/api/upload_phone_locations', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="123456" /><br/>
+	data file: <input type="file" name="data" /><br/>
+	<input type="submit" />
+</form>
+
 <h2>get_last_upload_ts</h2>
 <?php echo Form::open('/api/get_last_upload_ts');?>
 	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>

@@ -54,4 +54,37 @@ class Model_Phone extends ORM {
    		}
 
    	}
+   	
+   	
+   	public function save_locations($file_path) {
+		$handle = @fopen($file_path, "r");
+		if (! $handle) {
+			return 0;
+		}
+		
+		else {
+			$rows=0;
+			while (($buffer = fgets($handle, 4096)) !== false) {
+				$parts = explode(',', $buffer);
+				if(count($parts)==2) {
+					$loc = ORM::factory('phone_location');
+					$loc->ts = trim($parts[0]);
+					$gps = trim($parts[1]);
+					$gps_parts = explode(' ', $gps);
+					if(count($gps_parts)==2) {
+						$loc->gps = $gps;
+						$loc->gps_lat = $gps_parts[0];
+						$loc->gps_long = $gps_parts[1];
+						$loc->phone_id = $this->id;
+						$loc->save();
+						$rows++;
+					}
+				}
+					
+				
+			}
+			fclose($handle);
+			return $rows;
+		}
+	}
 }
