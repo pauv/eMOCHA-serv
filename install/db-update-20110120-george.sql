@@ -1,0 +1,1 @@
+ALTER TABLE `uploaded_data` DROP `display_label` ;

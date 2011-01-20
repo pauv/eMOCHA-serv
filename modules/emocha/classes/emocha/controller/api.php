@@ -167,7 +167,6 @@ class Emocha_Controller_Api extends Controller {
 		$form_data->xml_content = Arr::get($_POST,"xml_content");
 		$form_data->file_path = Arr::get($_POST,"file_path");
 		$form_data->last_modified = Arr::get($_POST,"last_modified");
-		$form_data->display_label = Arr::get($_POST,"display_label");
 		
 		
 		/*

@@ -7,6 +7,10 @@
 <?php } ?>
 
 
+<p>
+<?php echo Html::anchor('admin/edit_phone', 'Add a phone') ?>
+</p>
+
 <table>
 
 
@@ -27,6 +31,7 @@
 	<th>Created</th>
 	<th>Last connected</th>
 	<th></th>
+	<th></th>
 
 </tr>
 
@@ -42,6 +47,7 @@
 	<td><?php $link = $phone->validated ? 'edit':'activate';
 			echo Html::anchor('admin/edit_phone/'.$phone->id, $link);
 		?></td>
+	<td><?php echo Html::anchor('admin/delete_phone/'.$phone->id, 'delete') ?></td>
 </tr>
 
 <?php 	

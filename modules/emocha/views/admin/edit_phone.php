@@ -19,7 +19,7 @@ if(isset($errors)) {
 
             <td>Imei</td>
 
-            <td><?php echo $phone->imei ?></td>
+            <td><?php echo Form::input('imei', Arr::get($form_vals, 'imei', '')); ?></td>
 
         </tr>
         
@@ -27,7 +27,7 @@ if(isset($errors)) {
 
             <td>Activate</td>
 
-            <td><?php echo Form::select('validated', array('0','1'), $phone->validated); ?></td>
+            <td><?php echo Form::select('validated', array('0','1'), Arr::get($form_vals, 'validated', '')); ?></td>
 
         </tr>
     
@@ -43,7 +43,7 @@ if(isset($errors)) {
 
             <td>Comments</td>
 
-            <td><?php echo Form::textarea('comments', $phone->comments); ?></td>
+            <td><?php echo Form::textarea('comments', Arr::get($form_vals, 'comments', '')); ?></td>
 
         </tr>
         

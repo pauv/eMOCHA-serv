@@ -215,12 +215,6 @@ class Emocha_Controller_Admin extends Controller_Site {
 		$content->action = $action;
 	}
 	
-	// phones list
-	public function action_phones($action=false) {
-		$data['phones'] = ORM::factory('phone')->order_by('creation_ts', 'DESC')->find_all();
-		$data['action'] = $action;
-		$this->template->content = View::factory('admin/phones', $data);
-	}
 	
 	
 	public function action_edit_form_file($form_id, $id=false)
@@ -367,12 +361,28 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	
 	
+	// phones list
+	public function action_phones($action=false) {
+		$data['phones'] = ORM::factory('phone')->order_by('creation_ts', 'DESC')->find_all();
+		$data['action'] = $action;
+		$this->template->content = View::factory('admin/phones', $data);
+	}
+	
+	
+	
 	public function action_edit_phone($id=false)
 	{	
 		$this->template->curr_nav = 'phones';
 		//Load the view
 		$content = $this->template->content = View::factory('admin/edit_phone');
-		$phone = ORM::factory('phone', $id);
+		if($id) {
+			$phone = ORM::factory('phone', $id);
+			$mode = 'edit';
+		}
+		else {
+			$phone = ORM::factory('phone');
+			$mode = 'create';
+		}
 		$content->phone = $phone;
  
 		//If there is a post and $_POST is not empty
@@ -380,6 +390,9 @@ class Emocha_Controller_Admin extends Controller_Site {
 		{
 		
 			$errors = array();
+			// xss clean post vars
+ 			$post = Arr::xss($_POST);
+			$content->form_vals = $post;
 			
  			/*if(!$_POST['password']) {
  				$errors = array(Kohana::message('phone', 'enter_password'));
@@ -397,15 +410,52 @@ class Emocha_Controller_Admin extends Controller_Site {
 			
 			else 
 			{
-				$phone->edit($_POST['validated'], $_POST['password'], $_POST['comments']);
+				$phone->edit($_POST['imei'], $_POST['validated'], $_POST['password'], $_POST['comments']);
 				Request::instance()->redirect('admin/phones/saved');
 				
 			}
 			
 	
 		}
+		else 
+		{
+			// assign current form data
+			$content->form_vals = $phone->as_array();
+			
+		}
+	}
+	
+	
+	
+	// confirm delete request
+	public function action_delete_phone ($id=false) {
+	
+		$this->template->curr_nav = 'phones';
+		if(!$id) {
+			Request::instance()->redirect('admin/phones');
+		}
+		
+		$content = $this->template->content = View::factory('admin/delete_phone_confirm');
+		$content->phone = ORM::factory('phone', $id);
+
+	}
+	
+	
+	// confirmed: delete
+	public function action_delete_phone_confirmed ($id=false) {
+	
+		if(!$id) {
+			redirect('admin/phones');
+		}
+		
+		$phone = ORM::factory('phone', $id);
+		
+		$phone->delete();
+		Request::instance()->redirect('admin/phones/deleted');
+		
 		
 	}
+	
 	
 	
 	// ALARMS
