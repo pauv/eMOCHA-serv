@@ -16,7 +16,7 @@ class Model_Phone_Location extends ORM {
 			$sql = "SELECT DISTINCT DATE(ts) as mydate FROM phone_locations";
 					$result = DB::query(Database::SELECT, $sql)->execute();
 			foreach($result->as_array() as $row) {
-				$dates[] = $row['mydate'];
+				$dates[$row['mydate']] = $row['mydate'];
 			}
 			return $dates;
 	}
