@@ -7,7 +7,8 @@ class Model_Phone extends ORM {
 	
 	
 	protected $_has_many = array (
-								'form_datas'=>array('foreign_key'=>'uploader_phone_id')
+								'form_datas'=>array('foreign_key'=>'uploader_phone_id'),
+								'phone_locations'=>array()
 							);
 	
 	
