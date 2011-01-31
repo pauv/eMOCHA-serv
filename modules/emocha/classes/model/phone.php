@@ -68,15 +68,17 @@ class Model_Phone extends ORM {
 			$rows=0;
 			while (($buffer = fgets($handle, 4096)) !== false) {
 				$parts = explode(',', $buffer);
-				if(count($parts)==2) {
+				if(count($parts)==4) {
 					$loc = ORM::factory('phone_location');
 					$loc->ts = trim($parts[0]);
+					$loc->altitude = trim($parts[2]);
+					$loc->speed = trim($parts[3]);
 					$gps = trim($parts[1]);
 					$gps_parts = explode(' ', $gps);
 					if(count($gps_parts)==2) {
 						$loc->gps = $gps;
-						$loc->gps_lat = $gps_parts[0];
-						$loc->gps_long = $gps_parts[1];
+						$loc->gps_lat = trim($gps_parts[0]);
+						$loc->gps_long = trim($gps_parts[1]);
 						$loc->phone_id = $this->id;
 						$loc->save();
 						$rows++;
