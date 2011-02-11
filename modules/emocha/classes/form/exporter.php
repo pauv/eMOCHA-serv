@@ -180,7 +180,7 @@
 				if (count($val) > 0) {
 					$this->_get_row($row_num, $val, $id);
 				} else {
-					$this->rows[$row_num][$id] = $val;
+					$this->rows[$row_num][$id] = trim(str_replace("\n", "", $val));
 				}
 			}
 	
