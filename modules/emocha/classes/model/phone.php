@@ -17,6 +17,7 @@ class Model_Phone extends ORM {
 	public function edit($imei, $validated, $password, $comments) {
         
         $this->imei = $imei;
+        $this->imei_md5 = md5($imei);
         $this->validated = $validated;
         $this->comments = $comments;
         $this->save();
