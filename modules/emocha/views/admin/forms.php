@@ -12,7 +12,7 @@
 
 
 <b>Note:</b><br />
-Household Core and Patient Core forms need to be given code 'household_core' and 'patient_core' respectively.<br />
+Household Core and Patient Core forms need to be given code 'hcore' and 'pcore' respectively.<br />
 Once in the system, form ids need to be preserved, so edit rather than delete a form which is already in use.
 <br /><br />
 
