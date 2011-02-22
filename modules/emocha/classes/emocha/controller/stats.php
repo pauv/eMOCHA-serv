@@ -53,10 +53,10 @@ class Emocha_Controller_Stats extends Controller_Site {
 			$form = ORM::factory('form', $form_id);
 			$form_exporter = new Form_Exporter($form);
 			$data = $form_exporter->get_as_csv();
-			$name = $form->get_short_name().".txt";
+			$name = $form->get_short_name().".xls";
 			
 			$this->request->response = $data;
-			$this->request->send_file(TRUE, $name);
+			$this->request->send_file(TRUE, $name, array('mime_type'=>'application/vnd.ms-excel'));
 		}
 		
 	}
