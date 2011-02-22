@@ -8,12 +8,11 @@ class Api
     		$times = array();
     		
     		
-    		// media files
-    		$sql = "SELECT MAX(ts) as last_updated FROM media INNER JOIN files
-    					ON media.file_id = files.id";
+    		// media
+			$sql = "SHOW TABLE STATUS LIKE 'media'";
     		$result = DB::query(Database::SELECT, $sql)->execute();
 			$row = $result->current();
-			$times['last_media_upd'] = $row['last_updated']==NULL?0:$row['last_updated'];
+			$times['last_media_upd']=strtotime($row['Update_time']);
 			
 			// form config
 			$sql = "SHOW TABLE STATUS LIKE 'forms'";
