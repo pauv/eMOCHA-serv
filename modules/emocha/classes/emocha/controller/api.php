@@ -34,11 +34,6 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
-	public function action_check_user() {
-		$json = View::factory('json/display', Json::response('OK', 'known user'))->render();
-		$this->request->response = $json;
-	}
-	
 	public function action_activate_phone() {
     	$imei = preg_replace('/\W/', '', Arr::get($_POST, 'imei', ''));    	
     	$result = Phone::activate($imei);
@@ -84,25 +79,6 @@ class Emocha_Controller_Api extends Controller {
     }
     
     
-    public function action_get_form_templates() {
-    
-    	$last_server_update = Sdcard::get_last_server_update();
-	  	$responseA['last_server_upd'] = $last_server_update;
-	
-		if ($last_server_update != Arr::get($_POST, 'last_server_upd')) {
-			$forms = ORM::factory('form')->where('archived','=',0)->find_all();
-			$files_arr = array();
-			foreach ($forms as $form) {
-				if ($form->file->loaded()) {
-					$files_arr[] = $form->file->api_array();
-				}
-			}
-			$responseA['files'] = $files_arr;			
-		} 
-    	$json = View::factory('json/display', Json::response('OK', 'get_form_templates', $responseA))->render();
-		$this->request->response = $json;
-		
-    }
     
      public function action_get_media_files() {
     

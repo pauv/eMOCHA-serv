@@ -42,14 +42,6 @@
 </form>
 
 
-<h2>Get form templates</h2>
-<?php echo Form::open('/api/get_form_templates', array(
-													'enctype'=>'multipart/form-data'
-													));?>
-	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
-	Pwd: <input type="text" name="pwd" value="" /><br/>
-	<input type="submit" />
-</form>
 
 <h2>Get media files</h2>
 <?php echo Form::open('/api/get_media_files', array(
@@ -64,15 +56,6 @@
 <h2>Activate</h2>
 <?php echo Form::open('/api/activate_phone');?>
 	imei: <input type="text" name="imei" value="351676030209490" /><br/>
-	<input type="submit" />
-</form>
-
-
-<h2>Check user</h2>
-<?php echo Form::open('/api/check_user');?>
-	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
-	Pwd: <input type="text" name="pwd" value="" /><br/>
-	gps: <input type="text" name="gps" value="39.296502470970154:-76.59163177013397" /><br />
 	<input type="submit" />
 </form>
 

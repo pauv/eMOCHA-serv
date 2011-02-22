@@ -15,13 +15,6 @@ class Api
 			$row = $result->current();
 			$times['last_media_upd'] = $row['last_updated']==NULL?0:$row['last_updated'];
 			
-			// form files
-			$sql = "SELECT MAX(ts) as last_updated FROM forms INNER JOIN files
-    					ON forms.file_id = files.id";
-    		$result = DB::query(Database::SELECT, $sql)->execute();
-			$row = $result->current();
-			$times['last_form_template_upd'] = $row['last_updated']==NULL?0:$row['last_updated'];
-			
 			// form config
 			$sql = "SHOW TABLE STATUS LIKE 'forms'";
     		$result = DB::query(Database::SELECT, $sql)->execute();
