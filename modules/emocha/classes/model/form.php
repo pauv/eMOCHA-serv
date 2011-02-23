@@ -85,7 +85,7 @@ class Model_Form extends ORM {
 			$array->rules('newfile', array(
 										'Upload::valid' => array(),
 										'upload::not_empty'=>NULL,
-								  		'Upload::type' =>array('Upload::type' => array('xml')), 
+								  		'Upload::type' =>array('Upload::type' => array('xml','png')), 
 								  		'Upload::size' => array('1M')
 								  		));
 		}
@@ -93,7 +93,7 @@ class Model_Form extends ORM {
 		
 			$array->rules('newfile', array(
 										'Upload::valid' => array(),
-								  		'Upload::type' =>array('Upload::type' => array('xml')), 
+								  		'Upload::type' =>array('Upload::type' => array('xml','png')), 
 								  		'Upload::size' => array('1M')
 								  		));
 		
