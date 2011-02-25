@@ -82,12 +82,17 @@
 		var markerCluster = new MarkerClusterer(map, markers);
 
 		<?php
-		// handle selected patient
+		// handle selected patient or household
 		if($selected_item && $map_type=='patients') {
 		?>
 		map.setCenter(new GLatLng(<?php echo $selected_item->household->gps_lat; ?>, <?php echo $selected_item->household->gps_long; ?>), 20);
 		<?php
-		} else {
+		}
+		elseif($selected_item && $map_type=='households') {
+		?>
+		map.setCenter(new GLatLng(<?php echo $selected_item->gps_lat; ?>, <?php echo $selected_item->gps_long; ?>), 20);
+		<?php
+		}else {
 		?>
 			map.setZoom(map.getBoundsZoomLevel(bounds)-1);
 		<?php 

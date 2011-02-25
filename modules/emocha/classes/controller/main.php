@@ -74,6 +74,10 @@ class Controller_Main extends Controller_Site {
 			}
 			else {
 				$items = ORM::factory('household')->find_all();
+				// a household was selected
+				if($selected_code){
+					$selected_item = ORM::factory('household', $selected_code);
+				}
 			}
 		}
 		elseif ($map_type == 'patients') {
