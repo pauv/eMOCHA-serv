@@ -138,6 +138,12 @@
 		 */
 		private function _get_columns($obj, $parent_id) {
 			if ($this->file_found) {
+				if(stristr($this->form->group,'household')){
+					$this->columns = array('household_code');
+				}
+				elseif(stristr($this->form->group,'patient')){
+					$this->columns = array('patient_code');
+				}
 				foreach($obj as $key => $val) {
 					$id = ($parent_id ? "$parent_id." : '').$key; 
 					if (count($val) > 0) {
@@ -158,7 +164,12 @@
 			$row_num = 0;
 
 			foreach($this->form->form_datas->find_all() AS $row) {	
-				
+				if(stristr($this->form->group,'household')){
+					$this->rows[$row_num]['household_code'] = $row->household_code;
+				}
+				elseif(stristr($this->form->group,'patient')){
+					$this->rows[$row_num]['patient_code'] = $row->patient_code;
+				}
 				$row_xml = simplexml_load_string(stripslashes($row->xml_content));
 				if ($row_xml) {
 					$this->_get_row($row_num, $row_xml, '');	
