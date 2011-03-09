@@ -95,7 +95,7 @@
 				<?php echo Form::select('patient_code', $patients, $patient_code); ?>
 				<br /><br />
 				Date<br/>
-				<?php echo Form::select('date', $dates, $date); ?>
+				<?php echo Form::select('date', array_merge(array('0'=>'All'), $dates), $date); ?>
 				<br /><br />
 				<input type="submit" value="search" />
 			</form>
