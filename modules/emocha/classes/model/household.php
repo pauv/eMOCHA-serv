@@ -26,12 +26,12 @@ class Model_Household extends ORM_Encrypted {
 			$household->code = $form->household_code;
 		}
 		$xml_obj = simplexml_load_string(stripslashes($form->xml_content));
-		$household->village_code = $xml_obj->location->village_code;
-		$household->gps = $xml_obj->location->gps_coordinates;
+		$household->village_code = trim($xml_obj->location->village_code);
+		$household->gps = trim($xml_obj->location->gps_coordinates);
 		$gps_arr = explode(' ', $household->gps);
 		if (count($gps_arr)>=2) {
-			$household->gps_lat = $gps_arr[0];
-			$household->gps_long = $gps_arr[1];
+			$household->gps_lat = trim($gps_arr[0]);
+			$household->gps_long = trim($gps_arr[1]);
 		}
 		
 		

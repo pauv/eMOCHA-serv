@@ -32,10 +32,10 @@ class Model_Patient extends ORM_Encrypted {
 			$patient->code = $form->patient_code;
 		}
 		$xml_obj = simplexml_load_string(stripslashes($form->xml_content));
-		$patient->household_code = $form->household_code;
-		$patient->first_name = $xml_obj->individual->first_name;
-		$patient->last_name = $xml_obj->individual->last_name;
-		$patient->age = $xml_obj->individual->age;
+		$patient->household_code = trim($form->household_code);
+		$patient->first_name = trim($xml_obj->individual->first_name);
+		$patient->last_name = trim($xml_obj->individual->last_name);
+		$patient->age = trim($xml_obj->individual->age);
 		if($xml_obj->individual->sex==0) {
 			$patient->sex='m';
 		}
