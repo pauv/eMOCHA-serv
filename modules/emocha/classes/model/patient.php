@@ -207,6 +207,15 @@ class Model_Patient extends ORM_Encrypted {
 			return $patients;
 	}
 	
+	public static function get_code_val_array() {
+		$arr = array(''=>'');
+		$patients = ORM::factory('patient')->find_all();
+		foreach($patients as $patient) {
+			$arr[$patient->code] = $patient->code;
+		}
+		return $arr;
+	}
+	
 	
 	
 	public static function get_count() {
