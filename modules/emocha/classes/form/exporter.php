@@ -31,8 +31,20 @@
 			$this->def_form_path = DOCROOT."sdcard/emocha/odk/forms/".$this->form->name;
 			
 			$file_content = implode('', file($this->def_form_path));
-			preg_match("/<instance>(.*)<\/instance>/ms", $file_content, $foundA);
-			$this->def_form_xml = @simplexml_load_string($foundA[1]);
+			//$xml = @simplexml_load_string($file_content);
+			
+			// split up template to handle long files
+			// maybe this could be done better with an xml query
+			$a = explode('<instance>', $file_content);
+			$b = explode('</instance>', $a[1]);
+			$this->def_form_xml = @simplexml_load_string($b[0]);
+			
+			//preg_match("/<instance>(.*)<\/instance>/ms", $file_content, $foundA);
+			//$this->def_form_xml = @simplexml_load_string($foundA[1]);
+			
+			//echo Kohana::debug($this->def_form_xml);
+			
+
 			
 			$this->file_found = $this->def_form_xml ? true : false;
 		}
