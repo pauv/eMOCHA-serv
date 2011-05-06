@@ -100,7 +100,7 @@
     			$html .= "<tr>";
     			foreach ($this->data_as_array['columns'] as $column) {
     				$val = array_key_exists($column, $row) ? $row[$column] : "";
-					$html .= "<td>$val</td>";
+					$html .= "<td class=\"val\">$val</td>";
 				}
 				$html .= "</tr>";
     			

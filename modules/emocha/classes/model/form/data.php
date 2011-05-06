@@ -205,12 +205,12 @@ class Model_Form_Data extends ORM_Encrypted {
 						$html .= "<h3>$key</h3><table>";
 						foreach($val as $k => $v) {
 							//$v = $this->_linkify($v, $usrid, $form_name);
-							$html .= "<tr><td>$k</td><td>$v</td></tr>";
+							$html .= "<tr><td>$k</td><td class=\"val\">$v</td></tr>";
 						}
 						$html .= "</table></td></tr>";
 					} else {
 						//$val = $this->_linkify($val, $usrid, $form_name);
-						$html .= "<tr><td>$key</td><td>$val</td></tr>";				
+						$html .= "<tr><td>$key</td><td class=\"val\">$val</td></tr>";				
 					}
 				}
 				$html .= '</table>';
