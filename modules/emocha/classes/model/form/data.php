@@ -19,10 +19,19 @@ class Model_Form_Data extends ORM_Encrypted {
 		return $this->form->name;
 	}
 	
-	
+	/*
+	 * Get existing form data based on code and form_id
+	 * Default code values from api.php are '' so this works 
+	 * even if household_code is not submitted (in the case of non-household projects)
+	 *
+	 * param string
+	 * param string
+	 * param string
+	 * return object (loaded or empty)
+	 */
 	public static function get_by_key_data($household_code, $patient_code, $form_id) {
 		
-		if($household_code && $form_id) {
+		if($patient_code || $household_code) {
 			$form = ORM::factory('form_data')
 					->where('household_code','=', $household_code)
 					->and_where('patient_code', '=', $patient_code)

@@ -40,6 +40,33 @@ class Emocha_Controller_Stats extends Controller_Site {
 				
 	}
 	
+	/*
+	 * export form and results as html table
+	 */
+	public function action_exportgrid($form_id=false) {
+
+		$content = $this->template->content = View::factory('stats/exportgrid');
+		
+		// get all form types
+		$content->forms = ORM::factory('form')->find_all();
+		$content->selected_form_id='';
+		
+		// individual form type selected
+		if($form_id) {
+		
+			$form = ORM::factory('form', $form_id);
+			$form_exporter = new Form_Exporter($form);
+			$form_exporter->load_data_as_array();
+			$content->columns = $form_exporter->data_as_array['columns'];
+			$content->rows = $form_exporter->data_as_array['rows'];
+			$content->selected_form_id = $form->id;
+			//echo Kohana::debug($content->columns);
+			//echo Kohana::debug($content->rows);
+			//exit;
+		}
+				
+	}
+	
 	
 	/*
 	 * export form and results as tab separated file for spreadsheets
@@ -140,6 +167,8 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	}
 	
+
+	
 	
 	// ajax call
 	public function action_patient($code) {
@@ -168,14 +197,25 @@ class Emocha_Controller_Stats extends Controller_Site {
 			
 		}
 		else {
-			$content->households = ORM::factory('household')->order_by('village_code', 'ASC')->find_all();
+			$content->households = ORM::factory('patient')->order_by('village_code', 'ASC')->find_all();
 		}
 		$content->order_by = $order_by;
 		$content->household_code = $household_code;
 	
 	}
 	 
-	 
+	 /*
+	 * View data in ajax grid 
+	 */
+	 public function action_datagrid()
+	{
+	
+		$content = $this->template->content = View::factory('stats/datagrid');
+		$content->patients = ORM::factory('patient')->find_all();
+	
+	}
+	
+	
 	/*
 	 * Demo of presenting households on a map
 	 * */
