@@ -42,10 +42,6 @@
 			//preg_match("/<instance>(.*)<\/instance>/ms", $file_content, $foundA);
 			//$this->def_form_xml = @simplexml_load_string($foundA[1]);
 			
-			//echo Kohana::debug($this->def_form_xml);
-			
-
-			
 			$this->file_found = $this->def_form_xml ? true : false;
 		}
 		
@@ -65,9 +61,6 @@
 			$this->data_as_array['columns'] = $this->get_data_columns();
 			$this->data_as_array['rows'] = $this->get_data_rows();
 	
-			//var_dump($this->data_as_array);
-			//echo "count".count($this->form->data);
-			//echo "<pre>";var_dump($this->form->data);echo"</pre>";
 		}
 	
 	
@@ -150,12 +143,14 @@
 		 */
 		private function _get_columns($obj, $parent_id) {
 			if ($this->file_found) {
-				if(stristr($this->form->group,'household')){
+				// add code as first column
+				if(stristr($this->form->group,'household') && empty($this->columns)){
 					$this->columns = array('household_code');
 				}
-				elseif(stristr($this->form->group,'patient')){
+				elseif(stristr($this->form->group,'patient') && empty($this->columns)){
 					$this->columns = array('patient_code');
 				}
+				// fill remaining columns by reading xml tree
 				foreach($obj as $key => $val) {
 					$id = ($parent_id ? "$parent_id." : '').$key; 
 					if (count($val) > 0) {
