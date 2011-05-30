@@ -108,7 +108,6 @@ class Model_Form_Data extends ORM_Encrypted {
 	param string
 	return string
 	*/
-	/*
 	public function get_xml_node ($node) {
 		$sql = "SELECT ExtractValue(AES_DECRYPT(xml_content,'".Encryption::get_key()."'), '//".$node."') AS xml_val
 		FROM uploaded_data WHERE id=".$this->id;
@@ -121,21 +120,23 @@ class Model_Form_Data extends ORM_Encrypted {
 		}
 		return '';
 	}
-	*/
+
 	
 	/*
 	Get xml node value
 	param string
 	return string
 	(USE PHP TO AVOID ENCRYPTION STUFF)
-	*/
+	
 	public function get_xml_node ($node) {
 		$xml = simplexml_load_string($this->xml_content);
 		if(is_object($xml) && $ref_node = $xml->xpath('//'.$node)) {
 			return $ref_node[0][0];
 		}
 		return '';
-	}
+	}*/
+	
+	
 	
 
 	

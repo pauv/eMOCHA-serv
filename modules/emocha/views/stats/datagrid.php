@@ -172,8 +172,8 @@
                     village_code: "<?php echo $patient->household->village_code; ?>",
                     household_code: "<?php echo $patient->household_code; ?>",
                     code: "<?php echo $patient->code; ?>",
-                    first_name: "<?php echo $patient->first_name; ?>",
-                    last_name: "<?php echo $patient->last_name; ?>",
+                    first_name: "<?php echo trim($patient->first_name); ?>",
+                    last_name: "<?php echo trim($patient->last_name); ?>",
                     age: "<?php echo $patient->age; ?>",
                     sex: "<?php echo $patient->sex; ?>"
                 };

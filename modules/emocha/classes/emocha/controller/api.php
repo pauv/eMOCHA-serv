@@ -126,8 +126,8 @@ class Emocha_Controller_Api extends Controller {
 		Try to load existing form data record
 		*/
 		$form_data = Model_Form_Data::get_by_key_data(
-							Arr::get($_POST,"household_code"),
-							Arr::get($_POST,"patient_code"),
+							Arr::get($_POST,"household_code",''),
+							Arr::get($_POST,"patient_code",''),
 							$form->id
 							);
 		

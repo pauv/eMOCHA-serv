@@ -14,7 +14,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	public function action_index() {
-		Request::instance()->redirect('stats/data');
+		Request::instance()->redirect('stats/datagrid');
 	}
 	
 	
@@ -41,12 +41,12 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	/*
-	 * export form and results as html table
+	 * export form and results as ajax table
 	 */
 	public function action_exportgrid($form_id=false) {
 
 		$content = $this->template->content = View::factory('stats/exportgrid');
-		
+		$this->template->curr_nav = 'export';
 		// get all form types
 		$content->forms = ORM::factory('form')->find_all();
 		$content->selected_form_id='';
@@ -60,9 +60,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 			$content->columns = $form_exporter->data_as_array['columns'];
 			$content->rows = $form_exporter->data_as_array['rows'];
 			$content->selected_form_id = $form->id;
-			//echo Kohana::debug($content->columns);
-			//echo Kohana::debug($content->rows);
-			//exit;
+
 		}
 				
 	}
@@ -197,7 +195,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 			
 		}
 		else {
-			$content->households = ORM::factory('patient')->order_by('village_code', 'ASC')->find_all();
+			$content->households = ORM::factory('household')->order_by('village_code', 'ASC')->find_all();
 		}
 		$content->order_by = $order_by;
 		$content->household_code = $household_code;
@@ -246,4 +244,21 @@ class Emocha_Controller_Stats extends Controller_Site {
 									));
 	
 	}
+	
+	/*
+	 * Demo charting of data input by date
+	 */
+	 public function action_timegraph() {
+	 	$content = $this->template->content = View::factory('stats/graphs');
+	 	$content->points = Stats::get_count_patients_by_date();
+	 }
+	 
+	 /*
+	 * Demo charting of data input by date
+	 */
+	 public function action_piechart() {
+	 	$content = $this->template->content = View::factory('stats/pies');
+	 	$content->totals = Stats::get_symptom_totals();
+	 	$content->title = "Symptoms pie chart";
+	 }
 }

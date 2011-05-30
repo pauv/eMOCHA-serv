@@ -56,7 +56,7 @@
 
 
 ?>
-<div style="width:600px;float:left;margin-top:20px" id="datagrid">
+<div style="width:800px;float:left;margin-top:20px" id="datagrid">
 			<div class="grid-header" style="width:100%">
 				<label>Data</label>
                 <span style="float:right" class="ui-icon ui-icon-search" title="Toggle search panel" onclick="toggleFilterRow()"></span>
