@@ -45,7 +45,7 @@ class Controller_Auth extends Controller_Site {
 			if ($status)
 			{		
 				//redirect to the user account
-				Request::instance()->redirect('main');
+				Request::instance()->redirect('');
 			}else
 			{
                 //Get errors for display in view
