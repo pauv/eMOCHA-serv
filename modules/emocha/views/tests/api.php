@@ -85,6 +85,16 @@
 	<input type="submit" />
 </form>
 
+<h2>upload_form_file</h2>
+<?php echo Form::open('/api/upload_form_file', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="123456" /><br/>
+	File: <input type="file" name="data" /><br/>
+	<input type="submit" />
+</form>
+
 <h2>upload_phone_locations</h2>
 <?php echo Form::open('/api/upload_phone_locations', array(
 													'enctype'=>'multipart/form-data'

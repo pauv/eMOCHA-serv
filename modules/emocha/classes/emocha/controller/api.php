@@ -190,6 +190,16 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
+	/*
+	 * Upload file connected to form data
+	 * currently a placeholder alaways returns 'ok'
+	 */
+    function action_upload_form_file() {
+    	$json = View::factory('json/display', Json::response('OK', 'file uploaded'))->render();
+    	$this->request->response = $json;
+    }
+	
+	
 	
 	/*
 	 * Upload location data from phone
