@@ -1,14 +1,61 @@
-{\rtf1\mac\ansicpg10000\cocoartf824\cocoasubrtf480
-{\fonttbl\f0\fswiss\fcharset77 Helvetica;}
+{\rtf1\ansi\ansicpg1252\cocoartf1038\cocoasubrtf350
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww11980\viewh10500\viewkind0
+\paperw12240\paperh15840\margl1440\margr1440\vieww16820\viewh8860\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\ql\qnatural\pardirnatural
 
 \f0\fs24 \cf0 Setting up a new app:\
 \
-create new database (db.sql)\
-copy file structure of a current demo app\
-make sure sdcard folders are correct permissions\
-edit application/bootstrap.php (change base url)\
-edit .htaccess (change base url)\
-edit application/config/database.php (new database settings)}
+Database:\
+Import database (db_setup_[\'85].sql) to MySQL. This contains the table structure.\
+\
+Take 'app-example' from git. you can rename this to whatever your app name should be. This is the folder you will access via the web.\
+\
+.htaccess files:\
+- The 'app-example' folder contains an .htaccess file that you can leave as is, if you keep the same folder stucture and names. Otherwise you'll need to change the 'RewriteBase' variable.\
+- if the other system and modules folders are in the web root then you may want to add an .htaccess there to prevent direct access to these folders.\
+\
+Bootstrap file:\
+/app-example/bootstrap.php (edit the base path of your app)\
+\
+Kohana Config files:\
+See modules/emocha/config-examples. Note these can either be in your modules/emocha/config folder or you app-example/config folder. Those in the app are app specific, those in the modules can be shared by different apps.\
+database.php (edit the database details)\
+auth.php (edit salt pattern so your auth salt is unique)\
+email.php (edit email sending server settings)\
+emocha.php (edit email alert recipient and some other app specific things)\
+googlemaps.php (edit client key from  http://code.google.com/apis/maps/signup.html)\
+encryption.php (edit AES encryption key for sensitive DB data)\
+api.php (edit authentication to usr_password or usr_only)\
+sms (enter clicakatell api details if you have them)\
+\
+Sdcard folder:\
+Create a folder called app-example/sdcard with following subdirectories:\
+./emocha\
+./emocha/odk\
+./emocha/odk/custom-resources\
+./emocha/odk/form_files\
+./emocha/odk/forms\
+./emocha/patient_files\
+./emocha/training\
+./emocha/training/courses\
+./emocha/training/lectures\
+./emocha/training/library\
+./upload\
+All need to be writable by php scripts\
+/app-example/sdcard/upload needs to be writable by php and also ftp/sftp (this is used for uploading big files to the media area)\
+\
+\
+Test the app:\
+Go to e.g. http://webroot/app-example\
+\
+First user:\
+An initial user will need to be create (manually in part).\
+- sign up via the application\
+- manually set the user data in the users table: both 'activated' and 'confirmed' should be '1'.\
+- manually give the user an admin role (insert user id=? and role id=2 into the roles_users table)\
+The user should now be able to log in and have admin permissions.\
+\
+\
+\
+}
