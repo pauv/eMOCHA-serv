@@ -8,7 +8,7 @@ class Controller_Account extends Controller_Site {
 	{
 		parent::before();
 		
-		$this->template->title = 'eMocha - Account';
+		$this->template->title = 'Account';
 		$this->template->nav = View::factory('account/nav');
 		$this->template->curr_menu = 'account';
 
@@ -23,6 +23,7 @@ class Controller_Account extends Controller_Site {
 	
 	public function action_details()
 	{	
+		$this->template->title = 'Account details';
 		//Load the view
 		$content = $this->template->content = View::factory('account/details');
 		$content->user = $this->user;
@@ -32,6 +33,7 @@ class Controller_Account extends Controller_Site {
 	
 	public function action_edit_details()
 	{	
+		$this->template->title = 'Edit account details';
 		//Load the view
 		$content = $this->template->content = View::factory('account/edit_details');
 		$content->user = $this->user;
@@ -79,6 +81,7 @@ class Controller_Account extends Controller_Site {
 	
 	public function action_change_password()
 	{	
+		$this->template->title = 'Change password';
 		//Load the view
 		$content = $this->template->content = View::factory('account/change_password');
  

@@ -14,7 +14,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	public function action_index() {
-		Request::instance()->redirect('stats/datagrid');
+		Request::instance()->redirect('stats/data');
 	}
 	
 	

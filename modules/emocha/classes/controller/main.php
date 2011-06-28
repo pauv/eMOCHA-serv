@@ -7,7 +7,7 @@ class Controller_Main extends Controller_Site {
 	{
 		parent::before();
 		
-		$this->template->title = 'eMocha - Admin';
+		$this->template->title = 'Main';
 		$this->template->nav = View::factory('main/nav');
 		$this->template->curr_menu = 'main';
 
@@ -64,6 +64,8 @@ class Controller_Main extends Controller_Site {
 	 * */
 	public function action_map($map_type='households', $selected_code=false) {
 	
+		$this->template->title = 'Data Map';
+		
 		$post = Arr::xss($_POST);
 		
 		$selected_item = false;
@@ -128,10 +130,12 @@ class Controller_Main extends Controller_Site {
 	
 	
 	public function action_alarms() {
+		$this->template->title = 'Alarms';
 		$content = $this->template->content = View::factory('main/alarms');
 	}
 	
 	public function action_messages() {
+		$this->template->title = 'Messages';
 		$content = $this->template->content = View::factory('main/messages');
 	}
 	

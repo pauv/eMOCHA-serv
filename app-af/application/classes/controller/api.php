@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Emocha_Controller_Api extends Controller {
+class Controller_Api extends Controller {
 
 	protected $phone;
 	
@@ -65,10 +65,6 @@ class Emocha_Controller_Api extends Controller {
     		$response = array('config'=>json_decode($config->content));
     		$json = View::factory('json/display', Json::response('OK', 'get_app_config', $response))->render();
     		$this->request->response = $json;
-    	}
-    	else {
-    		$json = View::factory('json/display', Json::response('ERR', 'no config found'))->render();
-			$this->request->response = $json;
     	}
     }
     

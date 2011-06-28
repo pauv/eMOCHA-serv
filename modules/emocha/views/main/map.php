@@ -46,7 +46,7 @@
 				$patients = $household->patients->find_all();
 				$html = count($patients).' patients:<br />';
 				foreach ($patients as $patient) {
-					$html .= Html::anchor('main/map/patients/'.$patient->code, $patient->first_name.' '.$patient->last_name) .'<br />';
+					$html .= Html::anchor('main/map/patients/'.$patient->code, trim($patient->first_name).' '.trim($patient->last_name)) .'<br />';
 				}
 				
 				if($household->gps_lat && $household->gps_long) {
@@ -120,28 +120,25 @@
 
 
 
-<h1>Data Map</h1>
-
-<?php if ($map_type=='households') { ?>
-	<b>Households</b>
-<?php } else {
-	echo Html::anchor('main/map/households', 'Households');
-} ?>
-&nbsp;
-&nbsp;
-<?php if ($map_type=='patients') { ?>
-	<b>Patients</b>
-<?php } else {
-	echo Html::anchor('main/map/patients', 'Patients');
-} ?>
 
 
-<table>
-	<tr>
-		<td>
-			<div id="map_canvas"></div>
-		</td>
-		<td>
+
+	<div id="map_canvas" class="column"></div>
+	<div id="map_filters" class="column">
+			<h3>View</h3>
+			<?php if ($map_type=='households') { ?>
+				<b>Households</b>
+			<?php } else {
+				echo Html::anchor('main/map/households', 'Households');
+			} ?>
+			&nbsp;
+			&nbsp;
+			<?php if ($map_type=='patients') { ?>
+				<b>Patients</b>
+			<?php } else {
+				echo Html::anchor('main/map/patients', 'Patients');
+			} ?>
+			<br /><br />
 			<h3>Filter</h3>
 				<?php
 				if($map_type=='households') {
@@ -169,13 +166,6 @@
 				<input type="radio" name="sex" value="f" <?php if (Arr::get($form_vals, 'sex')=='f') echo 'checked'; ?> />Female<br/>
 				<input type="radio" name="sex" value=""  <?php if (! Arr::get($form_vals, 'sex')) echo 'checked'; ?> />Both<br/>
 				<br/>
-				<!--
-				HIV<br/>
-				<input type="radio" name="hiv" value="y" />yes<br/>
-				<input type="radio" name="hiv" value="n" />no<br/>
-				<input type="radio" name="hiv" value="" />both<br/>
-				<br/>
-				-->
 				Age between<br/>
 				<input type="text" name="age_min" size="2" class="minmax" value="<?php echo Arr::get($form_vals, 'age_min'); ?>" /> and
 				<input type="text" name="age_max" size="2" class="minmax" value="<?php echo Arr::get($form_vals, 'age_max'); ?>" /><br/>
@@ -183,8 +173,9 @@
 				<?php
 				}
 				?>
-				<input type="submit" value="search" />
+				<br />
+				<input type="submit" value="Search" class="button" />
 			</form>
-		</td>
-	</tr>
-</table>
+	</div>
+
+<br class="clear_float" />

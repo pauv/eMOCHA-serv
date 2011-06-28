@@ -1,6 +1,3 @@
-<h1>Change Password</h1>
-
-
 <?php 
 if(isset($errors)) { 
 	echo View::factory('alert/errors')->set('errors', $errors)->render();

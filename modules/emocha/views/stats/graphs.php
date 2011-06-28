@@ -18,7 +18,6 @@
     <?php
     }
     ?>
-
   var plot2 = $.jqplot('chart1', [points], {axes:
   											{xaxis:{renderer:$.jqplot.DateAxisRenderer},
   											yaxis: {min: 0, tickInterval: 50}}

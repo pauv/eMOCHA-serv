@@ -3,25 +3,28 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>eMOCHA - <?php echo $title; ?></title>
+	<link rel="stylesheet" type="text/css" href="/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
-	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="shortcut icon" href="favicon.ico">
 	<script src="/js/jquery-1.4.3.min.js" type="text/javascript"></script>
 	<script src="/js/main.js" type="text/javascript"></script>
 </head>
 <body>
 
-	<table id="header">
+<!-- HEADER -->
+<div id="header">
+	<table>
 		<tr>
-			<td id="banner">
-				<img src="/images/banner_cut.gif">
+			<td><img src="/images/banner_cut.gif">
 				<img src="/images/eMOCHA_logo.png" />
-			</td>
-			<td id="login">
+				</td>
+			
+			<td id="login" align="right">
 				<h3><?php echo Kohana::config('emocha.version_name'); ?></h3>
 				<?php if(isset($logged_in)) { ?>				
 					<?php if($logged_in) { ?>
-						<p>Logged in as: <?php echo $user->username ?></p>
-						<p><?php echo Html::anchor('auth/logout', 'logout') ?></p>
+						Logged in as: <?php echo $user->username ?>&nbsp;&nbsp;&nbsp;&nbsp;
+						<?php echo Html::anchor('auth/logout', 'logout') ?>
 					<?php } else { ?>
 						<?php echo Html::anchor('auth/login', 'login') ?>
 						<?php echo Html::anchor('auth/register', 'register') ?>
@@ -30,41 +33,27 @@
 			</td>
 		</tr>
 	</table>
-	
-	<?php if($logged_in) { ?>
-		<ul id="main_menu">
-			<li id="mm_main"><?php echo Html::anchor('main', 'Main'); ?></li>
-			<li id="mm_edu"><?php echo Html::anchor('edu', 'Training'); ?></li>
-			<li id="mm_telemed"><?php echo Html::anchor('telemed', 'TeleMed'); ?></li>
-			<li id="mm_stats"><?php echo Html::anchor('stats', 'Data'); ?></li>
-			<li id="mm_handsets"><?php echo Html::anchor('handsets', 'Handsets'); ?></li>
-			<li id="mm_account"><?php echo Html::anchor('account', 'Your Account'); ?></li>
-			<?php if($is_admin_user) { ?>
-				<li id="mm_admin"><?php echo Html::anchor('admin', 'Admin'); ?></li>
-			<?php } ?>
-		</ul>
-		
-		<table id="main_table">
-			<tr>
-				<td id="nav" class="noborder">
-					<?php if(isset($nav)) { ?>
+	<div id="menu">
+	<?php if($logged_in) {
+		echo View::factory('menu')->bind('is_admin_user', $is_admin_user);
+		} ?>
+	</div>
+</div>
+
+<!-- HEADER ENDS -->
+<?php if($logged_in) { ?>
+<!-- SUBMENU -->
+<div id="submenu"><?php if(isset($nav)) { ?>
 					<ul>
 						<?php echo $nav; ?>		
 					</ul>
-					<?php } ?>
-				</td>
-				<td class="noborder">
-	<?php }
-	else { ?>
-			<p></p>
-			<table id="main_table">
-				<tr>
-					<td class="noborder">
-	<?php } ?>
+					<?php } ?></div>
+
+<div id="subheader"><h1><?php echo $title; ?></h1></div>
+
+<?php } ?>	
 	
-	
-	
-	
+<div id="content">	
 	
 	<?php 
 	// template content
@@ -102,7 +91,7 @@
 			$('#nav LI').click(li_click);
 		});
 	</script>
-	
 
+</div>
 </body>
 </html>

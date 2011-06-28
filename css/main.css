@@ -1,26 +1,26 @@
 BODY {
-    background-color: #FFF;
-    padding: 10px;
+    background: #C5C1C1;
+    padding: 0px;
     margin: 0px;
 }
 
 BODY, TD {
     font-family: Arial, Helvetica;
-    font-size: small;
-    color: #0a2972;
+    font-size: 11px;
+    color: #333;
 }
 
 A {
     text-decoration: underline;
-    color: #0a2972;
+    color: #003300;
 }
 
 TD {
-    -moz-border-radius:5px;
+    /*-moz-border-radius:5px;
     -webkit-border-radius:5px;	
     vertical-align: top;
 	padding: 5px;
-	border:1px solid #CCC;
+	border:1px solid #CCC;*/
 }
 
 
@@ -28,18 +28,55 @@ FORM {
     margin: 0px;
 }
 
+input.button {
+	background-color: #669933;
+     -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+    border: 0px;
+	color: #FFF;
+	padding: 2px 10px 2px 10px;
+}
 
-/* --- */
+
+div.column
+{
+	float: left;
+    overflow:hidden;
+    display: inline;
+}
+
+
+
+.clear_float 
+{
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: px; /*for IE*/
+}
+
+/* -HEADER- */
 
 #header {
+	background-color: #FFF;
+}
+
+#header TABLE {
 	width:100%;
-    margin-top: 5px;
-    height: 60px;
+    margin: 5px 0 0 0;
 }
 
 #header TD {
-    vertical-align: middle;
-    padding: 10px;
+    vertical-align: top;
+    color: #003300;
+    padding-right: 20px;
+}
+
+#menu {
+	border-bottom: 5px solid #1371B7;
+	padding-left: 300px;
 }
 
 #banner {
@@ -65,34 +102,96 @@ td#login {
 
 #main_menu {
 	padding:0px;
-	margin-top:20px;
-	margin-bottom:5px;
+	margin :0 0 1px 0;
+	color: #FFF;
 }
 #main_menu LI {
     -moz-border-radius:5px 5px 0px 0px;
     -webkit-border-radius:5px 5px 0px 0px;
-	background-color:#CCC;
+	background-color:#333;
 	display: inline;
 	list-style-type: none;
-	padding:5px 10px 5px 10px;
-	border-width:1px 1px 1px 1px;
-	border-color:#CCC;
-	border-style:solid;
+	padding:2px 15px 2px 15px;
 	cursor:pointer;
+	color: #FFF;
+	font-weight: bold;
 }
 #main_menu LI.current {
-	border-bottom-color:#FFF;
-	background-color:#FFF;
+	border-bottom-color:#1371B7;
+	background-color:#1371B7;
 }
+
 #main_menu LI:hover {
-	background-color:#EEEEEE;
+	background-color:#1371B7;
 }
 #main_menu LI A {
 	text-decoration:none;
+	color:#FFF;
+}
+
+#submenu {
+	background: #C5C1C1;
+	padding-left: 300px;
+}
+#submenu ul {
+	padding: 3px;
+}
+#submenu LI {
+	display: inline;
+	list-style-type: none;
+	font-size: 110%;
+	font-weight: normal;
+	padding-right: 5px;
+}
+#submenu LI A {
+	color: #1371B7;
+	text-decoration: none;
+}
+
+#submenu LI.current A {
+	font-weight: bold;
+	text-decoration: underline;
+}
+
+#subheader {
+	background: #C5C1C1;
+	width:100%;
+	border-bottom: 10px solid #1371B7;
+	padding: 10px 0px 5px 20px;
+}
+
+h1 {
+	padding: 0;
+	margin: 0;
+	font-size: 140%;
+	font-weight: normal;
+}
+
+h3 {
+	padding: 0;
+	margin: 0 0 5px 0;
+	font-size: 120%;
+	font-weight: bold;
 }
 
 
+
 /* --- */
+
+#content {
+	background: #FFF;
+	padding: 0px 0px 20px 0px;
+}
+
+#content table {
+	width: 100%;
+}
+#content tr {
+	border-bottom: 1px solid #CCC;
+}
+#content td {
+	padding: 10px 0px 10px 20px;
+}
 
 #main_table {
 	border:1px solid #CCC;
@@ -132,9 +231,7 @@ td#login {
 	margin-bottom:4px;
 	background-color:#DDD;
 }
-#nav LI.current {
-	background-color:#FFF;
-}
+
 #nav LI:hover {
 	background-color:#EEE;
 }
@@ -150,7 +247,11 @@ td#login {
 #map_canvas {
     width: 600px;
     height: 400px;
-    margin-right: 10px;
+    margin: 20px;
+}
+
+#map_filters {
+    margin-top: 20px;
 }
 
 /* --- */
