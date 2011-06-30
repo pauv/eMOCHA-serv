@@ -36,7 +36,9 @@
 <script language="JavaScript" src="/js/slickgrid/slick.pager.js"></script>
 <script language="JavaScript" src="/js/slickgrid/slick.columnpicker.js"></script>
 
-<div id="datalist">
+<div id="inner_content">
+
+
 <h3>This is the list of existing forms. Please click on one to show a table with all received data.</h3>
 <?php 
 
@@ -46,7 +48,7 @@
 	}	
 
 ?>
-</div>
+
 
 <?php if($selected_form_id) { 
 
@@ -56,16 +58,17 @@
 
 
 ?>
-<div style="width:800px;float:left;margin-top:20px" id="datagrid">
+
+<div style="width:850px;float:left;margin-top:20px" id="datagrid">
 			<div class="grid-header" style="width:100%">
 				<label>Data</label>
                 <span style="float:right" class="ui-icon ui-icon-search" title="Toggle search panel" onclick="toggleFilterRow()"></span>
 			</div>
 			<div id="myGrid" style="width:100%;height:500px;"></div>
 			<div id="pager" style="width:100%;height:20px;"></div>
-		</div>
+</div>
 
-
+<br class="clear_float" />
 <script>
 
 		var dataView;
@@ -298,3 +301,5 @@
 
 </script>
 <?php } ?>
+
+</div>

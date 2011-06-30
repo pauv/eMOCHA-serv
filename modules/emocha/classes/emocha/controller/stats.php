@@ -14,7 +14,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	public function action_index() {
-		Request::instance()->redirect('stats/data');
+		Request::instance()->redirect('stats/datagrid');
 	}
 	
 	
@@ -45,6 +45,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 */
 	public function action_exportgrid($form_id=false) {
 
+		$this->template->title = 'Export';
 		$content = $this->template->content = View::factory('stats/exportgrid');
 		$this->template->curr_nav = 'export';
 		// get all form types
@@ -108,7 +109,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	public function action_referrals() {
 
-		$this->template->title = 'Stats - Enter data';
+		$this->template->title = 'Log referral visit';
 		$content = $this->template->content = View::factory('stats/referrals');
 		$content->referral_visit_logged =  FALSE;
 		$content->form_vals = array();
@@ -145,7 +146,8 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 
 	 public function action_data()
 	{
-	
+		
+		$this->template->title = 'Data by patient';
 		$content = $this->template->content = View::factory('stats/data');
 		
 		// xss clean post vars
@@ -182,6 +184,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 * */
 	public function action_households($order_by = 'village') {
 	
+		$this->template->title = 'Data by household';
 		$household_code = Arr::get($_POST, 'household_code', '');
 	
 		$content = $this->template->content = View::factory('stats/data_households');
@@ -207,7 +210,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 */
 	 public function action_datagrid()
 	{
-	
+		$this->template->title = 'Data by patient';
 		$content = $this->template->content = View::factory('stats/datagrid');
 		$content->patients = ORM::factory('patient')->find_all();
 	

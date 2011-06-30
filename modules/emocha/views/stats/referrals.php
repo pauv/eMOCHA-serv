@@ -1,6 +1,4 @@
-<h1>Log Referral Visit</h1>
-
-
+<div id="inner_content">
 <?php 
 if(isset($errors)) { 
 	echo View::factory('alert/errors')->set('errors', $errors)->render();
@@ -44,7 +42,7 @@ Referred from form: <?php echo $form->name; ?>
 
         <tr>
 
-            <td colspan="2"><?php echo Form::submit('submit', 'Submit'); ?></td>
+            <td colspan="2"><input type="submit" class="button" value="Submit"></td>
 
         </tr>
 
@@ -53,3 +51,4 @@ Referred from form: <?php echo $form->name; ?>
 </table>
 
 <?php echo Form::close(); ?>
+</div>

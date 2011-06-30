@@ -36,8 +36,9 @@
 <script language="JavaScript" src="/js/slickgrid/slick.pager.js"></script>
 <script language="JavaScript" src="/js/slickgrid/slick.columnpicker.js"></script>
 
+<div id="inner_content">
 
-<div style="width:600px;float:left;margin-top:20px" id="datagrid">
+<div style="width:600px;float:left;" id="datagrid">
 			<div class="grid-header" style="width:100%">
 				<label>Data</label>
                 <span style="float:right" class="ui-icon ui-icon-search" title="Toggle search panel" onclick="toggleFilterRow()"></span>
@@ -45,7 +46,7 @@
 			<div id="myGrid" style="width:100%;height:500px;"></div>
 			<div id="pager" style="width:100%;height:20px;"></div>
 		</div>
-		<div class="options-panel" style="width:200px;margin-left:650px;margin-top:20px" >
+		<div class="options-panel" style="width:200px;margin-left:650px;" >
 				<b>Columns:</b> 
 				<hr/>
 				- Click column head to order<br />
@@ -69,6 +70,8 @@
 				<input type=text id="nmSearch" style="width:100px;">
 			</div>
 		</div>
+
+<br class="clear_float" />
 
 <script>
 
@@ -297,3 +300,5 @@
 		})
 
 </script>
+
+</div>

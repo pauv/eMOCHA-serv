@@ -7,7 +7,7 @@ class Controller_Edu extends Controller_Site {
 	{
 		parent::before();
 		
-		$this->template->title = 'eMocha - Education';
+		$this->template->title = 'Education';
 		$this->template->nav = View::factory('edu/nav');
 		$this->template->curr_menu = 'edu';
 
@@ -22,7 +22,7 @@ class Controller_Edu extends Controller_Site {
 	public function action_courses($action=false) {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'courses')->find_all();
 		$data['section'] = 'courses';
-		$this->template->title = 'eMocha - Courses';
+		$this->template->title = 'Courses';
 		$data['action'] = $action;
 		$this->template->content = View::factory('edu/file_list', $data);
 	}
@@ -31,7 +31,7 @@ class Controller_Edu extends Controller_Site {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'lectures')->find_all();
 		$data['section'] = 'lectures';
 		$data['action'] = $action;
-		$this->template->title = 'eMocha - Lectures';
+		$this->template->title = 'Lectures';
 		$this->template->content = View::factory('edu/file_list', $data);
 	}
 	
@@ -39,7 +39,7 @@ class Controller_Edu extends Controller_Site {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'library')->find_all();
 		$data['section'] = 'library';
 		$data['action'] = $action;
-		$this->template->title = 'eMocha - Library';
+		$this->template->title = 'Library';
 		$this->template->content = View::factory('edu/file_list', $data);
 	}
 	
@@ -61,7 +61,7 @@ class Controller_Edu extends Controller_Site {
 		$data['errors'] = $errors;
 		$data['ftp_files'] = File::list_files_in_ftp_upload($data['allowed_file_types']);
 		
-		$this->template->title = 'eMocha - '.ucfirst($section);
+		$this->template->title = ucfirst($section);
 		$this->template->content = View::factory('edu/upload_form', $data);
 		
 		

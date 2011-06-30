@@ -123,22 +123,6 @@
 
 
 
-<h1>Data Map</h1>
-
-<?php if ($map_type=='households') { ?>
-	<b>Households</b>
-<?php } else {
-	echo Html::anchor('main/map/households', 'Households');
-} ?>
-&nbsp;
-&nbsp;
-<?php if ($map_type=='patients') { ?>
-	<b>Patients</b>
-<?php } else {
-	echo Html::anchor('main/map/patients', 'Patients');
-} ?>
-
-
 <div id="map_canvas" class="column"></div>
 	<div id="map_filters" class="column">
 			<h3>View</h3>
@@ -196,6 +180,7 @@
 				<?php
 				}
 				?>
+				<br /><br />
 				<input type="submit" class="button" value="Search" />
 			</form>
 		</div>

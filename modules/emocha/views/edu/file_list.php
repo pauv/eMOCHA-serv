@@ -1,5 +1,3 @@
-<h1><?php echo ucfirst($section) ?></h1>
-
 <?php if ($action) { ?>
 <div class="st_OK">
 	The file was <?php echo $action; ?>
@@ -7,12 +5,8 @@
 <?php } ?>
 
 
-<p>
-<button onclick="document.location.href='<?php echo Url::site('edu/form/'.$section); ?>'">Add a file</button>
-</p>
 
-
-<table>
+<table class="list">
 
 
 <?php
@@ -35,6 +29,7 @@
 	<th></th>
 </tr>
 <?php
+		$count=1;
 		foreach($medias AS $media) {
 			
 			if($media->thumbnail->loaded()) {
@@ -50,7 +45,7 @@
 			
 ?>
 
-<tr>
+<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $img; ?></td>
 	<td><?php echo $media->title; ?></td>
 	<td><?php echo $media->file->filename; ?></td>
@@ -59,9 +54,16 @@
 	<td><?php echo Html::anchor('edu/delete/'.$section.'/'.$media->id, 'delete') ?></td>
 </tr>
 
-<?php 	
+<?php 	$count++;
 		}
+		
 	} 
 ?>		
 
 </table>
+
+
+
+<p>
+<button onclick="document.location.href='<?php echo Url::site('edu/form/'.$section); ?>'" class="listbutton">Add a file</button>
+</p>

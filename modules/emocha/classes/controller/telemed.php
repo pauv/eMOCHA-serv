@@ -21,12 +21,12 @@ class Controller_Telemed extends Controller_Site {
 	
 	
 	public function action_datasel() {
-		$this->template->title = 'Telemed - Datesel';
+		$this->template->title = 'Datesel';
 		$this->template->content = View::factory('telemed/datasel');
 	}
 	
 	public function action_notes() {
-		$this->template->title = 'Telemed - Notes';
+		$this->template->title = 'Notes';
 		$this->template->content = View::factory('telemed/notes');
 	}
 }

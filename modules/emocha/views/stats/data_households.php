@@ -1,5 +1,3 @@
-<link rel="stylesheet" type="text/css" href="/css/stats_datasel.css">
-
 <table>
 	<tr>
 		<td>
@@ -20,7 +18,7 @@ Order by:
 <?php echo Form::open('stats/households/household'); ?>
 Household code:<br/>
 <?php echo Form::input('household_code', $household_code); ?>
-<?php echo Form::submit('submit', 'Search'); ?>
+&nbsp;<input type="submit" class="button" value="Search">
 <?php echo Form::close(); ?>
 
 <?php 	
@@ -77,7 +75,7 @@ Household code:<br/>
 			</div>
 		</td>
 		<td>
-			<div id="filecontent"></div>
+			<div id="filecontent">&nbsp;</div>
 		</td>
 	</tr>
 </table>

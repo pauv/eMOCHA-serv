@@ -1,5 +1,4 @@
-<h1>Delete file</h1>
-
+<div id="inner_content">
 <p>
 Do you really want to delete the file '<?php echo $media->title; ?>'?
 </p>
@@ -11,3 +10,4 @@ Do you really want to delete the file '<?php echo $media->title; ?>'?
 <p>
 <?php echo Html::anchor('edu/'.$section, 'No, cancel') ?>
 </p>
+</div>

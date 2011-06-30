@@ -1,5 +1,4 @@
-<h1>Add a file to '<?php echo $section ?>'</h1>
-
+<div id="inner_content">
 
 <?php 
 if(isset($errors)) { 
@@ -59,7 +58,9 @@ Thumbnail (optional, jpg):<br />
 <?php } ?>
 
 <p>
-<input type="submit" value="upload" />
+<input type="submit" value="Upload" class="button" />
 </p>
 
 </form>
+
+</div>
