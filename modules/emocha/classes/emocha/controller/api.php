@@ -34,6 +34,54 @@ class Emocha_Controller_Api extends Controller {
 
 	}
 	
+	 
+	/*
+	 * Get single config value by key
+	 */
+	public function action_get_config_by_key() {
+	 	$label = Arr::get($_POST, 'key', ''); 
+    	$config = ORM::factory('config')->where('label', '=', $label)->find();
+    	if($config->loaded()) {
+    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_key', array($config->label=>$config->content)))->render();
+    		$this->request->response = $json;
+    	}
+    	else {
+    		$json = View::factory('json/display', Json::response('ERR', 'no config found'))->render();
+			$this->request->response = $json;
+    	}
+    }
+    
+    /*
+	 * Get multiple config value by keys
+	 */
+    public function action_get_config_by_keys() {
+    	$configs = array();
+	 	if(! $keys = Arr::get($_POST, 'keys', '')) {
+	 		// no keys submitted, get all keys
+    		$objs = ORM::factory('config')->where('label', '!=', 'application')->find_all();
+    		foreach($objs as $obj){
+    			$configs[$obj->label] = $obj->content;
+    		}
+    	}
+    	else {
+    		$labels = explode(',', $keys);
+    		foreach($labels as $label) {
+    			$config = ORM::factory('config')->where('label', '=', $label)->find();
+    			if($config->loaded()) {
+    				$configs[$config->label] = $config->content;
+    			}
+    		}
+    	}
+    	if(sizeof($configs)) {
+    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_keys', $configs))->render();
+    		$this->request->response = $json;
+    	}
+    	else {
+    		$json = View::factory('json/display', Json::response('ERR', 'no configs found'))->render();
+			$this->request->response = $json;
+    	}
+    }
+	
 	
 	public function action_activate_phone() {
     	$imei = preg_replace('/\W/', '', Arr::get($_POST, 'imei', ''));    	

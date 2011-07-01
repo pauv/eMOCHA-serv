@@ -113,6 +113,26 @@
 </form>
 
 
+<h2>get_config_by_key</h2>
+<?php echo Form::open('/api/get_config_by_key', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="123456" /><br/>
+	Key: <input type="text" name="key" value="" /><br/>
+	<input type="submit" />
+</form>
+
+<h2>get_config_by_keys</h2>
+<?php echo Form::open('/api/get_config_by_keys', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="123456" /><br/>
+	Keys (comma separated): <input type="text" name="keys" value="" /><br/>
+	<input type="submit" />
+</form>
+
 </body>
 
 </html>
