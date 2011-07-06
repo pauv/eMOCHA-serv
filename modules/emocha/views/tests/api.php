@@ -91,7 +91,10 @@
 													));?>
 	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	Pwd: <input type="text" name="pwd" value="123456" /><br/>
-	File: <input type="file" name="data" /><br/>
+	Household code: <input type="text" name="household_code" value="" /><br/>
+	Patient code: <input type="text" name="patient_code" value="" /><br/>
+	Form code: <input type="text" name="form_code" value="" /><br/>
+	File: <input type="file" name="file" /><br/>
 	<input type="submit" />
 </form>
 

@@ -17,7 +17,7 @@ class Emocha_Controller_Api extends Controller {
 				// check user and update gps / connect time info
 				if(Kohana::config('api.authentication')=='usr_only'){
 					$this->phone = Phone::get_by_user(Arr::get($_POST, 'usr')); 
-					echo Kohana::debug($this->phone);
+					//echo Kohana::debug($this->phone);
 				}
 				else {
 					$this->phone = Phone::get_by_user_password(Arr::get($_POST, 'usr'), Arr::get($_POST, 'pwd')); 
@@ -28,7 +28,9 @@ class Emocha_Controller_Api extends Controller {
 					//echo View::factory('profiler/stats');
 					exit;
 				} else {
-					$this->phone->set_gps(Arr::get($_POST, 'gps'));					
+					if($gps = Arr::get($_POST, 'gps')) {
+						$this->phone->set_gps($gps);	
+					}
 				}
 		}	
 
@@ -58,7 +60,7 @@ class Emocha_Controller_Api extends Controller {
     	$configs = array();
 	 	if(! $keys = Arr::get($_POST, 'keys', '')) {
 	 		// no keys submitted, get all keys
-    		$objs = ORM::factory('config')->where('label', '!=', 'application')->find_all();
+    		$objs = ORM::factory('config')->find_all();
     		foreach($objs as $obj){
     			$configs[$obj->label] = $obj->content;
     		}
@@ -245,9 +247,50 @@ class Emocha_Controller_Api extends Controller {
 	
 	/*
 	 * Upload file connected to form data
-	 * currently a placeholder alaways returns 'ok'
 	 */
     function action_upload_form_file() {
+    
+    	// load associated form
+    	$form = ORM::factory('form')->where('code','=',Arr::get($_POST,"form_code"))->find();
+		if(! $form->loaded()) {
+			$json = View::factory('json/display', Json::response('ERR', 'invalid form code'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		// load associated form data
+		$form_data = Model_Form_Data::get_by_key_data(
+							Arr::get($_POST,"household_code",''),
+							Arr::get($_POST,"patient_code",''),
+							$form->id
+							);
+		if(! $form_data->loaded()) {
+			$json = View::factory('json/display', Json::response('ERR', 'invalid household or patient code'))->render();
+			$this->request->response = $json;
+			return;
+		}
+    	
+    	// validate and save file
+    	if(isset($_FILES['file'])){
+			$validation = Validate::factory($_FILES)
+				->rules('file', array(
+										'upload::valid'=>NULL, 
+										'upload::type'=>array(array('3gp','mp4','m4a','aac','flac','mp3','ogg','wav','jpg','gif','bmp','webm')), 
+										'upload::size'=>array('32M')
+										));
+			if (! $validation->check()){
+				$json = View::factory('json/display', Json::response('ERR', 'invalid file'))->render();
+				$this->request->response = $json;
+				return;
+			}
+			else {
+				if (! $form_data->save_file($_FILES['file'])) {
+					$json = View::factory('json/display', Json::response('ERR', 'failed to save file'))->render();
+					$this->request->response = $json;
+					return;
+				}
+			}
+		}
     	$json = View::factory('json/display', Json::response('OK', 'file uploaded'))->render();
     	$this->request->response = $json;
     }

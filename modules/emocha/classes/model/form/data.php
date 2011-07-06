@@ -138,6 +138,30 @@ class Model_Form_Data extends ORM_Encrypted {
 	
 	
 	
+	
+	/*
+	 * save associated file
+	 * @return bool
+	 */
+	public function save_file($file) {
+		$files_folder = 'sdcard/emocha/patient_files';
+		$dir = '';
+		if($this->patient_code) {
+			$dir = $this->patient_code;
+		}
+		else {
+			$dir = $this->household_code;
+		}
+		// double check folder is not blank
+		if(! $dir) return false;
+		// write dir
+		$file_folder = DOCROOT.$files_folder.'/'.$dir;
+		if(! is_dir($file_folder)) {
+			mkdir($file_folder);
+		}
+		// write file
+		return upload::save($file, $file['name'], $file_folder);
+	}
 
 	
 	
