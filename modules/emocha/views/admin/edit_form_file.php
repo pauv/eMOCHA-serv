@@ -1,9 +1,11 @@
-<h1><?php echo ucfirst($mode) ?> Form File</h1>
-
 
 <?php 
 if(isset($errors)) { 
-	echo View::factory('alert/errors')->set('errors', $errors)->render();
+	?>
+	<div class="alert">
+	<?php echo View::factory('alert/errors')->set('errors', $errors)->render(); ?>
+	</div>
+	<?php
 }
 ?>
 
@@ -12,7 +14,7 @@ if(isset($errors)) {
 													));?>
 
 
-<table>
+<table class="form">
 
 
     <tbody>

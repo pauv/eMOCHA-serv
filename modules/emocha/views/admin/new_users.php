@@ -1,7 +1,8 @@
 
-<h1>New Users</h1>
 
-
+<table class="list">
+<?php if ($action_taken) { ?>
+<tr><td>
 <?php
 
 	// display message for action taken
@@ -21,28 +22,35 @@
 	
 	}
 ?>
+</td></tr>
+<?php
+}
+?>
+
 
 <?php
 if(count($users)==0) {
 ?>
-There are no new users
+<tr><td>There are no new users</td></tr>
 <?php
 }
 else {
 ?>
 
-	<table>
+	
 		<tr>
 			<th>name</th>
 			<th>username</th>
 			<th>email</th>
+			<th></th>
+			<th></th>
 		</tr>
 		<?php 
-		
+			$count=1;
 			// list users
 			foreach ($users as $user) {
 		?>
-			<tr>
+			<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 				<td><?php echo $user->first_name." ".$user->last_name; ?></td>
 				<td><?php echo $user->username; ?></td>
 				<td><?php echo $user->email; ?></td>
@@ -50,6 +58,7 @@ else {
 				<td><?php echo Html::anchor('admin/delete_user_confirm/'.$user->id, 'delete'); ?></td>
 			</tr>
 		<?php 
+			$count++;
 		} ?>
 	
 	</table>

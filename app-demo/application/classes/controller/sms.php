@@ -7,7 +7,7 @@ class Controller_Sms extends Controller_Site {
 	{
 		parent::before();
 		
-		$this->template->title = 'eMocha - Sms';
+		$this->template->title = 'Sms demo';
 		$this->template->nav = View::factory('sms/nav');
 		$this->template->curr_menu = 'sms';
 

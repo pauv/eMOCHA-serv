@@ -1,19 +1,5 @@
-<h1>Files for <?php echo $form->name; ?></h1>
 
-<?php if ($action) { ?>
-<div class="st_OK">
-	The file was <?php echo $action; ?>
-</div>
-<?php } ?>
-
-<p>
-<?php echo Html::anchor('admin/edit_form_file/'.$form->id, 'Add a file') ?>
-</p>
-
-
-
-
-<table>
+<table class="list">
 
 
 <?php
@@ -21,7 +7,10 @@
 	if (! count($form_files)) {
 ?>
 	<tr>
-		<td>No files found.</td>
+		<td>No files found.
+		<br /><br />
+		<button onclick="document.location.href='<?php echo Url::site('admin/edit_form_file/'.$form->id); ?>';">Add a file</button>
+		</td>
 	</tr>
 <?php		
 	} else {
@@ -38,11 +27,23 @@
 
 </tr>
 
-<?php
 
+<tr>
+<td colspan="6">
+<?php if ($action) { ?>
+<div class="st_OK">
+	The file was <?php echo $action; ?>
+</div><br /><br />
+<?php } ?>
+	<button onclick="document.location.href='<?php echo Url::site('admin/edit_form_file/'.$form->id); ?>';">Add a file</button>
+</td>
+</tr>
+
+<?php
+		$count=1;
 		foreach($form_files AS $form_file) {
 			?>
-<tr>
+<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $form_file->file->path; ?> </td>
 	<td><?php echo $form_file->type; ?> </td>
 	<td><?php echo $form_file->label; ?> </td>
@@ -52,6 +53,7 @@
 </tr>
 
 <?php 	
+			$count++;
 		}
 	} 
 ?>		

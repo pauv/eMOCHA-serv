@@ -1,5 +1,4 @@
-<h1>Delete file</h1>
-
+<div id="inner_content">
 <p>
 Do you really want to delete the form '<?php echo $form->name; ?>'?
 </p>
@@ -11,3 +10,4 @@ Do you really want to delete the form '<?php echo $form->name; ?>'?
 <p>
 <?php echo Html::anchor('admin/forms', 'No, cancel') ?>
 </p>
+</div>

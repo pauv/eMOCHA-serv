@@ -29,7 +29,7 @@ class Controller_Auth extends Controller_Site {
 	
 	public function action_login()
 	{
- 
+ 		$this->template->title = 'Login';
 		$content = $this->template->content = View::factory('auth/login');	
  
 		//If there is a post and $_POST is not empty
@@ -75,6 +75,7 @@ class Controller_Auth extends Controller_Site {
 	
 	public function action_register()
 	{	
+		$this->template->title = 'Register';
 		//Load the view
 		$content = $this->template->content = View::factory('auth/register');
 		// assign empty vals
@@ -147,6 +148,7 @@ class Controller_Auth extends Controller_Site {
 	 */
 	public function action_conf($code = FALSE) 
 	{
+		$this->template->title = 'Register';
 		// load default activation form
 		$content = $this->template->content = View::factory('auth/activate');
 		
@@ -185,6 +187,7 @@ class Controller_Auth extends Controller_Site {
 	public function action_email_error() 
 	{
 		// load view
+		$this->template->title = 'Register';
 		$content = $this->template->content = View::factory('auth/error');
 		$content->errors = array(Kohana::message('user_verification', 'email.send_failure'));
 	
@@ -197,6 +200,7 @@ class Controller_Auth extends Controller_Site {
 	public function action_activated() 
 	{
 		// load view
+		$this->template->title = 'Register';
 		$content = $this->template->content = View::factory('auth/activated');
 	
 	}
@@ -209,6 +213,7 @@ class Controller_Auth extends Controller_Site {
 	*/
 	public function action_forgot_password() 
 	{
+		$this->template->title = 'Forgot password';
 		//default view
 		$content = $this->template->content = View::factory('auth/forgot_password');
 		// assign empty vals
@@ -270,6 +275,7 @@ class Controller_Auth extends Controller_Site {
 	*/
 	public function action_reset($code = FALSE) 
 	{
+		$this->template->title = 'Password';
 		// load view
 		$content = $this->template->content = View::factory('auth/reset_password');	
 	
@@ -343,6 +349,7 @@ class Controller_Auth extends Controller_Site {
 	 */
 	public function action_reset_ok() 
 	{
+		$this->template->title = 'Password';
 		// load view
 		$content = $this->template->content = View::factory('auth/reset_password_ok');
 	
@@ -355,6 +362,7 @@ class Controller_Auth extends Controller_Site {
 	 */
 	public function action_access() {
 
+		$this->template->title = 'Error';
 		$content = $this->template->content = View::factory('auth/access');
 		
 	}

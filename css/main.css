@@ -181,6 +181,14 @@ h1 {
 	font-weight: normal;
 }
 
+h2 {
+	padding: 0;
+	margin: 10px 0 5px 0;
+	font-size: 130%;
+	font-weight: bold;
+}
+
+
 h3 {
 	padding: 0;
 	margin: 0 0 5px 0;
@@ -201,8 +209,16 @@ h3 {
 	padding: 20px 0 0 20px;
 }
 
+.alert {
+	padding: 20px 20px 20px 20px;
+}
+
 #content table {
 	width: 100%;
+}
+
+#content table.form {
+	width: 500px;
 }
 /*#content tr {
 	border-bottom: 1px solid #CCC;
@@ -284,11 +300,10 @@ h3 {
 #map_canvas {
     width: 600px;
     height: 400px;
-    margin: 20px;
 }
 
 #map_filters {
-    margin-top: 20px;
+    margin-left: 20px;
 }
 
 /* --- */
@@ -339,11 +354,13 @@ a.selected {
 	background-color:#BADA8F !important;
 	border:1px solid #8FC249 !important;
 	color:#456020 !important;
+	padding: 3px;
 }
 .st_ERR {
 	background-color:#D75640 !important;
 	border:1px solid #C14028 !important;
 	color:#6D2316 !important;
+	padding: 3px;
 }
 
 /* --- */

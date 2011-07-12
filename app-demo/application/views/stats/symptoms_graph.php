@@ -91,7 +91,8 @@
   });</script>
   
 
-  
-<h2>Symptoms entered by date</h2>
+<div id="inner_content">
+<b>Symptoms entered by date</b>
   <div id="chart2" style="height:400px; width:800px;"></div>
+  </div>
 

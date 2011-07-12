@@ -7,7 +7,6 @@ class Controller_Handsets extends Controller_Site {
 	{
 		parent::before();
 		
-		$this->template->title = 'eMocha - Handsets';
 		$this->template->nav = View::factory('handsets/nav');
 		$this->template->curr_menu = 'handsets';
 
@@ -19,6 +18,7 @@ class Controller_Handsets extends Controller_Site {
 	
 	public function action_phones() {
 	
+		$this->template->title = 'Phones';
 		$content = $this->template->content = View::factory('handsets/phones');
 		$content->phones = Phone::get_phone_list();
 
@@ -26,7 +26,7 @@ class Controller_Handsets extends Controller_Site {
 	
 	public function action_location() {
 		
-		$this->template->title = 'eMocha - Handset Locations';	
+		$this->template->title = 'Locations';	
 		$content = $this->template->content = View::factory('handsets/location');
 		
 		$phones = Phone::get_gps_phone_list();
@@ -70,7 +70,7 @@ class Controller_Handsets extends Controller_Site {
 	}
 	
 	public function action_add() {
-		$this->template->title = 'eMocha - Add handset';
+		$this->template->title = 'Add handset';
 		$this->template->content = View::factory('handsets/add');
 	}
 }

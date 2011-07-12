@@ -1,6 +1,4 @@
-<h1>Handset list</h1>
-
-<table>
+<table class="list">
 
 <tr>
 	<th>Name</th>
@@ -9,6 +7,7 @@
 </tr>
 
 <?php 
+	$count=1;
 	foreach ($phones as $phone) {
 		if ($phone->last_connect_ts > 0) { 
 			$time = date('d-m-Y H:j:s', $phone->last_connect_ts);
@@ -16,12 +15,14 @@
 			$time = 'no data received yet';
 		} 
 ?>
-<tr>
+<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $phone->comments; ?></td>
 	<td><?php echo $phone->imei; ?></td>
 	<td><?php echo $time; ?></td>
 </tr>
 
-<?php } ?>
+<?php 
+	$count++;
+} ?>
 
 </table>

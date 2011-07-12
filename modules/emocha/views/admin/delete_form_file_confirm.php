@@ -1,6 +1,4 @@
-<h1>Delete form file</h1>
-
-<p>
+<div id="inner_content"><p>
 Do you really want to delete the file '<?php echo $form_file->file->filename; ?>'?
 </p>
 
@@ -11,3 +9,4 @@ Do you really want to delete the file '<?php echo $form_file->file->filename; ?>
 <p>
 <?php echo Html::anchor('admin/form_files/'.$form_file->form->id, 'No, cancel') ?>
 </p>
+</div>

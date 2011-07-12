@@ -28,7 +28,10 @@
 </script>
 
 
-<h2><?php echo $title; ?></h2>
+<div id="inner_content">
+<b><?php echo $title; ?></b>
 
 <div id="chart1" style="margin-top:20px; margin-left:20px; width:460px; height:300px;"></div>
+
+</div>
     

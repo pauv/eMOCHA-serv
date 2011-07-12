@@ -9,7 +9,7 @@ if(isset($errors)) {
 
 
 
-<table>
+<table class="form">
 
 
     <tbody>
@@ -39,7 +39,7 @@ if(isset($errors)) {
 
         <tr>
 
-            <td colspan="2"><?php echo Form::submit('submit', 'Change'); ?></td>
+            <td colspan="2"><?php echo Form::submit('submit', 'Change', array('class'=>'button')); ?></td>
 
         </tr>
 

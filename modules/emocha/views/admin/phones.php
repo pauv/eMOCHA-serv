@@ -1,24 +1,16 @@
-<h1>Phones</h1>
-
-<?php if ($action) { ?>
-<div class="st_OK">
-	The phone was <?php echo $action; ?>
-</div>
-<?php } ?>
 
 
-<p>
-<?php echo Html::anchor('admin/edit_phone', 'Add a phone') ?>
-</p>
-
-<table>
+<table class="list">
 
 
 <?php
 	if (! count($phones)) {
 ?>
 	<tr>
-		<td>No phones found.</td>
+		<td>No phones found.
+		<br /><br />
+		<button onclick="document.location.href='<?php echo Url::site('admin/edit_phone'); ?>';">Add a phone</button>
+		</td>
 	</tr>
 <?php		
 	} else {
@@ -30,15 +22,28 @@
 	<th>Comments</th>
 	<th>Created</th>
 	<th>Last connected</th>
-	<th></th>
-	<th></th>
+	<th>&nbsp;</th>
+	<th>&nbsp;</th>
+	<th>&nbsp;</th>
 
+</tr>
+<tr>
+	<td colspan="7">
+	<?php if ($action) { ?>
+	<div class="st_OK">
+		The phone was <?php echo $action; ?>
+	</div>
+	<br /><br />
+	<?php } ?>
+	<button onclick="document.location.href='<?php echo Url::site('admin/edit_phone'); ?>';">Add a phone</button>
+	</td>
 </tr>
 
 <?php
+		$count=1;
 		foreach($phones AS $phone) {
 			?>
-<tr>
+<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $phone->imei; ?> </td>
 	<td><?php echo $phone->comments; ?> </td>
 	<td><?php echo date('d-m-Y H:j:s', $phone->creation_ts); ?></td>
@@ -50,9 +55,11 @@
 	<td><?php echo Html::anchor('admin/delete_phone/'.$phone->id, 'delete') ?></td>
 </tr>
 
-<?php 	
+<?php 		$count++;
 		}
 	} 
 ?>		
 
 </table>
+
+

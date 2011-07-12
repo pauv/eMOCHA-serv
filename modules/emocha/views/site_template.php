@@ -41,17 +41,22 @@
 </div>
 
 <!-- HEADER ENDS -->
-<?php if($logged_in) { ?>
+
 <!-- SUBMENU -->
-<div id="submenu"><?php if(isset($nav)) { ?>
+<div id="submenu"><?php if($logged_in) { ?>
+					<?php if(isset($nav)) { ?>
 					<ul>
 						<?php echo $nav; ?>		
 					</ul>
-					<?php } ?></div>
+					<?php } ?>
+					<?php } else { ?>
+					<br />
+					<?php } ?>
+				</div>
 
 <div id="subheader"><h1><?php echo $title; ?></h1></div>
 
-<?php } ?>	
+	
 	
 <div id="content">	
 	
@@ -59,14 +64,6 @@
 	// template content
 	echo $content; ?>
 	
-	
-	
-	
-	
-	
-				</td>
-		</tr>
-	</table>
 
 	<div id="status"></div>
 		

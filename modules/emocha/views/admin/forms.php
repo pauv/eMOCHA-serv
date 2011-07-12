@@ -1,29 +1,13 @@
-<h1>Forms</h1>
-
-<?php if ($action) { ?>
-<div class="st_OK">
-	The file was <?php echo $action; ?>
-</div>
-<?php } ?>
-
-<p>
-<?php echo Html::anchor('admin/edit_form', 'Add a form') ?>
-</p>
-
-
-<b>Note:</b><br />
-Household Core and Patient Core forms need to be given code 'hcore' and 'pcore' respectively.<br />
-Once in the system, form ids need to be preserved, so edit rather than delete a form which is already in use.
-<br /><br />
-
-<table>
-
+<table class="list">
 
 <?php
 	if (! count($forms)) {
 ?>
 	<tr>
-		<td>No files found.</td>
+		<td colspan="7">No files found.
+		<br /><br />
+		<button onclick="document.location.href='<?php echo Url::site('admin/edit_form'); ?>';">Add a form</button>
+		</td>
 	</tr>
 <?php		
 	} else {
@@ -40,11 +24,30 @@ Once in the system, form ids need to be preserved, so edit rather than delete a 
 	<th></th>
 
 </tr>
-
-<?php
-		foreach($forms AS $form) {
-			?>
 <tr>
+	<td colspan="7">
+<?php if ($action) { ?>
+
+	<div class="st_OK">
+	The file was <?php echo $action; ?>
+	</div>
+	<br /><br />
+	<?php } ?>
+	<button onclick="document.location.href='<?php echo Url::site('admin/edit_form'); ?>';">Add a form</button>
+	<br /><b>Note:</b>
+Household Core and Patient Core forms need to be given code 'hcore' and 'pcore' respectively.<br />
+Once in the system, form ids need to be preserved, so edit rather than delete a form which is already in use.
+<br /><br />
+	
+<?php } ?>
+</td>
+</tr>
+
+
+<?php 
+	$count=1;
+	foreach($forms as $form) { ?>
+<tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $form->name; ?> </td>
 	<td><?php echo $form->group; ?> </td>
 	<td><?php echo $form->code; ?> </td>
@@ -55,8 +58,9 @@ Once in the system, form ids need to be preserved, so edit rather than delete a 
 </tr>
 
 <?php 	
-		}
-	} 
+		$count++;
+	}
+
 ?>		
 
 </table>

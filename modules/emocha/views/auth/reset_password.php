@@ -1,6 +1,4 @@
-<h1>Reset Password</h1>
-
-<?php 
+<div id="inner_content"><?php 
 if(isset($errors)) { 
 	echo View::factory('alert/errors')->set('errors', $errors)->render();
 }
@@ -12,8 +10,8 @@ if(isset($errors)) {
 <?php if( ! $code) { ?>
 You've been sent an email with a verification code. Please enter the code below:
 <?php } ?>
-
-<table>
+</div>
+<table class="form">
 
 
     <tbody>
@@ -47,7 +45,7 @@ You've been sent an email with a verification code. Please enter the code below:
 
         <tr>
 
-            <td colspan="2"><?php echo Form::submit('submit', 'Reset Password'); ?></td>
+            <td colspan="2"><?php echo Form::submit('submit', 'Reset Password', array('class'=>'button')); ?></td>
 
         </tr>
 

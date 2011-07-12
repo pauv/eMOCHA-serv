@@ -22,6 +22,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_new_users($action_taken='') {
 		
+		$this->template->title = 'New users';
 		$content = $this->template->content = View::factory('admin/new_users');	
 		$content->users = Model_User::get_unconfirmed_users();
 		$content->action_taken = $action_taken;
@@ -52,6 +53,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_delete_user_confirm($id) {
 		
+		$this->template->title = 'Delete user';
 		$content = $this->template->content = View::factory('admin/delete_user_confirm');	
 		$content->user = ORM::factory('user', $id);
 		
@@ -59,6 +61,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	
 	public function action_forms($action=false) {
+		$this->template->title = 'Forms';
 		$data['forms'] = ORM::factory('form')->find_all();
 		$data['action'] = $action;
 		$this->template->content = View::factory('admin/forms', $data);
@@ -67,6 +70,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_edit_form($id=false)
 	{	
+		$this->template->title = 'Edit form';
 		$this->template->curr_nav = 'forms';
 		//Load the view
 		$content = $this->template->content = View::factory('admin/edit_form');
@@ -179,6 +183,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	// confirm delete request
 	public function action_delete_form ($id=false) {
 	
+		$this->template->title = 'Delete form';
 		$this->template->curr_nav = 'forms';
 		if(!$id) {
 			Request::instance()->redirect('admin/forms');
@@ -208,6 +213,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_form_files($id, $action=false)
 	{	
+		$this->template->title = 'Form files';
 		$this->template->curr_nav = 'forms';
 		//Load the view
 		$content = $this->template->content = View::factory('admin/form_files');
@@ -219,6 +225,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_edit_form_file($form_id, $id=false)
 	{	
+		$this->template->title = 'Edit form file';
 		$this->template->curr_nav = 'form_files';
 		$content = $this->template->content = View::factory('admin/edit_form_file');
 		
@@ -333,6 +340,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	// confirm delete request
 	public function action_delete_form_file ($form_id, $id=false) {
 	
+		$this->template->title = 'Delete form file';
 		$this->template->curr_nav = 'forms';
 		if(!$id) {
 			Request::instance()->redirect('admin/form_files');
@@ -363,6 +371,8 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	// phones list
 	public function action_phones($action=false) {
+	
+		$this->template->title = 'Phones';
 		$data['phones'] = ORM::factory('phone')->order_by('creation_ts', 'DESC')->find_all();
 		$data['action'] = $action;
 		$this->template->content = View::factory('admin/phones', $data);
@@ -372,6 +382,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	public function action_edit_phone($id=false)
 	{	
+		$this->template->title = 'Edit phone';
 		$this->template->curr_nav = 'phones';
 		//Load the view
 		$content = $this->template->content = View::factory('admin/edit_phone');
@@ -430,6 +441,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	// confirm delete request
 	public function action_delete_phone ($id=false) {
 	
+		$this->template->title = 'Delete phone';
 		$this->template->curr_nav = 'phones';
 		if(!$id) {
 			Request::instance()->redirect('admin/phones');
@@ -461,6 +473,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 	// ALARMS
 	
 	public function action_alarms($action=false) {
+		$this->template->title = 'Alarms';
 		$content = $this->template->content = View::factory('admin/alarms');
 		$content->alarms = ORM::factory('alarm')->find_all();
 		$content->action = $action;
@@ -475,6 +488,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 		$alarm = ORM::factory('alarm', $id);
 		$content = $this->template->content = View::factory('admin/edit_alarm');
 		$content->alarm = $alarm;
+		$this->template->title = 'Edit alarm: '.$alarm->name;
 	
 		//If there is a post and $_POST is not empty
 		if ($_POST)

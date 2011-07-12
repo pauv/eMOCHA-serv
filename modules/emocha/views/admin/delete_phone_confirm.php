@@ -1,5 +1,4 @@
-<h1>Delete phone</h1>
-
+<div id="inner_content">
 <p>
 Do you really want to delete the phone '<?php echo $phone->imei; ?>'?
 </p>
@@ -11,3 +10,4 @@ Do you really want to delete the phone '<?php echo $phone->imei; ?>'?
 <p>
 <?php echo Html::anchor('admin/phones/', 'No, cancel') ?>
 </p>
+</div>

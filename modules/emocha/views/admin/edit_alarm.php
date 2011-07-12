@@ -1,16 +1,20 @@
-<h1><?php echo $alarm->name; ?></h1>
+
 
 
 <?php 
 if(isset($errors)) { 
-	echo View::factory('alert/errors')->set('errors', $errors)->render();
+	?>
+	<div class="alert">
+	<?php echo View::factory('alert/errors')->set('errors', $errors)->render(); ?>
+	</div>
+	<?php
 }
 ?>
 
 <?php echo Form::open('admin/alarm/'.$alarm->id);?>
 
 
-<table>
+<table class="form">
 
 
     <tbody>
@@ -72,7 +76,7 @@ if(isset($errors)) {
 
         <tr>
 
-            <td colspan="2"><?php echo Form::submit('submit', 'save'); ?></td>
+            <td colspan="2"><?php echo Form::submit('submit', 'save', array('class'=>'button')); ?></td>
 
         </tr>
 

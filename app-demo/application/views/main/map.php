@@ -121,7 +121,7 @@
 
 
 
-
+<div id="inner_content">
 
 <div id="map_canvas" class="column"></div>
 	<div id="map_filters" class="column">
@@ -185,3 +185,4 @@
 			</form>
 		</div>
 	<br class="clear_float" />	
+</div>
