@@ -44,7 +44,7 @@ class Emocha_Controller_Api extends Controller {
 	 	$label = Arr::get($_POST, 'key', ''); 
     	$config = ORM::factory('config')->where('label', '=', $label)->find();
     	if($config->loaded()) {
-    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_key', array($config->label=>$config->content)))->render();
+    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_key', array('keys'=>array($config->label=>$config->content))))->render();
     		$this->request->response = $json;
     	}
     	else {
@@ -60,7 +60,7 @@ class Emocha_Controller_Api extends Controller {
     	$configs = array();
 	 	if(! $keys = Arr::get($_POST, 'keys', '')) {
 	 		// no keys submitted, get all keys
-    		$objs = ORM::factory('config')->find_all();
+    		$objs = ORM::factory('config')->where('label','!=','application')->find_all();
     		foreach($objs as $obj){
     			$configs[$obj->label] = $obj->content;
     		}
@@ -75,7 +75,7 @@ class Emocha_Controller_Api extends Controller {
     		}
     	}
     	if(sizeof($configs)) {
-    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_keys', $configs))->render();
+    		$json = View::factory('json/display', Json::response('OK', 'get_config_by_keys', array('keys'=>$configs)))->render();
     		$this->request->response = $json;
     	}
     	else {

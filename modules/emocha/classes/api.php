@@ -22,8 +22,8 @@ class Api
 
 			
 			// app config
-			$sql = "SELECT UNIX_TIMESTAMP(MAX(last_modified)) as last_updated FROM configs
-					WHERE label='application'";
+			$sql = "SELECT UNIX_TIMESTAMP(MAX(last_modified)) as last_updated FROM configs";
+					//WHERE label='application'";
     		$result = DB::query(Database::SELECT, $sql)->execute();
 			$row = $result->current();
 			$times['last_app_config_upd'] = $row['last_updated']==NULL?0:$row['last_updated'];
