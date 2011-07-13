@@ -2,10 +2,13 @@
 
 class Controller_Stats extends Emocha_Controller_Stats {
 
-
+	public function action_index() {
+		Request::instance()->redirect('stats/data');
+	}
+	
 	 public function action_data()
 	{
-	
+		$this->template->title = 'Data by patient';
 		$content = $this->template->content = View::factory('stats/data');
 		
 		// xss clean post vars

@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="/css/stats_datasel.css">
 
 <table>
 	<tr>
@@ -29,7 +28,7 @@
 			</div>
 		</td>
 		<td>
-			<div id="filecontent"></div>
+			<div id="filecontent">&nbsp;</div>
 		</td>
 	</tr>
 </table>
