@@ -1,5 +1,5 @@
 BODY {
-    background: #C5C1C1;
+    background: #D7D3D3;
     padding: 0px;
     margin: 0px;
 }
@@ -89,7 +89,8 @@ div.column
 }
 
 #menu {
-	border-bottom: 5px solid #1371B7;
+	/*border-bottom: 5px solid #1371B7;*/
+	border-bottom: 2px solid #FFF;
 	padding-left: 300px;
 }
 
@@ -126,9 +127,11 @@ td#login {
 	display: inline;
 	list-style-type: none;
 	padding:2px 15px 2px 15px;
+	margin-right: -2px;
 	cursor:pointer;
 	color: #FFF;
 	font-weight: bold;
+	font-size: 13px;
 }
 #main_menu LI.current {
 	border-bottom-color:#1371B7;
@@ -144,7 +147,7 @@ td#login {
 }
 
 #submenu {
-	background: #C5C1C1;
+	background: #D7D3D3;
 	padding-left: 300px;
 }
 #submenu ul {
@@ -158,7 +161,7 @@ td#login {
 	padding-right: 5px;
 }
 #submenu LI A {
-	color: #1371B7;
+	color: #669933;
 	text-decoration: none;
 }
 
@@ -168,9 +171,9 @@ td#login {
 }
 
 #subheader {
-	background: #C5C1C1;
+	background: #D7D3D3;
 	width:100%;
-	border-bottom: 10px solid #1371B7;
+	/*border-bottom: 10px solid #1371B7;*/
 	padding: 10px 0px 5px 20px;
 }
 
@@ -235,7 +238,7 @@ h3 {
 
 .list th {
 	background: #1371B7;
-	padding: 0px 0px 10px 20px;
+	padding: 7px 0px 10px 20px;
 	font-size: 120%;
 	text-align: left;
 }
