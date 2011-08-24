@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>eMOCHA - <?php echo $title; ?></title>
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="/css/main_1.css">
 	<link rel="shortcut icon" href="/favicon.ico">
 	<script src="/js/jquery-1.3.2.min.js" type="text/javascript"></script>
 	<script src="/js/main.js" type="text/javascript"></script>

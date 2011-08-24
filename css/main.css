@@ -216,7 +216,7 @@ h3 {
 	padding: 20px 20px 20px 20px;
 }
 
-#content table {
+#content table.list {
 	width: 100%;
 }
 

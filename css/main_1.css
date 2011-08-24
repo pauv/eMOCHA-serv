@@ -1,0 +1,215 @@
+BODY {
+    background-color: #FFF;
+    padding: 10px;
+    margin: 0px;
+}
+
+BODY, TD {
+    font-family: Arial, Helvetica;
+    font-size: small;
+    color: #0a2972;
+}
+
+A {
+    text-decoration: underline;
+    color: #0a2972;
+}
+
+TD {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;	
+    vertical-align: top;
+	padding: 5px;
+	border:1px solid #CCC;
+}
+
+
+FORM {
+    margin: 0px;
+}
+
+
+/* --- */
+
+#header {
+	width:100%;
+    margin-top: 5px;
+    height: 60px;
+}
+
+#header TD {
+    vertical-align: middle;
+    padding: 10px;
+}
+
+#banner {
+    padding-left: 10px;
+    background-color: #FFF;
+}
+
+td#login {
+    width: 150px;
+}
+
+#banner IMG {
+    margin-right: 15px;
+}
+
+#bannerimg {
+    width: 468px;
+    height: 60px;
+}
+
+/* --- */
+
+
+#main_menu {
+	padding:0px;
+	margin-top:20px;
+	margin-bottom:5px;
+}
+#main_menu LI {
+    -moz-border-radius:5px 5px 0px 0px;
+    -webkit-border-radius:5px 5px 0px 0px;
+	background-color:#CCC;
+	display: inline;
+	list-style-type: none;
+	padding:5px 10px 5px 10px;
+	border-width:1px 1px 1px 1px;
+	border-color:#CCC;
+	border-style:solid;
+	cursor:pointer;
+}
+#main_menu LI.current {
+	border-bottom-color:#FFF;
+	background-color:#FFF;
+}
+#main_menu LI:hover {
+	background-color:#EEEEEE;
+}
+#main_menu LI A {
+	text-decoration:none;
+}
+
+
+/* --- */
+
+#main_table {
+	border:1px solid #CCC;
+	width:100%;
+	
+}
+
+.noborder {
+	border:0px;
+}
+
+
+/* --- */
+
+#nav {
+	width:100px;
+}
+
+#nav UL {
+	padding:0px;
+}
+#nav LI {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;	
+	list-style-type: none;
+	padding:5px 10px 5px 10px;
+	border:1px solid #CCC;
+	margin-bottom:4px;
+	cursor:pointer;
+}
+#nav LI {
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;	
+	list-style-type: none;
+	padding:5px 10px 5px 10px;
+	border:1px solid #CCC;
+	margin-bottom:4px;
+	background-color:#DDD;
+}
+#nav LI.current {
+	background-color:#FFF;
+}
+#nav LI:hover {
+	background-color:#EEE;
+}
+#nav LI A {
+	text-decoration:none;
+}
+
+/* --- */
+
+#map {
+}
+
+#map_canvas {
+    width: 600px;
+    height: 400px;
+    margin-right: 10px;
+}
+
+/* --- */
+
+IMG.thumb {
+	width:30%;
+	height:30%;
+}
+
+img.title_icon {
+	position: relative;
+	top: 10px;
+	padding-right: 10px;
+}
+/* --- */
+
+
+
+/*
+STATS LIST
+*/
+div.stats_patient {
+	margin: 0 0 0 10px;
+}
+
+div.stats_patient li {
+	font-size: 0.9em;
+}
+
+a.selected {
+	color: green;
+}
+
+
+
+#status {
+	padding:2px;
+	width:100%;
+	position:fixed;
+	right:0px;
+	bottom:0px;
+	text-align:center;
+	font-size:x-small;
+	background-color:#FFF;
+	border:1px solid #EEE;
+}
+.st_OK {
+	background-color:#BADA8F !important;
+	border:1px solid #8FC249 !important;
+	color:#456020 !important;
+}
+.st_ERR {
+	background-color:#D75640 !important;
+	border:1px solid #C14028 !important;
+	color:#6D2316 !important;
+}
+
+/* --- */
+
+.error {
+	color: red;
+}
