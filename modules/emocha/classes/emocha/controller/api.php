@@ -98,7 +98,7 @@ class Emocha_Controller_Api extends Controller {
 		}
 		$this->request->response = $json;
 		
-    }   
+    }
     
     
     public function action_get_server_updated_times() {

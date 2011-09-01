@@ -77,15 +77,18 @@ class Controller_Test extends Controller_Site {
 			$content->text = $text;
 			$content->error = $error;
 		}
-		
-
+	
+    
 		
 	}
 	
 	
 	
 	
-	
+	public function action_cdma () {
+    		$r = Phone::is_cdma_valid('123345efa5223');
+    		echo Kohana::debug($r);
+    	}
 	
 
 

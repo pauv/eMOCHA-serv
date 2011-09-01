@@ -32,7 +32,7 @@
 		public static function activate($imei) {
         	
         	// check valid code
-			if ( ! Phone::is_imei_valid($imei)) {
+			if ( ! Phone::is_imei_valid($imei) && ! Phone::is_cdma_valid($imei)) {
 				return array(
 						'msg'=>Kohana::message('phone', 'activate.phone_activation_bad_imei'),
 						'phone_id'=>0
@@ -76,6 +76,10 @@
 
 		}
 		
+		/*
+		 * Check for IMEI type id validity
+		 * (used in GSM phones)
+		 */
 		public static function is_imei_valid($imei) {
 			if(!ctype_digit($imei)) {
 				return false;
@@ -106,6 +110,18 @@
 			 
 			// If the total mod 10 equals 0, the number is valid
 			return ($total % 10 == 0) ? true : false;
+		}
+		
+		
+		/*
+		 * Check for ESN or MEID type id validity
+		 * (used in CDMA phones)
+		 */
+		public static function is_cdma_valid($id) {
+			return ( preg_match('/^[0-9a-fA-F]{8}$/', $id) || // 8 digit hex (esn)
+					preg_match('/^[0-9]{11}$/', $id) || // 11 digit decimal (esn)
+					preg_match('/^[0-9a-fA-F]{14}$/', $id) || // 14 digit hex (meid)
+					preg_match('/^[0-9]{18}$/', $id) ); // 18 digit decimal (meid)
 		}
 		
 		
