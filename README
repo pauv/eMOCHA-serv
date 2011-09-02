@@ -9,6 +9,12 @@ This is the Server application. The Client application can be found at http://gi
 
 -
 
+Branches:
+dev (development code, dev sites)
+master (tested code, live sites)
+
+-
+
 Folders:
 
 Core directories:
