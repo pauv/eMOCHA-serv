@@ -1,2 +1,6 @@
 sdcard/**/*
-config/**/*
+application/config/**/*
+application/bootstrap.php
+application/cache/**/*
+application/logs/**/*
+
