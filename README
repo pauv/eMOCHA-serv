@@ -1,0 +1,44 @@
+Name:
+eMOCHA - electronic Mobile Open-Source Comprehensive Health Application
+
+-
+
+Description:
+eMOCHA is a free open source tool that helps health workers in developing countries. It has two parts. This is the Server application. The Client application can be found at http://github.com/emocha/eMOCHA.
+
+-
+
+Folders:
+
+Core directories:
+css
+images
+js
+modules
+system
+
+App versions:
+app-example (use this for a clean install and remove the the app folders:)
+af
+demo
+exact
+fxb
+uw
+
+DB scripts:
+install
+
+-
+
+Requirements:
+Server with PHP/MySQL. The code is based on Kohana. See technical requirements at http://kohanaframework.org
+
+-
+
+Pricing:
+Free
+
+-
+
+License:
+GNU General Public License
