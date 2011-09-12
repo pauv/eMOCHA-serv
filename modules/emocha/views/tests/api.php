@@ -2,6 +2,16 @@
 
 <body>
 
+
+<h2>Check user passes authentication</h2>
+<?php echo Form::open('/api/check_user', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="" /><br/>
+	<input type="submit" />
+</form>
+
 <h2>Upload file</h2>
 <?php echo Form::open('/api/upload_file', array(
 													'enctype'=>'multipart/form-data'
@@ -59,13 +69,6 @@
 	<input type="submit" />
 </form>
 
-<h2>get_sdcard_file_list</h2>
-<?php echo Form::open('/api/get_sdcard_file_list');?>
-	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
-	Pwd: <input type="text" name="pwd" value="" /><br/>
-	last_server_upd: <input type="text" name="last_server_upd" value="<?php print time(); ?>" /><br/>
-	<input type="submit" />
-</form>
 
 <h2>upload_form_data</h2>
 <?php echo Form::open('/api/upload_form_data', array(

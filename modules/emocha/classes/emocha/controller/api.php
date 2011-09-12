@@ -37,6 +37,15 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	 
+	 /*
+	  * check if user passed authentication
+	  */
+	public function action_check_user() {
+		$json = View::factory('json/display', Json::response('OK', 'known user'))->render();
+		$this->request->response = $json;
+	}
+
+
 	/*
 	 * Get single config value by key
 	 */
