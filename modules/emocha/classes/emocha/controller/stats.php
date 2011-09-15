@@ -248,6 +248,13 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	}
 	
+	public function action_patient_image ($patient_id) {
+		$this->auto_render = FALSE;
+		$template = View::factory('stats/patient_image');
+		$template->patient = ORM::factory('patient')->where('id','=', $patient_id)->find();
+		$this->request->response = $template->render();
+	}
+	
 	/*
 	 * Demo charting of data input by date
 	 */

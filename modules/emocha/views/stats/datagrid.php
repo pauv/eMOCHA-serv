@@ -36,7 +36,10 @@
 <script language="JavaScript" src="/js/slickgrid/slick.pager.js"></script>
 <script language="JavaScript" src="/js/slickgrid/slick.columnpicker.js"></script>
 
+<div id="patient_image" style="position:absolute; z-index:10"></div>
 <div id="inner_content">
+
+
 
 <div style="width:600px;float:left;" id="datagrid">
 			<div class="grid-header" style="width:100%">
@@ -90,6 +93,7 @@
                 resizable: false,
                 cssClass: "cell-reorder dnd"
             },
+            {id:"img", name:"Image", field:"img", sortable:false},
 			{id:"village_code", name:"Village", field:"village_code", sortable:true},
 			{id:"household_code", name:"Household", field:"household", sortable:true},
 			{id:"code", name:"Patient", field:"code", sortable:true},
@@ -172,6 +176,9 @@
             foreach($patients as $patient) { ?>
 				data[<?php echo $i; ?>] = {
 					id: "id_<?php echo $i; ?>",
+					img: '<?php if($profile_image = $patient->get_profile_image()) {
+							echo '<a href="'.Url::site('stats/patient_image').'/'.$patient->id.'"><img src="/images/icons/patient_32.png" width=20></a>';
+						} ?>',
                     village_code: "<?php echo $patient->household->village_code; ?>",
                     household_code: "<?php echo $patient->household_code; ?>",
                     code: "<?php echo $patient->code; ?>",
@@ -298,6 +305,18 @@
 
 			$("#gridContainer").resizable();
 		})
+		
+		
+		function openImgWin (patient_id) {
+			//new_window = window.open('<?php echo Url::site('stats/patient_image'); ?>/'+patient_id,'patient_image','width=200,height=100,directories=0,location=0,menubar=0,toolbar=0,status=0,titlebar=0,scrollbars=0');
+			//new_window.focus();
+			$.ajax({
+				   url: '<?php echo Url::site('stats/patient_image'); ?>/'+patient_id,
+				   success: function(html){
+					$("#patient_image").html(html);
+				  }
+			});
+		}
 
 </script>
 
