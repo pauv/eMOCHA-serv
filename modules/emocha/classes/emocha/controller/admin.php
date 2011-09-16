@@ -536,5 +536,136 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
+	
+	
+	
+	// CONFIGS
+	
+	public function action_configs($action=false) {
+		$this->template->title = 'configs';
+		$content = $this->template->content = View::factory('admin/configs');
+		$content->configs = ORM::factory('config')->find_all();
+		$content->action = $action;
+		
+	}
+	
+	/*
+	edit and save config
+	*/
+	
+	public function action_edit_config($id=false)
+	{	
+		$this->template->title = 'Edit config';
+		$this->template->curr_nav = 'configs';
+		//Load the view
+		$content = $this->template->content = View::factory('admin/edit_config');
+		if($id) {
+			$config = ORM::factory('config', $id);
+			$mode = 'edit';
+		}
+		else {
+			$config = ORM::factory('config');
+			$mode = 'create';
+		}
+ 
+		//If there is a post and $_POST is not empty
+		if ($_POST)
+		{
+		
+			$errors = array();
+			
+ 			// xss clean post vars
+ 			$post = Arr::xss($_POST);
+ 			// return posted values to config
+ 			// in case of error
+			$content->form_vals = $post;
+			
+			$vars = array_merge($post, $_FILES);
+ 			
+ 			//var_dump($vars);
+ 			//exit;
+ 			
+			//Load the validation rules, filters etc...
+			$validation = $config->validate($vars, $mode);	
+			
+ 
+			//If the validation data validates using the rules setup in the user model
+			if ( ! $validation->check())
+			{
+				$errors = $validation->errors('config');
+			}
+			else 
+			{
+			
+				$config->values($validation);
+	
+			}
+			
+			
+			/*
+			 * Check for errors
+			 */
+			if (count($errors)) {
+			
+				$content->errors = $errors;
+			
+			}
+			
+			else 
+			{
+				$config->save();
+				Request::instance()->redirect('admin/configs/saved');
+				
+			}
+			
+	
+		}
+		
+		else 
+		{
+			// assign current config data
+			$content->form_vals = $config->as_array();
+			
+		}
+		
+		
+		// assign vars to config
+		$content->mode = $mode;
+		$content->id = $id ? $id:'';
+		
+	}
+
+
+
+	
+	// confirm delete request
+	public function action_delete_config ($id=false) {
+	
+		$this->template->title = 'Delete config';
+		$this->template->curr_nav = 'configs';
+		if(!$id) {
+			Request::instance()->redirect('admin/configs');
+		}
+		
+		$content = $this->template->content = View::factory('admin/delete_config_confirm');
+		$content->config = ORM::factory('config', $id);
+
+	}
+	
+	
+	// confirmed: delete both file and db record
+	public function action_delete_config_confirmed ($id=false) {
+	
+		if(!$id) {
+			redirect('admin/configs');
+		}
+		
+		$config = ORM::factory('config', $id);
+		$config->delete();
+		Request::instance()->redirect('admin/configs/deleted');
+		
+		
+	}
+	
 
 } 
