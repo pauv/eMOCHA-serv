@@ -81,13 +81,10 @@
 	});
 </script>
 
+<div id="inner_content">
 
-<table>
-	<tr>
-		<td>
-			<div id="map_canvas"></div>
-		</td>
-		<td>
+<div id="map_canvas" class="column"></div>
+<div id="map_filters" class="column">
 			<h3>Filter</h3>
 				
 				<form method="post" action="<?php echo Url::site('main/map') ?>">
@@ -99,8 +96,9 @@
 				<br /><br />
 				<input type="submit" value="search" />
 			</form>
-		</td>
-	</tr>
-</table>
+			
+</div>
 
 
+<br class="clear_float" />
+</div>

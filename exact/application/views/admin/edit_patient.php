@@ -1,5 +1,3 @@
-<h1><?php echo ucfirst($mode) ?> Patient</h1>
-
 
 <?php 
 if(isset($errors)) { 
@@ -10,7 +8,7 @@ if(isset($errors)) {
 <?php echo Form::open('admin/edit_patient/'.$id);?>
 
 
-<table>
+<table class="form">
 
 
     <tbody>
@@ -50,7 +48,7 @@ if(isset($errors)) {
 
         <tr>
 
-            <td colspan="2"><?php echo Form::submit('submit', ucfirst($mode)); ?></td>
+            <td colspan="2"><?php echo Form::submit('submit', ucfirst($mode), array('class'=>'button')); ?></td>
 
         </tr>
 

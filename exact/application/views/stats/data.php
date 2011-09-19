@@ -29,7 +29,7 @@
 			</div>
 		</td>
 		<td>
-			<div id="filecontent"></div>
+			<div id="filecontent">&nbsp;</div>
 		</td>
 	</tr>
 </table>

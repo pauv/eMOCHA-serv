@@ -2,7 +2,10 @@
 
 class Controller_Stats extends Emocha_Controller_Stats {
 
-
+	public function action_index() {
+		Request::instance()->redirect('stats/data');
+	}
+	
 	 public function action_data()
 	{
 	

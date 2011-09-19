@@ -11,6 +11,7 @@ class Controller_Admin extends Emocha_Controller_Admin {
 	
 	
 	public function action_patients($action=false) {
+		$this->template->title = 'Studies/patients';
 		$data['patients'] = ORM::factory('patient')->find_all();
 		$data['action'] = $action;
 		$this->template->content = View::factory('admin/patients', $data);
@@ -19,6 +20,7 @@ class Controller_Admin extends Emocha_Controller_Admin {
 	
 	public function action_edit_patient($id=false)
 	{	
+		$this->template->title = 'Edit patient';
 		$this->template->curr_nav = 'patients';
 		//Load the view
 		$content = $this->template->content = View::factory('admin/edit_patient');
