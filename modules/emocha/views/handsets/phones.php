@@ -10,7 +10,7 @@
 	$count=1;
 	foreach ($phones as $phone) {
 		if ($phone->last_connect_ts > 0) { 
-			$time = date('d-m-Y H:j:s', $phone->last_connect_ts);
+			$time = date('d-m-Y H:i:s', $phone->last_connect_ts);
 		} else {
 			$time = 'no data received yet';
 		} 

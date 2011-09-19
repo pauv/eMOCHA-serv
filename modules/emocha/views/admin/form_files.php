@@ -47,7 +47,7 @@
 	<td><?php echo $form_file->file->path; ?> </td>
 	<td><?php echo $form_file->type; ?> </td>
 	<td><?php echo $form_file->label; ?> </td>
-	<td><?php echo date('d-m-Y H:j:s', strtotime($form_file->last_modified)); ?></td>
+	<td><?php echo date('d-m-Y H:i:s', strtotime($form_file->last_modified)); ?></td>
 	<td><?php echo Html::anchor('admin/edit_form_file/'.$form->id.'/'.$form_file->id, 'edit') ?></td>
 	<td><?php echo Html::anchor('admin/delete_form_file/'.$form->id.'/'.$form_file->id, 'delete') ?></td>
 </tr>

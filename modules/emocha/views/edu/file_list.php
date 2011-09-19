@@ -50,7 +50,7 @@
 	<td><?php echo $media->title; ?></td>
 	<td><?php echo $media->file->filename; ?></td>
 	<td><?php echo number_format($media->file->size / 1024); ?> Kb</td>
-	<td><?php echo date('d-m-Y H:j:s', $media->file->ts); ?></td>
+	<td><?php echo date('d-m-Y H:i:s', $media->file->ts); ?></td>
 	<td><?php echo Html::anchor('edu/delete/'.$section.'/'.$media->id, 'delete') ?></td>
 </tr>
 

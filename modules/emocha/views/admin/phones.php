@@ -46,8 +46,8 @@
 <tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $phone->imei; ?> </td>
 	<td><?php echo $phone->comments; ?> </td>
-	<td><?php echo date('d-m-Y H:j:s', $phone->creation_ts); ?></td>
-	<td><?php if($phone->last_connect_ts!=0) echo date('d-m-Y H:j:s', $phone->last_connect_ts); ?></td>
+	<td><?php echo date('d-m-Y H:i:s', $phone->creation_ts); ?></td>
+	<td><?php if($phone->last_connect_ts!=0) echo date('d-m-Y H:i:s', $phone->last_connect_ts); ?></td>
 	<td></td>
 	<td><?php $link = $phone->validated ? 'edit':'activate';
 			echo Html::anchor('admin/edit_phone/'.$phone->id, $link);

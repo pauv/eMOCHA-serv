@@ -51,7 +51,7 @@ Once in the system, form ids need to be preserved, so edit rather than delete a 
 	<td><?php echo $form->name; ?> </td>
 	<td><?php echo $form->group; ?> </td>
 	<td><?php echo $form->code; ?> </td>
-	<td><?php echo date('d-m-Y H:j:s', strtotime($form->last_modified)); ?></td>
+	<td><?php echo date('d-m-Y H:i:s', strtotime($form->last_modified)); ?></td>
 	<td><?php echo Html::anchor('admin/edit_form/'.$form->id, 'edit') ?></td>
 	<td><?php echo Html::anchor('admin/form_files/'.$form->id, 'edit files') ?></td>
 	<td><?php echo Html::anchor('admin/delete_form/'.$form->id, 'delete') ?></td>
