@@ -14,7 +14,7 @@ if(isset($errors)) {
 													));?>
 
 
-<table class="config">
+<table class="form">
 
 
     <tbody>
