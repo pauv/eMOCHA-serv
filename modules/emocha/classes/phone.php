@@ -20,7 +20,7 @@
 		        
         public static function get_gps_phone_list() {
         	return ORM::factory('phone')
-        			->where('gps', 'LIKE', '%:%')
+        			->where('gps', 'LIKE', '% %')
         			->find_all();
         }
         

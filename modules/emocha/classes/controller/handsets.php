@@ -48,7 +48,7 @@ class Controller_Handsets extends Controller_Site {
 				$icon = 'oldIcon';
 			}
 	
-			$loc = explode(':', $phone->gps);
+			$loc = explode(' ', $phone->gps);
 			
 			$js = sprintf(
 				'tMarker=new GMarker(new GLatLng(%s,%s), { icon:%s }); '.

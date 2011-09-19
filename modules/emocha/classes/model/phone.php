@@ -35,7 +35,8 @@ class Model_Phone extends ORM {
 	
 	
 	public function set_gps($gps = '') {
-		$gps = preg_replace('/[^0-9.,:-]/', '', $gps);
+		$gps = trim($gps);
+		//$gps = preg_replace('/[^0-9.,:-]/', '', $gps);
 		$this->gps = $gps;
 		$this->last_connect_ts = time();
 		$this->save();					        	
