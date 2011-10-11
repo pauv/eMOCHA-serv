@@ -93,4 +93,14 @@ class Model_Phone extends ORM {
 			return $rows;
 		}
 	}
+	
+	public function send_alert($message_type, $form_code=NULL) {
+		if($message_type=='form_reminder') {
+			$alert = ORM::factory('phone_alert');
+			$alert->phone_id = $this->id;
+			$alert->message_type = $message_type;
+			$alert->form_code = $form_code;
+			return $alert->save();
+		}
+	}
 }

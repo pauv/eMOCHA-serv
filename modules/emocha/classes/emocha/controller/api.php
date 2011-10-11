@@ -342,6 +342,32 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
+	/*
+	 * Upload location data from phone
+	 */
+    function action_register_c2dm() {
+
+		if(! $reg = trim(Arr::get($_POST,"registration_id",''))) {
+			$json = View::factory('json/display', Json::response('ERR', 'registration_id is empty'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		$phone = $this->phone;
+		$phone->c2dm_registration_id = $reg;
+		
+		if($phone->save()) {
+			$json = View::factory('json/display', Json::response('OK', 'registration id saved'))->render();
+		} 
+		else {
+			$json = View::factory('json/display', Json::response('ERR', 'failed to save'))->render();
+		}
+
+		$this->request->response = $json;
+		
+	}
+	
+	
 	
 
 }

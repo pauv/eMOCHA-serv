@@ -139,6 +139,15 @@
 	<input type="submit" />
 </form>
 
+<h2>register_c2dm</h2>
+<?php echo Form::open('/api/register_c2dm');?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="" /><br/>
+	Reg id: <textarea name="registration_id"></textarea>
+	<input type="submit" />
+</form>
+
+
 </body>
 
 </html>

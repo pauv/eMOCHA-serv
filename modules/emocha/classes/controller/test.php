@@ -90,6 +90,20 @@ class Controller_Test extends Controller_Site {
     		$r = Phone::is_cdma_valid('123345efa5223');
     		echo Kohana::debug($r);
     	}
+    	
+    	
+    
+	public function action_times () {
+    		echo "Timezone is ".date_default_timezone_get()."<br />";
+			echo "Time is ".date("G:i:s A", time() )."<br />";
+			echo "Time offset is ".date('P', time() )."<br />";
+			$sql = "SELECT @@global.time_zone as global_time, @@session.time_zone as session_time, NOW() as cur_time";
+			$result = DB::query(Database::SELECT, $sql)->execute();
+			$row = $result->current();
+			echo "DB global timezone is ".$row['global_time']."<br />";
+			echo "DB session timezone is ".$row['session_time']."<br />";
+			echo "DB time is ".$row['cur_time']."<br />";
+    	}
 	
 
 
