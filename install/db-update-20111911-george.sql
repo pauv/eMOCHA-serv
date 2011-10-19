@@ -1,0 +1,1 @@
+ALTER TABLE `phone_locations` ADD `bearing` DECIMAL( 4, 1 ) NOT NULL;
