@@ -26,12 +26,20 @@
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			
 			$response = curl_exec($ch);
-			if(!stristr($response, 'error')) {
+			$info = curl_getinfo ($ch);
+			
+			if(curl_errno($ch)) {
+				C2dm::log_error('client_auth', curl_error($ch), '', '', serialize($data));
+				return FALSE;
+			}
+			elseif(!stristr($response, 'error')) {
 				$tokens = explode('=', $response);
 				if (isset($tokens[3])) {
 					return trim($tokens[3]);
 				}
 			}
+			
+			C2dm::log_error('client_auth', '', $info['http_code'], $response, serialize($data));
 			return FALSE;
 		} 
 		
@@ -60,12 +68,35 @@
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 			
 			$response = curl_exec($ch);
-			$info = Kohana::debug(curl_getinfo($ch));
-			if($info['http_code']==200 && stristr($response, 'id')) {
+			$info = curl_getinfo ($ch);
+			
+			if(curl_errno($ch)) {
+				C2dm::log_error('send_message', curl_error($ch), '', '', serialize($data));
+				return FALSE;
+			}
+			elseif($info['http_code']!=200 || stristr($response, 'error')) {
+				C2dm::log_error('send_message', '', $info['http_code'], $response, serialize($data));
+				return FALSE;
+			}
+			else {
 				return $response;
 			}
-			return FALSE;
 			
 		} 
+		
+		
+		/*
+		 * Log c2dm error
+		 *
+		 */
+		 public static function log_error($type, $curl_error, $http_code, $response, $data) {
+		 	$err = ORM::factory('c2dm_error');
+		 	$err->type = $type;
+		 	$err->curl_error = $curl_error;
+		 	$err->http_code = $http_code;
+		 	$err->response = $response;
+		 	$err->data = $data;
+		 	$err->save();
+		 }
 		
 }

@@ -1,1 +1,12 @@
 ALTER TABLE `phone_locations` ADD `bearing` DECIMAL( 4, 1 ) NOT NULL;
+
+CREATE TABLE `c2dm_errors` (
+`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+`type` VARCHAR( 50 ) NOT NULL ,
+`curl_error` VARCHAR( 200 ) NOT NULL ,
+`response` TEXT NOT NULL ,
+`data` TEXT NOT NULL ,
+`ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE = MYISAM ;
+
+ALTER TABLE `phone_alerts` ADD `response` TEXT NOT NULL;

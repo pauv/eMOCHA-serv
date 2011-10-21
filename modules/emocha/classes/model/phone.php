@@ -95,12 +95,13 @@ class Model_Phone extends ORM {
 		}
 	}
 	
-	public function send_alert($message_type, $form_code=NULL) {
+	public function log_alert($message_type, $form_code='', $response='') {
 		if($message_type=='form_reminder') {
 			$alert = ORM::factory('phone_alert');
 			$alert->phone_id = $this->id;
 			$alert->message_type = $message_type;
 			$alert->form_code = $form_code;
+			$alert->response = $response;
 			return $alert->save();
 		}
 	}
