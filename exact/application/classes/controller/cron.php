@@ -127,27 +127,40 @@ class Controller_Cron extends Controller {
 		// settings
 		$fillout_time_mins = 15;
 		
-		
-		// needs sending
-		echo "Sending END OF DAY alerts at ".date('H:i:s')."\n";
-		// get auth key
-		$auth_key = C2dm::client_auth();
-		// set collapse key
-		$collapse_key = 'ck'.time();
-		// iterate phones
-		$phones = ORM::factory('phone')
-					->where('c2dm_registration_id','!=','')
-					->find_all();
-		foreach($phones as $phone) {
-			if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'edaily')) {
-				$phone->log_alert('form_reminder', 'edaily', $response);
-				echo "Alert sent to phone id ".$phone->id."\n";
-			}
-			else {
-				echo "Error sending to phone id ".$phone->id."\n";
+		$current_time = date('G');
+		// check after nine and before 10
+		// (this script will run hourly)
+		if(!($current_time>=21  && $current_time<22)){
+			echo "Not right time\n";
+			exit;
+		}
+		else {
+			// needs sending
+			echo "Sending END OF DAY alerts at ".date('H:i:s')."\n";
+			// get auth key
+			$auth_key = C2dm::client_auth();
+			// set collapse key
+			$collapse_key = 'ck'.time();
+			// iterate phones
+			$phones = ORM::factory('phone')
+						->where('c2dm_registration_id','!=','')
+						->find_all();
+			foreach($phones as $phone) {
+				if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'edaily')) {
+					$phone->log_alert('form_reminder', 'edaily', $response);
+					echo "Alert sent to phone id ".$phone->id."\n";
+				}
+				else {
+					echo "Error sending to phone id ".$phone->id."\n";
+				}
 			}
 		}
 		echo "\n";
+	}
+	
+	public function action_cli_test(){
+		echo (bool) Kohana::$is_cli;
+		echo ":".php_sapi_name()."\n";
 	}
 	
 	
