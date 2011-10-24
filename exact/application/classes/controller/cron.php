@@ -164,4 +164,49 @@ class Controller_Cron extends Controller {
 	}
 	
 	
+	public function action_end_of_day_force() {
+		// needs sending
+		echo "Sending END OF DAY alerts at ".date('H:i:s')."\n";
+		// get auth key
+		$auth_key = C2dm::client_auth();
+		// set collapse key
+		$collapse_key = 'ck'.time();
+		// iterate phones
+		$phones = ORM::factory('phone')
+					->where('c2dm_registration_id','!=','')
+					->find_all();
+		foreach($phones as $phone) {
+			if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'edaily')) {
+				$phone->log_alert('form_reminder', 'edaily', $response);
+				echo "Alert sent to phone id ".$phone->id."\n";
+			}
+			else {
+				echo "Error sending to phone id ".$phone->id."\n";
+			}
+		}
+	}
+	
+	
+	public function action_random_force() {
+		// needs sending
+		echo "Sending RANDOM alerts at ".date('H:i:s')."\n";
+		// get auth key
+		$auth_key = C2dm::client_auth();
+		// set collapse key
+		$collapse_key = 'ck'.time();
+		// iterate phones
+		$phones = ORM::factory('phone')
+					->where('c2dm_registration_id','!=','')
+					->find_all();
+		foreach($phones as $phone) {
+			if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'erandom')) {
+				$phone->log_alert('form_reminder', 'erandom', $response);
+				echo "Alert sent to phone id ".$phone->id."\n";
+			}
+			else {
+				echo "Error sending to phone id ".$phone->id."\n";
+			}
+		}
+	}
+	
 }
