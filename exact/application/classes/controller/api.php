@@ -56,7 +56,7 @@ class Controller_Api extends Emocha_Controller_Api {
 			$modified = strtotime($form_data->last_modified);
 			$diff = ($modified-$notified) / 60;
 			if($diff > 15) {
-				$form_data->flag = 'late';
+				$form_data->rejected = 'late';
 			}
 		}
 		
