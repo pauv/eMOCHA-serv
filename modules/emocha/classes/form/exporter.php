@@ -169,8 +169,12 @@
 		function get_data_rows() {
 			
 			$row_num = 0;
+			
+			$rows = $this->form->form_datas
+					->where('rejected','=', '')
+					->find_all();
 
-			foreach($this->form->form_datas->find_all() AS $row) {	
+			foreach($rows AS $row) {	
 				if(stristr($this->form->group,'household')){
 					$this->rows[$row_num]['household_code'] = $row->household_code;
 				}

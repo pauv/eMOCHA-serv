@@ -48,6 +48,17 @@ class Controller_Api extends Emocha_Controller_Api {
 		$form_data->uploader_phone_id = $this->phone->id;
 		$form_data->xml_content = Arr::get($_POST,"xml_content");
 		$form_data->last_modified = Arr::get($_POST,"last_modified");
+		$form_data->notified = Arr::get($_POST,"pn_ts");
+		
+		if($form->code=='erandom') {
+			// compare last_modified and pn_ts
+			$notified = strtotime($form_data->notified);
+			$modified = strtotime($form_data->last_modified);
+			$diff = ($modified-$notified) / 60;
+			if($diff > 15) {
+				$form_data->flag = 'late';
+			}
+		}
 		
 		
 		

@@ -82,9 +82,10 @@
 	form_code: <input type="text" name="form_code" value="hcore" /><br/>
 	xml_content: <textarea name="xml_content"></textarea><br/>
 	file_path: <input type="text" name="file_path" value="/sdcard/odk/instances/2010/" /><br/>
-	last_modified: <input type="text" name="last_modified" value="<?php echo time(); ?>" /><br/>
+	last_modified: <input type="text" name="last_modified" value="<?php echo date('YmdHis'); ?>" /><br/>
 	display_label: <input type="text" name="display_label" value="unused" /><br/>	
 	image file: <input type="file" name="image" /><br/>
+	pn_ts: <input type="text" name="pn_ts" value="<?php echo date('YmdHis'); ?>" /><br/>
 	<input type="submit" />
 </form>
 

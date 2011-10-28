@@ -15,8 +15,8 @@
 				$files = $patient->form_datas->order_by('last_modified','ASC')->find_all();
 				if (count($files)) {
 					print sprintf('<ul id="list_%s">', $patient->id);
-					foreach($files AS $file) {
-						print sprintf('<li><a href="javascript:;" onClick="display_xml(%s); return false" class="linkToXML">%s</a> %s</li>', $file->id, $file->get_form_name(), $file->last_modified); 
+					foreach($files AS $file) { 
+						?><li><a href="javascript:;" onClick="display_xml(<?php echo $file->id; ?>); return false" class="linkToXML"<?php if($file->rejected) echo ' style="color:red;"'; ?>><?php echo $file->get_form_name(); ?></a> <?php echo $file->last_modified; ?></li><?
 					}
 					print '</ul>';
 				}
