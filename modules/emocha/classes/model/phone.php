@@ -16,6 +16,9 @@ class Model_Phone extends ORM {
 	// activate phone via admin
 	public function edit($imei, $validated, $password, $comments) {
         
+        if(!$this->loaded()) {
+        	$this->creation_ts = time();
+        }
         $this->imei = $imei;
         $this->imei_md5 = md5($imei);
         $this->validated = $validated;
