@@ -1,0 +1,1 @@
+ALTER TABLE `phone_locations` ENGINE = InnoDB;
