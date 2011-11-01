@@ -107,7 +107,7 @@ class Controller_Cron extends Controller {
 		$times[4] = $nine + $random;
 		
 		// check times are sufficiently spaced
-		if($times[2]-$times[1] > 900 && $times[3]-$times[2] > 900 && $times[4]-$times[3] > 900) {
+		if($times[2]-$times[1] > 3600 && $times[3]-$times[2] > 3600 && $times[4]-$times[3] > 3600) {
 			return $times;
 		}
 		else {
