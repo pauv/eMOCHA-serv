@@ -69,7 +69,8 @@ class Emocha_Controller_Api extends Controller {
     	$configs = array();
 	 	if(! $keys = Arr::get($_POST, 'keys', '')) {
 	 		// no keys submitted, get all keys
-    		$objs = ORM::factory('config')->where('label','!=','application')->find_all();
+    		//$objs = ORM::factory('config')->where('label','!=','application')->find_all();
+    		$objs = ORM::factory('config')->find_all();
     		foreach($objs as $obj){
     			$configs[$obj->label] = $obj->content;
     		}
