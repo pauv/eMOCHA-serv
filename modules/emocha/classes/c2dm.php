@@ -60,7 +60,9 @@
 			$data = array('registration_id' => $reg_id,
 			'collapse_key' => $collapse_key,
 			'data.message_type' => $message_type,
-			'data.form_code' => $form_code);
+			'data.form_code' => $form_code,
+			'data.pn_sent' => date('YmdHis'));
+			
 			
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 			curl_setopt($ch, CURLOPT_POST, true);
