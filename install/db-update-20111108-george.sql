@@ -1,0 +1,1 @@
+ALTER TABLE `c2dm_errors` ADD `phone_id` INT NOT NULL;

@@ -47,7 +47,7 @@
     	 * Send c2dm message
     	 * return response with message id or false
     	 */
-		public static function send_message($auth_key, $reg_id, $collapse_key, $message_type, $form_code) {
+		public static function send_message($auth_key, $phone, $collapse_key, $message_type, $form_code) {
 			$ch = curl_init();
 		
 			$header[] = 'Authorization: GoogleLogin auth='.$auth_key;
@@ -57,7 +57,7 @@
 			curl_setopt($ch, CURLOPT_HEADER, false);
 			curl_setopt($ch, CURLOPT_URL, "https://android.apis.google.com/c2dm/send");
 			
-			$data = array('registration_id' => $reg_id,
+			$data = array('registration_id' => $phone->c2dm_registration_id,
 			'collapse_key' => $collapse_key,
 			'data.message_type' => $message_type,
 			'data.form_code' => $form_code,
@@ -73,11 +73,11 @@
 			$info = curl_getinfo ($ch);
 			
 			if(curl_errno($ch)) {
-				C2dm::log_error('send_message', curl_error($ch), '', '', serialize($data));
+				C2dm::log_error('send_message', curl_error($ch), '', '', serialize($data), $phone->id);
 				return FALSE;
 			}
 			elseif($info['http_code']!=200 || stristr($response, 'error')) {
-				C2dm::log_error('send_message', '', $info['http_code'], $response, serialize($data));
+				C2dm::log_error('send_message', '', $info['http_code'], $response, serialize($data), $phone->id);
 				return FALSE;
 			}
 			else {
@@ -91,13 +91,14 @@
 		 * Log c2dm error
 		 *
 		 */
-		 public static function log_error($type, $curl_error, $http_code, $response, $data) {
+		 public static function log_error($type, $curl_error, $http_code, $response, $data, $phone_id=0) {
 		 	$err = ORM::factory('c2dm_error');
 		 	$err->type = $type;
 		 	$err->curl_error = $curl_error;
 		 	$err->http_code = $http_code;
 		 	$err->response = $response;
 		 	$err->data = $data;
+		 	$err->phone_id = $phone_id;
 		 	$err->save();
 		 }
 		

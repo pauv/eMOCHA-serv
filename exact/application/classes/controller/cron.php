@@ -70,7 +70,7 @@ class Controller_Cron extends Controller {
 							->where('c2dm_registration_id','!=','')
 							->find_all();
 				foreach($phones as $phone) {
-					if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'erandom')) {
+					if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
 						$phone->log_alert('form_reminder', 'erandom', $response);
 						echo "Alert sent to phone id ".$phone->id."\n";
 					}
@@ -146,7 +146,7 @@ class Controller_Cron extends Controller {
 						->where('c2dm_registration_id','!=','')
 						->find_all();
 			foreach($phones as $phone) {
-				if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'edaily')) {
+				if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
 					$phone->log_alert('form_reminder', 'edaily', $response);
 					echo "Alert sent to phone id ".$phone->id."\n";
 				}
@@ -176,7 +176,7 @@ class Controller_Cron extends Controller {
 					->where('c2dm_registration_id','!=','')
 					->find_all();
 		foreach($phones as $phone) {
-			if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'edaily')) {
+			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
 				$phone->log_alert('form_reminder', 'edaily', $response);
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
@@ -199,7 +199,7 @@ class Controller_Cron extends Controller {
 					->where('c2dm_registration_id','!=','')
 					->find_all();
 		foreach($phones as $phone) {
-			if($response = C2dm::send_message($auth_key, $phone->c2dm_registration_id, $collapse_key, 'form_reminder', 'erandom')) {
+			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
 				$phone->log_alert('form_reminder', 'erandom', $response);
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
