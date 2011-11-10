@@ -421,7 +421,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 			
 			else 
 			{
-				$phone->edit($_POST['imei'], $_POST['validated'], $_POST['password'], $_POST['comments']);
+				$phone->edit($_POST['imei'], $_POST['validated'], $_POST['password'], $_POST['comments'], $_POST['c2dm_disable']);
 				Request::instance()->redirect('admin/phones/saved');
 				
 			}

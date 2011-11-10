@@ -68,6 +68,7 @@ class Controller_Cron extends Controller {
 				// iterate phones
 				$phones = ORM::factory('phone')
 							->where('c2dm_registration_id','!=','')
+							->and_where('c2dm_disable', '=', 0)
 							->find_all();
 				foreach($phones as $phone) {
 					if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
@@ -144,6 +145,7 @@ class Controller_Cron extends Controller {
 			// iterate phones
 			$phones = ORM::factory('phone')
 						->where('c2dm_registration_id','!=','')
+						->and_where('c2dm_disable', '=', 0)
 						->find_all();
 			foreach($phones as $phone) {
 				if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
@@ -174,6 +176,7 @@ class Controller_Cron extends Controller {
 		// iterate phones
 		$phones = ORM::factory('phone')
 					->where('c2dm_registration_id','!=','')
+					->and_where('c2dm_disable', '=', 0)
 					->find_all();
 		foreach($phones as $phone) {
 			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
@@ -197,6 +200,7 @@ class Controller_Cron extends Controller {
 		// iterate phones
 		$phones = ORM::factory('phone')
 					->where('c2dm_registration_id','!=','')
+					->and_where('c2dm_disable', '=', 0)
 					->find_all();
 		foreach($phones as $phone) {
 			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {

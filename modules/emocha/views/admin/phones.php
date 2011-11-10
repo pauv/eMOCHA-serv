@@ -22,6 +22,7 @@
 	<th>Comments</th>
 	<th>Created</th>
 	<th>Last connected</th>
+	<th>C2dm disabled</th>
 	<th>&nbsp;</th>
 	<th>&nbsp;</th>
 	<th>&nbsp;</th>
@@ -48,6 +49,7 @@
 	<td><?php echo $phone->comments; ?> </td>
 	<td><?php echo date('d-m-Y H:i:s', $phone->creation_ts); ?></td>
 	<td><?php if($phone->last_connect_ts!=0) echo date('d-m-Y H:i:s', $phone->last_connect_ts); ?></td>
+	<td><?php echo $phone->c2dm_disable; ?> </td>
 	<td></td>
 	<td><?php $link = $phone->validated ? 'edit':'activate';
 			echo Html::anchor('admin/edit_phone/'.$phone->id, $link);

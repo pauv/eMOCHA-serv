@@ -36,6 +36,15 @@ if(isset($errors)) {
 
         </tr>
         
+        
+        <tr>
+
+            <td>Description</td>
+
+            <td><?php echo Form::textarea('description', Arr::get($form_vals, 'description', '')); ?></td>
+
+        </tr>
+        
        
     </tbody>
 

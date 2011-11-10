@@ -49,6 +49,13 @@ if(isset($errors)) {
 
         </tr>
         
+        <tr>
+
+            <td>Disable c2dm</td>
+
+            <td><?php echo Form::select('c2dm_disable', array('0','1'), Arr::get($form_vals, 'c2dm_disable', '')); ?></td>
+
+        </tr>
        
 
     </tbody>

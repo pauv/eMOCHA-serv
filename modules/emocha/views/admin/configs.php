@@ -17,6 +17,7 @@
 <tr>
 	<th>Key/label</th>
 	<th>Content</th>
+	<th>Description</th>
 	<th>Last modified</th>
 	<th></th>
 	<th></th>
@@ -45,6 +46,7 @@
 <tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $config->label; ?> </td>
 	<td><?php echo $config->content; ?> </td>
+	<td><?php echo $config->description; ?> </td>
 	<td><?php echo date('d-m-Y H:i:s', strtotime($config->last_modified)); ?></td>
 	<td><?php echo Html::anchor('admin/edit_config/'.$config->id, 'edit') ?></td>
 	<td><?php echo Html::anchor('admin/delete_config/'.$config->id, 'delete') ?></td>

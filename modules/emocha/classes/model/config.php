@@ -14,7 +14,8 @@ class Model_Config extends ORM {
 												))
 						->rules('content', array(
 												'not_empty'=>NULL
-												));
+												))
+						->filter('description', 'trim');
  
 		return $array;
 	}

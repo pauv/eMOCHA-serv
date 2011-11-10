@@ -32,3 +32,11 @@ ALTER TABLE `uploaded_data` ADD `notified` DATETIME NOT NULL AFTER `file_path`;
 ALTER TABLE `uploaded_data` CHANGE `flag` `rejected` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
 ALTER TABLE `phone_locations` ENGINE = InnoDB;
+
+
+
+ALTER TABLE `c2dm_errors` ADD `phone_id` INT NOT NULL;
+ALTER TABLE `configs` ADD `description` VARCHAR( 255 ) NOT NULL AFTER `content`;
+ALTER TABLE `configs` CHANGE `description` `description` TEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
+ALTER TABLE `phone` ADD `c2dm_disable` TINYINT NOT NULL;
