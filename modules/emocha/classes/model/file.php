@@ -17,6 +17,7 @@ class Model_File extends ORM {
 	
 	 public function api_array () {
     	$arr = Array(
+    				"id"		=> $this->id,
 					"path"		=> $this->path, 
 					"ts"		=> $this->ts, 
 					"size"		=> $this->size, 
