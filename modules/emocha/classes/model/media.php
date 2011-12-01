@@ -103,4 +103,20 @@ class Model_Media extends ORM {
 		parent::delete();
 	}
 	
+	
+	// format for api response
+	public function api_array() {
+		$arr = array();
+		$arr['id'] = $this->id;
+		$arr['title'] = $this->title;
+		$arr['type'] = $this->type;
+		if($this->file->loaded()) {
+			$arr['file'] = $this->file->api_array();
+		}
+		if($this->thumbnail->loaded()) {
+			$arr['thumbnail'] = $this->thumbnail->api_array();
+		}
+		return $arr;
+	}
+	
 }

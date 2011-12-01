@@ -144,7 +144,9 @@ class Emocha_Controller_Api extends Controller {
     }
     
     
-    
+    /*
+    TO BE REMOVED 
+    */
      public function action_get_media_files() {
     
     	$last_server_update = Sdcard::get_last_server_update();
@@ -161,6 +163,26 @@ class Emocha_Controller_Api extends Controller {
 			$responseA['files'] = $files_arr;			
 		} 
     	$json = View::factory('json/display', Json::response('OK', 'get_media_files', $responseA))->render();
+		$this->request->response = $json;
+		
+    }
+    
+    
+    
+     public function action_get_media() {
+    
+    	$last_server_update = Sdcard::get_last_server_update();
+	  	$responseA['last_server_upd'] = $last_server_update;
+	
+		if ($last_server_update != Arr::get($_POST, 'last_server_upd')) {
+			$medias = ORM::factory('media')->find_all();
+			$response = array();
+			foreach ($medias as $media) {
+				$response[] = $media->api_array();
+			}		
+		} 
+    	//$json = Json::response_array('OK', 'get_media', $response, 'media', 'media');
+    	$json = View::factory('json/display', Json::response('OK', 'get_media', $response))->render();
 		$this->request->response = $json;
 		
     }

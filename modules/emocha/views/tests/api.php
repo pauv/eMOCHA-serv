@@ -53,8 +53,18 @@
 
 
 
-<h2>Get media files</h2>
+<h2>Get media files (old)</h2>
 <?php echo Form::open('/api/get_media_files', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="" /><br/>
+	<input type="submit" />
+</form>
+
+
+<h2>Get media</h2>
+<?php echo Form::open('/api/get_media', array(
 													'enctype'=>'multipart/form-data'
 													));?>
 	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
