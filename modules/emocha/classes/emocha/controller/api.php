@@ -172,16 +172,17 @@ class Emocha_Controller_Api extends Controller {
      public function action_get_media() {
     
     	$last_server_update = Sdcard::get_last_server_update();
-	  	$responseA['last_server_upd'] = $last_server_update;
+    	$response = array();
+	  	$response['last_server_upd'] = $last_server_update;
 	
 		if ($last_server_update != Arr::get($_POST, 'last_server_upd')) {
 			$medias = ORM::factory('media')->find_all();
-			$response = array();
+			$response['media'] = array();
 			foreach ($medias as $media) {
-				$response[] = $media->api_array();
+				$response['media'][] = $media->api_array();
 			}		
 		} 
-    	//$json = Json::response_array('OK', 'get_media', $response, 'media', 'media');
+    	//$json = Json::response_array('OK', 'get_media', $response, 'media');
     	$json = View::factory('json/display', Json::response('OK', 'get_media', $response))->render();
 		$this->request->response = $json;
 		
