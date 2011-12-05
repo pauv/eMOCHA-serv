@@ -107,14 +107,35 @@ class Model_Phone extends ORM {
 		}
 	}
 	
-	public function log_alert($message_type, $form_code='', $response='') {
-		if($message_type=='form_reminder') {
+	public function send_alert($auth_key, $collapse_key, $message_type, $form_code='', $message='') {
+		
+		// create alert record
+		$alert = ORM::factory('phone_alert');
+		$alert->phone_id = $this->id;
+		$alert->message_type = $message_type;
+		$alert->form_code = $form_code;
+		$alert->message = $message;
+		
+		if($alert->save()) {
+			// try to send
+			if($response = C2dm::send_message($auth_key, $alert, $this, $collapse_key)) {
+				$alert->response = $response;
+				$alert->sent = 1;
+				return $alert->save();
+			}
+		}
+		return FALSE;
+
+	}
+	
+	public function log_alert($message_type, $form_code='', $message='', $response='') {
+		//if($message_type=='form_reminder') {
 			$alert = ORM::factory('phone_alert');
 			$alert->phone_id = $this->id;
 			$alert->message_type = $message_type;
 			$alert->form_code = $form_code;
 			$alert->response = $response;
 			return $alert->save();
-		}
+		//}
 	}
 }

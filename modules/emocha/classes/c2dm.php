@@ -47,7 +47,7 @@
     	 * Send c2dm message
     	 * return response with message id or false
     	 */
-		public static function send_message($auth_key, $phone, $collapse_key, $message_type, $form_code) {
+		public static function send_message($auth_key, $alert, $phone, $collapse_key) {
 			$ch = curl_init();
 		
 			$header[] = 'Authorization: GoogleLogin auth='.$auth_key;
@@ -59,8 +59,10 @@
 			
 			$data = array('registration_id' => $phone->c2dm_registration_id,
 			'collapse_key' => $collapse_key,
-			'data.message_type' => $message_type,
-			'data.form_code' => $form_code,
+			'data.alert_id' => $alert->id,
+			'data.message_type' => $alert->message_type,
+			'data.form_code' => $alert->form_code,
+			'data.message' => urlencode($alert->message),
 			'data.pn_sent' => date('YmdHis'));
 			
 			

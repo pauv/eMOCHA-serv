@@ -159,6 +159,15 @@
 </form>
 
 
+<h2>confirm_alert</h2>
+<?php echo Form::open('/api/confirm_alert');?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="" /><br/>
+	Alert id: <input type="text" name="alert_id" value="" />
+	<input type="submit" />
+</form>
+
+
 </body>
 
 </html>

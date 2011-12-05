@@ -392,6 +392,37 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
+	/*
+	 * Confirm receipt of alert
+	 */
+    function action_confirm_alert() {
+
+		if(! $id = trim(Arr::get($_POST,"alert_id",''))) {
+			$json = View::factory('json/display', Json::response('ERR', 'alert_id is empty'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		$alert = ORM::factory('phone_alert', $id);
+		if(! $alert->loaded() || $alert->phone_id!=$this->phone->id) {
+			$json = View::factory('json/display', Json::response('ERR', 'alert_id invalid'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		$alert->received = 1;
+		if($alert->save()) {
+			$json = View::factory('json/display', Json::response('OK', 'alert confirmed'))->render();
+		} 
+		else {
+			$json = View::factory('json/display', Json::response('ERR', 'failed to save'))->render();
+		}
+
+		$this->request->response = $json;
+		
+	}
+	
+	
 	
 
 }

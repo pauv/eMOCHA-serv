@@ -71,8 +71,14 @@ class Controller_Cron extends Controller {
 							->and_where('c2dm_disable', '=', 0)
 							->find_all();
 				foreach($phones as $phone) {
-					if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
-						$phone->log_alert('form_reminder', 'erandom', $response);
+					/*if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
+						$phone->log_alert('form_reminder', 'erandom', '', $response);
+						echo "Alert sent to phone id ".$phone->id."\n";
+					}
+					else {
+						echo "Error sending to phone id ".$phone->id."\n";
+					}*/
+					if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'erandom', '')) {
 						echo "Alert sent to phone id ".$phone->id."\n";
 					}
 					else {
@@ -148,8 +154,14 @@ class Controller_Cron extends Controller {
 						->and_where('c2dm_disable', '=', 0)
 						->find_all();
 			foreach($phones as $phone) {
-				if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
-					$phone->log_alert('form_reminder', 'edaily', $response);
+				/*if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
+					$phone->log_alert('form_reminder', 'edaily', '', $response);
+					echo "Alert sent to phone id ".$phone->id."\n";
+				}
+				else {
+					echo "Error sending to phone id ".$phone->id."\n";
+				}*/
+				if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'edaily', '')) {
 					echo "Alert sent to phone id ".$phone->id."\n";
 				}
 				else {
@@ -179,8 +191,14 @@ class Controller_Cron extends Controller {
 					->and_where('c2dm_disable', '=', 0)
 					->find_all();
 		foreach($phones as $phone) {
-			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
-				$phone->log_alert('form_reminder', 'edaily', $response);
+			/*if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'edaily')) {
+				$phone->log_alert('form_reminder', 'edaily', '', $response);
+				echo "Alert sent to phone id ".$phone->id."\n";
+			}
+			else {
+				echo "Error sending to phone id ".$phone->id."\n";
+			}*/
+			if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'edaily', '')) {
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
 			else {
@@ -203,8 +221,14 @@ class Controller_Cron extends Controller {
 					->and_where('c2dm_disable', '=', 0)
 					->find_all();
 		foreach($phones as $phone) {
-			if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
-				$phone->log_alert('form_reminder', 'erandom', $response);
+			/*if($response = C2dm::send_message($auth_key, $phone, $collapse_key, 'form_reminder', 'erandom')) {
+				$phone->log_alert('form_reminder', 'erandom', '', $response);
+				echo "Alert sent to phone id ".$phone->id."\n";
+			}
+			else {
+				echo "Error sending to phone id ".$phone->id."\n";
+			}*/
+			if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'erandom', '')) {
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
 			else {
