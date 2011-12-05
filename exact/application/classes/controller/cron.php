@@ -78,7 +78,7 @@ class Controller_Cron extends Controller {
 					else {
 						echo "Error sending to phone id ".$phone->id."\n";
 					}*/
-					if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'erandom', '')) {
+					if($phone->send_alert($auth_key, $collapse_key, 'form_reminder', 'erandom', '')) {
 						echo "Alert sent to phone id ".$phone->id."\n";
 					}
 					else {
@@ -161,7 +161,7 @@ class Controller_Cron extends Controller {
 				else {
 					echo "Error sending to phone id ".$phone->id."\n";
 				}*/
-				if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'edaily', '')) {
+				if($phone->send_alert($auth_key, $collapse_key, 'form_reminder', 'edaily', '')) {
 					echo "Alert sent to phone id ".$phone->id."\n";
 				}
 				else {
@@ -198,7 +198,7 @@ class Controller_Cron extends Controller {
 			else {
 				echo "Error sending to phone id ".$phone->id."\n";
 			}*/
-			if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'edaily', '')) {
+			if($phone->send_alert($auth_key, $collapse_key, 'form_reminder', 'edaily', '')) {
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
 			else {
@@ -228,7 +228,7 @@ class Controller_Cron extends Controller {
 			else {
 				echo "Error sending to phone id ".$phone->id."\n";
 			}*/
-			if($phone->send_alert($auth_key, $collapse_key, 'custom_message', 'form_reminder', 'erandom', '')) {
+			if($phone->send_alert($auth_key, $collapse_key, 'form_reminder', 'erandom', '')) {
 				echo "Alert sent to phone id ".$phone->id."\n";
 			}
 			else {
