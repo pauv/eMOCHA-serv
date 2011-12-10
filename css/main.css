@@ -328,6 +328,14 @@ img.title_icon {
 /*
 STATS LIST
 */
+
+div.stats_summary {
+	margin: 10px;
+	background: #DDD;
+	padding: 5px;
+}
+
+
 div.stats_patient {
 	margin: 0 0 0 10px;
 }

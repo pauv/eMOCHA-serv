@@ -66,4 +66,36 @@ class Model_Patient extends ORM {
 			return $arr;
 		}
 	
+	
+ 	/*
+	get array of dates where patient has submitted form data
+	@return array
+	*/
+	public function get_form_data_dates() {
+		$dates = array();
+			
+		$sql = "SELECT DISTINCT(DATE(last_modified)) as mydate FROM uploaded_data
+				WHERE patient_code='".$this->code."'
+				ORDER bY mydate ASC";
+		$result = DB::query(Database::SELECT, $sql)->execute();
+		foreach($result->as_array() as $row) {
+			$dates[] =$row['mydate'];
+		}
+		
+		return $dates;
+
+	}
+	
+	/*
+	get form data for a given date
+	@return array
+	*/
+	public function get_form_data_by_date($date) {
+		$datas = ORM::factory('form_data')
+				->where('patient_code','=',$this->code)
+				->and_where(DB::expr("DATE(last_modified)"),'=',$date)
+				->find_all();
+		
+		return $datas;
+	}
 }
