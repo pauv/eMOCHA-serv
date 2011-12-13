@@ -17,7 +17,9 @@ Total rejected (late) forms: <b><?php echo ORM::factory('form_data')->where('rej
 			foreach($patients as $patient) { ?>
 				<div class="stats_patient"><img src="/images/icons/patient_32.png" class="title_icon">
 				<a href="javascript:;" onclick="$('#dates_<?php echo $patient->id; ?>').toggle();hide_xml();"><?php echo $patient->code; ?></a>
-				<div id="dates_<?php echo $patient->id; ?>" style="display:none;margin-left:20px;">
+					Total forms: <b><?php echo $patient->form_datas->count_all(); ?></b>,
+					Rejected: <b><?php echo $patient->form_datas->where('rejected','=','late')->count_all(); ?></b>
+				<div id="dates_<?php echo $patient->id; ?>" style="display:none;margin-left:40px;">
 					<?php 
 					$dates = $patient->get_form_data_dates();
 					foreach($dates as $date) {
