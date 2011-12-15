@@ -17,6 +17,12 @@ Title/label:<br />
 </p>
 
 <p>
+Language:<br />
+<?php echo Form::select('language', array('en'=>'en','es'=>'es')); ?>
+</p>
+
+
+<p>
 Select from Ftp folder:<br />
 <?php if(is_array($ftp_files) && count($ftp_files)) { ?>
 <select name="ftp_file">

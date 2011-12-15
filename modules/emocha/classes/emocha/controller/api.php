@@ -145,7 +145,7 @@ class Emocha_Controller_Api extends Controller {
     
     
     /*
-    TO BE REMOVED 
+    TO BE DEPRECATED
     */
      public function action_get_media_files() {
     
@@ -176,7 +176,10 @@ class Emocha_Controller_Api extends Controller {
 	  	$response['last_server_upd'] = $last_server_update;
 	
 		if ($last_server_update != Arr::get($_POST, 'last_server_upd')) {
-			$medias = ORM::factory('media')->find_all();
+		
+			$language = Arr::get($_POST, 'language', 'en');
+			$medias = ORM::factory('media')->where('language','=',$language)->find_all();
+			
 			$response['media'] = array();
 			foreach ($medias as $media) {
 				$response['media'][] = $media->api_array();

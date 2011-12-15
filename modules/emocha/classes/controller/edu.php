@@ -228,6 +228,7 @@ class Controller_Edu extends Controller_Site {
 			$media = ORM::factory('media');
 			$media->type = $section;
 			$media->title = Arr::get($_POST, 'title');
+			$media->language = Arr::get($_POST, 'language');
 			
 			// file
 			$file = ORM::factory('file');

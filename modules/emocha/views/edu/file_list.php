@@ -23,6 +23,7 @@
 <tr>
 	<th></th>
 	<th>Title</th>
+	<th>Language</th>
 	<th>Filename</th>
 	<th>Size</th>
 	<th>Date added</th>
@@ -48,6 +49,7 @@
 <tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $img; ?></td>
 	<td><?php echo $media->title; ?></td>
+	<td><?php echo $media->language; ?></td>
 	<td><?php echo $media->file->filename; ?></td>
 	<td><?php echo number_format($media->file->size / 1024); ?> Kb</td>
 	<td><?php echo date('d-m-Y H:i:s', $media->file->ts); ?></td>

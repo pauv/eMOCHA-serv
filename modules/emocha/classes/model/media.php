@@ -109,6 +109,7 @@ class Model_Media extends ORM {
 		$arr = array();
 		$arr['id'] = $this->id;
 		$arr['title'] = $this->title;
+		$arr['language'] = $this->language;
 		$arr['type'] = $this->type;
 		if($this->file->loaded()) {
 			$arr['file'] = $this->file->api_array();

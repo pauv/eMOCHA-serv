@@ -69,6 +69,7 @@
 													));?>
 	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	Pwd: <input type="text" name="pwd" value="" /><br/>
+	Language: <?php echo Form::select('language', array('en'=>'en','es'=>'es')); ?><br />
 	<input type="submit" />
 </form>
 
