@@ -29,10 +29,11 @@
         /*
          * Activate phone
          */
-		public static function activate($imei) {
+		public static function activate($imei, $auto_validate=FALSE) {
         	
         	// check valid code
 			if ( ! Phone::is_imei_valid($imei) && ! Phone::is_cdma_valid($imei)) {
+				echo $imei;
 				return array(
 						'msg'=>Kohana::message('phone', 'activate.phone_activation_bad_imei'),
 						'phone_id'=>0
@@ -59,20 +60,30 @@
 			$phone->creation_ip = $ip;
 			$phone->save();
 			
-			
-
-			$to = Kohana::config('emocha.admin_alerts_to');
-			$from = Kohana::config('email.options.username');
-			$subject = 'Phone activation requested';
-			$message = "Sent from: ".Url::site();
-			$message .= "\n\nPhone IMEI: ".$phone->imei;	
-			$message .= "\n\nLogin to the backend and go to the 'admin' section to activate this phone.";
-			Email::send($to, $from, $subject, $message);
-			
-			return array(
-						'msg'=>Kohana::message('phone', 'activate.phone_activation_sent'),
-						'phone_id'=>$phone->id
-						);
+			// versions requiring no manual validation
+			if($auto_validate) {
+				$phone->validated = 1;
+				$phone->save();
+				return array(
+							'msg'=>Kohana::message('phone', 'activate.phone_auto_validate'),
+							'phone_id'=>$phone->id
+							);
+			}
+			// versions requiring manual validation
+			else {
+				$to = Kohana::config('emocha.admin_alerts_to');
+				$from = Kohana::config('email.options.username');
+				$subject = 'Phone activation requested';
+				$message = "Sent from: ".Url::site();
+				$message .= "\n\nPhone IMEI: ".$phone->imei;	
+				$message .= "\n\nLogin to the backend and go to the 'admin' section to activate this phone.";
+				Email::send($to, $from, $subject, $message);
+				
+				return array(
+							'msg'=>Kohana::message('phone', 'activate.phone_activation_sent'),
+							'phone_id'=>$phone->id
+							);
+			}
 
 		}
 		
