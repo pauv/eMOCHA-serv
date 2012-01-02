@@ -6,7 +6,7 @@ class Controller_Api extends Emocha_Controller_Api {
 	
 	public function before()
 	{
-		parent::before();
+		//parent::before();
 		
 		switch($this->request->action) {
 			case 'activate_phone':
