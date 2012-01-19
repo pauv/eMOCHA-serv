@@ -21,7 +21,14 @@ class Controller_Site extends Emocha_Controller_Site
 		}
 		else {
 			$languages = array_keys($language_conf);
-			$this->language = Session::instance()->get('language', $languages[0]);
+			// check if language session not already set
+			if(! $language = Session::instance()->get('language')) {
+				Session::instance()->set('language', $languages[0]);
+				$this->language = $languages[0];
+			}
+			else {
+				$this->language = $language;
+			}
 		}
 	}
 }
