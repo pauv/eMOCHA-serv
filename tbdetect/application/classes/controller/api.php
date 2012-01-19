@@ -59,6 +59,51 @@ class Controller_Api extends Emocha_Controller_Api {
 		$this->request->response = $json;
 		
     }
+    
+    
+  /*
+   * Register language of phone
+   *
+   */
+  public function action_register_language() {
+  
+  		// check a language has been submitted
+    	if(! $language = trim(Arr::get($_POST,"language",''))) {
+			$json = View::factory('json/display', Json::response('ERR', 'language variable is empty'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		// check languages have been configured on the server
+		$languages = Kohana::config('language.languages');
+		if(!is_array($languages) || !sizeof($languages)) {
+			$json = View::factory('json/display', Json::response('ERR', 'no languages in server config'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		// check language exists in config
+		$languages = Kohana::config('language.languages');
+		if(!array_key_exists($language, $languages)) {
+			$json = View::factory('json/display', Json::response('ERR', 'submitted language does not exist in config'))->render();
+			$this->request->response = $json;
+			return;
+		}
+		
+		// save language to phone record
+		$phone = $this->phone;
+		$phone->language = $language;
+		
+		if($phone->save()) {
+			$json = View::factory('json/display', Json::response('OK', 'language saved'))->render();
+		} 
+		else {
+			$json = View::factory('json/display', Json::response('ERR', 'failed to save'))->render();
+		}
+
+		$this->request->response = $json;
+		
+	}
 	
 	
 	
