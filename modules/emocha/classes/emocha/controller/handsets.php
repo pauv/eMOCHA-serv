@@ -37,7 +37,7 @@ class Emocha_Controller_Handsets extends Controller_Site {
 									));		
 	}
 	
-	private function _get_gmaps_js($phones) {
+	protected function _get_gmaps_js($phones) {
 		
 		$markerDataJS = '';
 		foreach ($phones as $phone) {
