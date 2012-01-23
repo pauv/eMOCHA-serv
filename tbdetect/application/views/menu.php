@@ -6,7 +6,9 @@
 				   success: function(data){
 					//$("#rate_back").html(data);
 					//getStats();
+					<?php if(! $_POST) { ?>
 					window.location.reload()
+					<?php } ?>
 				  }
 			});
 			return false;
