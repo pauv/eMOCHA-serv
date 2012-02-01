@@ -16,7 +16,7 @@ class Controller_Stats extends Emocha_Controller_Stats {
  		$ord = Arr::get($request, 'ord', 'code');
 
 
-		
+		/*
 		$pagination = Pagination::factory(array(
 			'total_items'    => Model_Patient::get_count(),
 			'items_per_page' => 10,
@@ -25,7 +25,8 @@ class Controller_Stats extends Emocha_Controller_Stats {
 		$content->patients = Model_Patient::get_list($pagination->items_per_page, $pagination->offset, $ord);
 		$content->current_url = URL::site($this->request->uri).'?'.http_build_query($_GET, '&');
 		$content->pagination = $pagination->render();
-	
+		*/
+		$content->patients = ORM::factory('patient')->find_all();
 	}
 	
 	
