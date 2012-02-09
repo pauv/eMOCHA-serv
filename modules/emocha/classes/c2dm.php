@@ -17,7 +17,7 @@
 			$data = array('accountType' => 'GOOGLE',
 			'Email' => Kohana::config('c2dm.user'),
 			'Passwd' => Kohana::config('c2dm.password'),
-			'source'=>'emocha',
+			'source'=>'PHI-cUrl-Example',
 			'service'=>'ac2dm');
 			
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -59,7 +59,6 @@
 			
 			$data = array('registration_id' => $phone->c2dm_registration_id,
 			'collapse_key' => $collapse_key,
-			'delay_while_idle' => 0,
 			'data.alert_id' => $alert->id,
 			'data.message_type' => $alert->message_type,
 			'data.form_code' => $alert->form_code,
