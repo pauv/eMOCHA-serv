@@ -108,16 +108,6 @@ class Controller_Api extends Emocha_Controller_Api {
 			return;
 		}
 		
-		// find form data
-		$form_data = ORM::factory('form_data')
-					->where('form_id','=',$form->id)
-					->and_where('last_modified','=',Arr::get($_POST,"last_modified"))
-					->find();
-		if(! $form_data->loaded()) {
-			$json = View::factory('json/display', Json::response('ERR', 'no corresponding form data'))->render();
-			$this->request->response = $json;
-			return;
-		}
 		
 		// check if form reminder already logged
 		$phone_form_reminder = ORM::factory('phone_form_reminder')
@@ -136,6 +126,17 @@ class Controller_Api extends Emocha_Controller_Api {
 		*/
 		if($form->code=='erandom') {
 		
+			// find form data
+			$form_data = ORM::factory('form_data')
+						->where('form_id','=',$form->id)
+						->and_where('last_modified','=',Arr::get($_POST,"last_modified"))
+						->find();
+			if(! $form_data->loaded()) {
+				$json = View::factory('json/display', Json::response('ERR', 'no corresponding form data'))->render();
+				$this->request->response = $json;
+				return;
+			}
+		
 			// check time limits
 			$delay_limit_config = ORM::factory('config')->where('label','=','form_reminder_delay_interval')->find();
 			if($delay_limit_config->loaded() && $delay_limit_config->content) {
@@ -147,10 +148,12 @@ class Controller_Api extends Emocha_Controller_Api {
 					$form_data->rejected = 'late';
 				}
 			}
+			
+			$form_data->notified = Arr::get($_POST,"reminder_ts");
+			$form_data->save();
+			
 		}
 		
-		$form_data->notified = Arr::get($_POST,"reminder_ts");
-		$form_data->save();
 		
 		
 		
