@@ -124,7 +124,7 @@ class Controller_Api extends Emocha_Controller_Api {
 		/*
 		if erandom, then find data and check response time
 		*/
-		if($form->code=='erandom') {
+		if($form->code=='erandom' || $form->code=='edaily') {
 		
 			// find form data
 			$form_data = ORM::factory('form_data')
