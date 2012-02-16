@@ -4,7 +4,8 @@
 <div class="stats_summary" >
 Total users: <b><?php echo ORM::factory('patient')->count_all(); ?></b>,
 Total forms: <b><?php echo ORM::factory('form_data')->count_all(); ?></b>,
-Total rejected (late) forms: <b><?php echo ORM::factory('form_data')->where('rejected','=','late')->count_all(); ?></b>
+Total rejected (late) forms: <b><?php echo ORM::factory('form_data')->where('rejected','=','late')->count_all(); ?></b>,
+Total reminders ignored: <b><?php echo ORM::factory('form_data')->where('rejected','=','no_reply')->count_all(); ?></b>
 </div>
 
 <table>

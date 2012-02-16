@@ -121,36 +121,56 @@ class Controller_Api extends Emocha_Controller_Api {
 		}
 		
 		
+		$last_modified = Arr::get($_POST,"last_modified", FALSE);
+		
 		/*
 		if erandom, then find data and check response time
 		*/
 		if($form->code=='erandom' || $form->code=='edaily') {
 		
-			// find form data
-			$form_data = ORM::factory('form_data')
-						->where('form_id','=',$form->id)
-						->and_where('last_modified','=',Arr::get($_POST,"last_modified"))
-						->find();
-			if(! $form_data->loaded()) {
-				$json = View::factory('json/display', Json::response('ERR', 'no corresponding form data'))->render();
-				$this->request->response = $json;
-				return;
-			}
-		
-			// check time limits
-			$delay_limit_config = ORM::factory('config')->where('label','=','form_reminder_delay_interval')->find();
-			if($delay_limit_config->loaded() && $delay_limit_config->content) {
-				// compare last_modified and pn_ts
-				$notified = strtotime(Arr::get($_POST,"reminder_ts"));
-				$modified = strtotime(Arr::get($_POST,"last_modified"));
-				$diff = $modified-$notified;
-				if($diff > $delay_limit_config->content) {
-					$form_data->rejected = 'late';
-				}
-			}
+			// if last_modifed not set, then add an empty form data
+			if(! $last_modified) {
 			
-			$form_data->notified = Arr::get($_POST,"reminder_ts");
-			$form_data->save();
+				$form_data = ORM::factory('form_data');
+				$form_data->patient_code = $patient->code;
+				$form_data->creator_phone_id = $this->phone->id;
+				$form_data->form_id = $form->id;
+				$form_data->uploader_phone_id = $this->phone->id;
+				// add reminder value to last_modified for ordering on stats page
+				$form_data->last_modified = Arr::get($_POST,"reminder_ts");
+				$form_data->notified = Arr::get($_POST,"reminder_ts");
+				$form_data->rejected = 'no_reply';
+				$form_data->save();
+				
+			}
+			// else, find the associate form data and check time limit
+			else {
+			
+				$form_data = ORM::factory('form_data')
+							->where('form_id','=',$form->id)
+							->and_where('last_modified','=',$last_modified)
+							->find();
+				if(! $form_data->loaded()) {
+					$json = View::factory('json/display', Json::response('ERR', 'no corresponding form data'))->render();
+					$this->request->response = $json;
+					return;
+				}
+				
+				// check time limit
+				$delay_limit_config = ORM::factory('config')->where('label','=','form_reminder_delay_interval')->find();
+				if($delay_limit_config->loaded() && $delay_limit_config->content) {
+					// compare last_modified and pn_ts
+					$notified = strtotime(Arr::get($_POST,"reminder_ts"));
+					$modified = strtotime(Arr::get($_POST,"last_modified"));
+					$diff = $modified-$notified;
+					if($diff > $delay_limit_config->content) {
+						$form_data->rejected = 'late';
+					}
+				}
+				$form_data->notified = Arr::get($_POST,"reminder_ts");
+				$form_data->save();
+				
+			}
 			
 		}
 		
