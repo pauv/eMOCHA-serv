@@ -113,6 +113,7 @@ class Controller_Api extends Emocha_Controller_Api {
 		$phone_form_reminder = ORM::factory('phone_form_reminder')
 							->where('phone_id','=',$this->phone->id)
 							->and_where('reminder_id','=',Arr::get($_POST,"reminder_id"))
+							->and_where('reminder_ts','=',Arr::get($_POST,"reminder_ts"))
 							->find();
 		if($phone_form_reminder->loaded()) {
 			$json = View::factory('json/display', Json::response('ERR', 'reminder already logged'))->render();
@@ -148,6 +149,7 @@ class Controller_Api extends Emocha_Controller_Api {
 			
 				$form_data = ORM::factory('form_data')
 							->where('form_id','=',$form->id)
+							->and_where('patient_code','=',$patient->code)
 							->and_where('last_modified','=',$last_modified)
 							->find();
 				if(! $form_data->loaded()) {
