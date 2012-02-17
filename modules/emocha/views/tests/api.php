@@ -96,7 +96,21 @@
 	last_modified: <input type="text" name="last_modified" value="<?php echo date('YmdHis'); ?>" /><br/>
 	display_label: <input type="text" name="display_label" value="unused" /><br/>	
 	image file: <input type="file" name="image" /><br/>
-	pn_ts: <input type="text" name="pn_ts" value="<?php echo date('YmdHis'); ?>" /><br/>
+	<input type="submit" />
+</form>
+
+<h2>log_reminder (Exact only)</h2>
+<?php echo Form::open('/api/log_reminder', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	Usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	Pwd: <input type="text" name="pwd" value="123456" /><br/>
+	patient_code: <input type="text" name="patient_code" value="" /><br/>
+	form_code: <input type="text" name="form_code" value="erandom" /><br/>
+	reminder_id: <input type="text" name="reminder_id" value="1" /><br/>
+	reminder_ts: <input type="text" name="reminder_ts" value="<?php echo date('YmdHis'); ?>" /><br/>
+	reply_ts: <input type="text" name="reply_ts" value="<?php echo date('YmdHis'); ?>" /><br/>
+	last_modified: <input type="text" name="last_modified" value="<?php echo date('YmdHis'); ?>" /><br/>
 	<input type="submit" />
 </form>
 

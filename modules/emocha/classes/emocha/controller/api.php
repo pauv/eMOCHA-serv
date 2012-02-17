@@ -238,8 +238,6 @@ class Emocha_Controller_Api extends Controller {
 		
 		/*
 		Save household and patient data if necessary
-		TODO: these form id numbers probably should not be hardwired
-		as the only way to recognise the core forms
 		*/
 		if($form->code=='hcore') {
 			$household = Model_Household::save_from_form_data($form_data);

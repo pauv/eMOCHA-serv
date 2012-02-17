@@ -2,6 +2,10 @@
 
 class Controller_Cron extends Controller {
 
+	// TODO 
+	// This file can be removed
+	// reminders are now handled by the phone
+	
 	
 	public function before() {
 		parent::before();
