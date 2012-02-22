@@ -1,36 +1,13 @@
-<?php
-
-
+<?php defined('SYSPATH') or die('No direct script access.');
+/**
+ * File helper
+ *
+ * @package    eMOCHA
+ * @author     George Graham
+ * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
+ */  
 class File extends Kohana_File{
-
-	/*
-	public static function list_files_in_dir($source_dir, $ext = '', $depth = 0) {
-		static $_filedata = array();
-		echo $source_dir.'<br />';
-		// Reset the static variable when this function is not being
-		// called by itself. Before this fix $_filedata grew larger 
-		// each time the function was called.
-		if ($depth++ == 0) {
-			$_filedata = array();
-		}
-
-		if ($fp = @opendir($source_dir)) {
-			while (FALSE !== ($file = readdir($fp))) {
-				if (@is_dir($source_dir.$file) && strncmp($file, '.', 1) !== 0) {
-					 Self::list_files_in_dir($source_dir.$file.DIRECTORY_SEPARATOR, $ext, $depth);
-				} elseif (strncmp($file, '.', 1) !== 0) {
-					if ($ext == '' || substr($file, strrpos($file, '.')) == ".$ext") {					
-						$info = pathinfo($source_dir.$file);
-						$info['relative_path'] = $source_dir;
-						$_filedata[] = $info;
-					} 
-				}
-			}
-	
-		} 
-		return $_filedata;
-	}
-	*/
 
 
 

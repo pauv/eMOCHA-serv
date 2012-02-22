@@ -1,6 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
-
+/**
+ * Test Controller
+ *
+ * @package    eMOCHA
+ * @author     George Graham
+ * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
+ */  
 class Controller_Test extends Controller_Site {
 
 
@@ -107,77 +113,4 @@ class Controller_Test extends Controller_Site {
 			$this->template->content = $str;
     	}
 	
-	
-	public function action_google_client_login() {
-	
-		// client login
-		/*
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, "https://www.google.com/accounts/ClientLogin");
-		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-		
-		$data = array('accountType' => 'GOOGLE',
-		'Email' => 'emocha.exact@gmail.com',
-		'Passwd' => 'jooth7eed:iu2Ah',
-		'source'=>'PHI-cUrl-Example',
-		'service'=>'ac2dm');
-		
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		
-		$hasil = curl_exec($ch);
-		
-		//$this->template->content = nl2br($hasil);
-		
-		$tokens = explode('=', $hasil);
-		//echo Kohana::debug($tokens);
-		//$this->template->content = $tokens[3];
-		$this->template->content =  "Auth token: ".$tokens[3];
-		
-		// c2dm call
-	
-		$ch = curl_init();
-		
-		$header[] = 'Authorization: GoogleLogin auth='.trim($tokens[3]);
-		
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HEADER, true);
-		curl_setopt($ch, CURLOPT_URL, "https://android.apis.google.com/c2dm/send");
-		
-		$data = array('registration_id' => 'APA91bGJh3UtZHYL-cSdGxNjmyNVyRYcUKGKgonS_aAZP6_f3liX8fe758W7-hrMapJphbLuZuphhxriBfDeKcEKbiXWENXsgXJbB3WLZlJ0gc_TDPgPBK4K3SiHpwUV7btEcfEVg-FnN65-NPTXgXDYQkOcRYbD2g',
-		'collapse_key' => 'rtert45767',
-		'data.message_type' => 'form_reminder_c',
-		'data.form_code' => 'erandom');
-		
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		
-		$hasil = curl_exec($ch);
-		
-		$info = Kohana::debug(curl_getinfo($ch));
-		
-		$this->template->content .= '<br /><br />Registration id:<br />APA91bGJh3UtZHYL-cSdGxNjmyNVyRYcUKGKgonS_aAZP6_f3liX8fe758W7-hrMapJphbLuZuphhxriBfDeKcEKbiXWENXsgXJbB3WLZlJ0gc_TDPgPBK4K3SiHpwUV7btEcfEVg-FnN65-NPTXgXDYQkOcRYbD2g';
-		
-		$this->template->content .= '<br /><br />Curl info:<br />'.$info;
-		
-		$this->template->content .= '<br /><br />Response including headers:<br />'.$hasil;
-		
-
-	*/
-		$auth_key = C2dm::client_auth();
-		echo 'Auth<br />'.Kohana::debug($auth_key);
-		if($auth_key) {
-			$reg_id = 'PA91bGJh3UtZHYL-cSdGxNjmyNVyRYcUKGKgonS_aAZP6_f3liX8fe758W7-hrMapJphbLuZuphhxriBfDeKcEKbiXWENXsgXJbB3WLZlJ0gc_TDPgPBK4K3SiHpwUV7btEcfEVg-FnN65-NPTXgXDYQkOcRYbD2g';
-			$response = C2dm::send_message($auth_key, $reg_id, 'dsfsdf', 'form_reminder', 'erandom');
-			echo 'Msg<br />'.Kohana::debug($response);
-		}
-	}
-
-
 }
