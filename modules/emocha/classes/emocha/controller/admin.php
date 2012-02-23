@@ -1,5 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-  
+/**
+ * Admin Controller
+ *
+ * @package    eMOCHA
+ * @author     George Graham
+ * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
+ */  
 class Emocha_Controller_Admin extends Controller_Site {
 
 	// only users with admin role can access this page

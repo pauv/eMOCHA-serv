@@ -1,5 +1,13 @@
 <?php defined('SYSPATH') or die('No direct script access.');
- 
+/**
+ * Form File Model
+ *
+ * @package    eMOCHA
+ * @author     George Graham
+ * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
+ */ 
+
  /*
  Models extra files connected to a specific form
  e.g. images
