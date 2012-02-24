@@ -26,15 +26,17 @@ class Model_Form_Data extends ORM_Encrypted {
 		return $this->form->name;
 	}
 	
-	/*
+	/**
+	 * get_by_key_data()
+	 *
 	 * Get existing form data based on code and form_id
 	 * Default code values from api.php are '' so this works 
 	 * even if household_code is not submitted (in the case of non-household projects)
 	 *
-	 * param string
-	 * param string
-	 * param string
-	 * return object (loaded or empty)
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return object (loaded or empty)
 	 */
 	public static function get_by_key_data($household_code, $patient_code, $form_id) {
 		
@@ -54,11 +56,13 @@ class Model_Form_Data extends ORM_Encrypted {
 	
 	
 	
-	/*
-	Find a form data from a referral id
-	param string
-	return object (loaded or empty)
-	*/
+	/**
+	 * get_by_referral_id()
+	 * 
+	 * Find a form data from a referral id
+	 * @param string
+	 * @return object (loaded or empty)
+	 */
 	public static function get_by_referral_id($referral_id) {
 		$sql = "SELECT id
 				FROM uploaded_data
@@ -76,29 +80,17 @@ class Model_Form_Data extends ORM_Encrypted {
 	
 	}
 	
-	/*
-	Update a unique xml node
-	param string
-	param string
-	return bool (node changed)
-	*/
-	/*
-	public function update_xml_node ($node, $value) {
-	
-		$sql = "UPDATE uploaded_data
-		SET xml_content = AES_ENCRYPT(UpdateXML(AES_DECRYPT(xml_content,'".Encryption::get_key()."'), '//".$node."', '<".$node.">".$value."</".$node.">'),'".Encryption::get_key()."')
-		WHERE id=".$this->id;
-		//echo $sql;
-		return DB::query(Database::UPDATE, $sql)->execute();
-	}*/
 	
 	/*
-	Update a unique xml node
-	param string
-	param string
-	return bool (node found and updated)
-	(USE PHP TO AVOID ENCRYPTION STUFF)
-	*/
+	 * update_xml_node()
+	 * 
+	 * Update a unique xml node
+	 * 
+	 * @param string
+	 * @param string
+	 * @return bool (node found and updated)
+	 *
+	 */
 	public function update_xml_node ($node, $value) {
 		$xml = simplexml_load_string($this->xml_content);
 		if(is_object($xml) && $ref_node = $xml->xpath('//'.$node)) {
@@ -110,11 +102,14 @@ class Model_Form_Data extends ORM_Encrypted {
 	}
 	
 	
-	/*
-	Get xml node value
-	param string
-	return string
-	*/
+	/**
+	 * get_xml_node()
+	 * 
+	 * Get xml node value
+	 *
+	 * @param string
+	 * @return string
+	 */
 	public function get_xml_node ($node) {
 		$sql = "SELECT ExtractValue(AES_DECRYPT(xml_content,'".Encryption::get_key()."'), '//".$node."') AS xml_val
 		FROM uploaded_data WHERE id=".$this->id;
@@ -129,25 +124,14 @@ class Model_Form_Data extends ORM_Encrypted {
 	}
 
 	
-	/*
-	Get xml node value
-	param string
-	return string
-	(USE PHP TO AVOID ENCRYPTION STUFF)
-	
-	public function get_xml_node ($node) {
-		$xml = simplexml_load_string($this->xml_content);
-		if(is_object($xml) && $ref_node = $xml->xpath('//'.$node)) {
-			return $ref_node[0][0];
-		}
-		return '';
-	}*/
 	
 	
-	
-	
-	/*
+	/**
+	 *  save_file()
+	 * 
 	 * save associated file
+	 *
+	 * @param array
 	 * @return bool
 	 */
 	public function save_file($file) {
@@ -179,9 +163,14 @@ class Model_Form_Data extends ORM_Encrypted {
 	##################################
 
 	
-	
-	public static function get_table_data($gender, $tb, $hiv,
-        	$age_min, $age_max, $temp_min, $temp_max) {
+	/**
+	 * get_table_data()
+	 * 
+	 * display data in tabular form
+	 *
+	 * @return array
+	 */
+	public static function get_table_data($gender, $tb, $hiv, $age_min, $age_max, $temp_min, $temp_max) {
         		
             $rows = ORM::factory('form_data')
             			->find_all();
@@ -233,6 +222,15 @@ class Model_Form_Data extends ORM_Encrypted {
         }
         
         
+        
+        
+        /**
+		 * display_result()
+		 * 
+		 * display xml data in page form
+		 *
+		 * @return string
+		 */
         public function display_result() {
 			
 			$xml = simplexml_load_string(stripslashes($this->xml_content));
@@ -245,12 +243,10 @@ class Model_Form_Data extends ORM_Encrypted {
 						$html .= "<tr><td colspan='2'>";				
 						$html .= "<h3>$key</h3><table>";
 						foreach($val as $k => $v) {
-							//$v = $this->_linkify($v, $usrid, $form_name);
 							$html .= "<tr><td>$k</td><td class=\"val\">$v</td></tr>";
 						}
 						$html .= "</table></td></tr>";
 					} else {
-						//$val = $this->_linkify($val, $usrid, $form_name);
 						$html .= "<tr><td>$key</td><td class=\"val\">$val</td></tr>";				
 					}
 				}

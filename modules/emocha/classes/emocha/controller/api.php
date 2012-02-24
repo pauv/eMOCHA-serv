@@ -9,8 +9,16 @@
  */  
 class Emocha_Controller_Api extends Controller {
 
+	// connecting phone
 	protected $phone;
 	
+	
+	/**
+	 * before()
+	 *
+	 * Runs before any other action when the controller is called
+	 * Authenticates phone
+	 */
 	public function before()
 	{
 		parent::before();
@@ -44,17 +52,24 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	 
-	 /*
-	  * check if user passed authentication
-	  */
+
+	/**
+	 * action_check_user()
+	 *
+	 * Check if user passed authentication
+	 *
+	 */
 	public function action_check_user() {
 		$json = View::factory('json/display', Json::response('OK', 'known user'))->render();
 		$this->request->response = $json;
 	}
 
 
-	/*
+	/**
+	 * action_get_config_by_key()
+	 *
 	 * Get single config value by key
+	 *
 	 */
 	public function action_get_config_by_key() {
 	 	$label = Arr::get($_POST, 'key', ''); 
@@ -69,8 +84,11 @@ class Emocha_Controller_Api extends Controller {
     	}
     }
     
-    /*
-	 * Get multiple config value by keys
+    /**
+	 * action_get_config_by_keys()
+	 *
+	 * Get multiple config values by key
+	 *
 	 */
     public function action_get_config_by_keys() {
     	$configs = array();
@@ -102,6 +120,12 @@ class Emocha_Controller_Api extends Controller {
     }
 	
 	
+	/**
+	 * action_activate_phone()
+	 *
+	 * Activate new phone
+	 *
+	 */
 	public function action_activate_phone() {
     	$imei = preg_replace('/\W/', '', Arr::get($_POST, 'imei', ''));    	
     	$result = Phone::activate($imei);
@@ -118,12 +142,26 @@ class Emocha_Controller_Api extends Controller {
     }
     
     
+    /**
+	 * action_get_server_update_times()
+	 *
+	 * Get last update values for server configs and media
+	 *
+	 */
     public function action_get_server_updated_times() {
     	$response = Api::get_server_updated_times();
     	$json = View::factory('json/display', Json::response('OK', 'get_server_updated_times', $response))->render();
     	$this->request->response = $json;
     }
     
+    
+    /**
+	 * action_get_app_config()
+	 *
+	 * Get config for 'application' config
+	 * TO DEPRECATE
+	 *
+	 */
     public function action_get_app_config() {
     	$config = ORM::factory('config')->where('label', '=', 'application')->find();
     	if($config->loaded()) {
@@ -139,7 +177,14 @@ class Emocha_Controller_Api extends Controller {
     	}
     }
     
-     public function action_get_form_config() {
+    
+    /**
+	 * action_get_form_config()
+	 *
+	 * Get config for each form
+	 *
+	 */
+    public function action_get_form_config() {
     	$forms = ORM::factory('form')->where('archived','=',0)->find_all();
     	$response = array();
     	foreach($forms as $form) {
@@ -151,9 +196,12 @@ class Emocha_Controller_Api extends Controller {
     }
     
     
-    /*
-    TO BE DEPRECATED
-    */
+    /**
+	 * action_get_media_files()
+	 *
+	 * Get list of media to download
+	 * TO DEPRECATE
+	 */
      public function action_get_media_files() {
     
     	$last_server_update = Sdcard::get_last_server_update();
@@ -175,7 +223,12 @@ class Emocha_Controller_Api extends Controller {
     }
     
     
-    
+    /**
+	 * action_get_media()
+	 *
+	 * Get list of media to download
+	 *
+	 */
      public function action_get_media() {
     
     	$last_server_update = Sdcard::get_last_server_update();
@@ -201,8 +254,11 @@ class Emocha_Controller_Api extends Controller {
     
     
     
-	/*
-	 * Upload form data from phone
+	/**
+	 * action_upload_form_data()
+	 *
+	 * Upload data for one filled out form
+	 *
 	 */
     function action_upload_form_data() {
     
@@ -285,9 +341,11 @@ class Emocha_Controller_Api extends Controller {
 		
 	}
 	
-	
-	/*
+	/**
+	 * action_upload_form_file()
+	 *
 	 * Upload file connected to form data
+	 *
 	 */
     function action_upload_form_file() {
     
@@ -338,8 +396,11 @@ class Emocha_Controller_Api extends Controller {
 	
 	
 	
-	/*
-	 * Upload location data from phone
+	/**
+	 * action_upload_form_file()
+	 *
+	 * Upload list of phone locations
+	 *
 	 */
     function action_upload_phone_locations() {
     
@@ -374,8 +435,11 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
-	/*
-	 * Upload location data from phone
+	/**
+	 * action_register_c2dm()
+	 *
+	 * Register phone's c2dm registration id
+	 *
 	 */
     function action_register_c2dm() {
 
@@ -400,8 +464,12 @@ class Emocha_Controller_Api extends Controller {
 	}
 	
 	
-	/*
+	/**
+	 * action_confirm_alert()
+	 *
 	 * Confirm receipt of alert
+	 * TO DEPRECATE
+	 *
 	 */
     function action_confirm_alert() {
 
