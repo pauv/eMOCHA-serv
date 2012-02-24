@@ -76,7 +76,7 @@ class Model_Patient extends ORM {
 			
 		$sql = "SELECT DISTINCT(DATE(last_modified)) as mydate FROM uploaded_data
 				WHERE patient_code='".$this->code."'
-				ORDER bY mydate ASC";
+				ORDER BY mydate ASC";
 		$result = DB::query(Database::SELECT, $sql)->execute();
 		foreach($result->as_array() as $row) {
 			$dates[] =$row['mydate'];
@@ -94,6 +94,7 @@ class Model_Patient extends ORM {
 		$datas = ORM::factory('form_data')
 				->where('patient_code','=',$this->code)
 				->and_where(DB::expr("DATE(last_modified)"),'=',$date)
+				->order_by('last_modified')
 				->find_all();
 		
 		return $datas;
