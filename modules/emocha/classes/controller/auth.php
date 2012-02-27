@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */   
 class Controller_Auth extends Controller_Site {
@@ -13,6 +13,12 @@ class Controller_Auth extends Controller_Site {
 	public $login_required = FALSE;
 	
 	
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 * Checks user authentication
+	 */
 	public function before()
 	{
 		parent::before();
@@ -25,6 +31,11 @@ class Controller_Auth extends Controller_Site {
 	
 	}
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		// redirect to the login page as default
@@ -32,6 +43,11 @@ class Controller_Auth extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  action_login()
+	 *
+	 * Handle user login
+	 */
 	public function action_login()
 	{
  		$this->template->title = 'Login';
@@ -63,7 +79,11 @@ class Controller_Auth extends Controller_Site {
  
  
  
- 
+ 	/**
+	 *  action_logout()
+	 *
+	 * Logout user
+	 */
 	public function action_logout()
 	{
 		//Sign out the user
@@ -77,7 +97,11 @@ class Controller_Auth extends Controller_Site {
 	
 	
 	
-	
+	/**
+	 *  actionregister()
+	 *
+	 * Register user, display form or post form results
+	 */
 	public function action_register()
 	{	
 		$this->template->title = 'Register';
@@ -146,10 +170,14 @@ class Controller_Auth extends Controller_Site {
 	}
  
  
- 	/*
+ 
+	/**
+	 *  action_conf()
+	 *
 	 * Checks email verification
 	 * activates user account
-	 * @ param verification code
+	 *
+	 * @param string
 	 */
 	public function action_conf($code = FALSE) 
 	{
@@ -186,7 +214,10 @@ class Controller_Auth extends Controller_Site {
 	}
 	
 	
-	/*
+
+	/**
+	 *  action_email_error()
+	 *
 	 * Email couldn't be sent, display special page
 	 */
 	public function action_email_error() 
@@ -199,7 +230,10 @@ class Controller_Auth extends Controller_Site {
 	}
 	
 	
-	/*
+
+	/**
+	 *  action_activated()
+	 *
 	 * Display activated message after successful verification
 	 */
 	public function action_activated() 
@@ -212,10 +246,11 @@ class Controller_Auth extends Controller_Site {
 	
 	
 	
-	/*
-	Forgot password
-	Display form or handle submitted values
-	*/
+	/**
+	 *  action_forgot_password()
+	 *
+	 * Forgot password, handle password re-request
+	 */
 	public function action_forgot_password() 
 	{
 		$this->template->title = 'Forgot password';
@@ -274,10 +309,14 @@ class Controller_Auth extends Controller_Site {
 	}
 	
 	
-	/*
-	Checks password verification
-	@ param verification code
-	*/
+
+    /**
+	 *  action_reset()
+	 *
+	 * Checks password verification
+	 *
+	 * @param string
+	 */
 	public function action_reset($code = FALSE) 
 	{
 		$this->template->title = 'Password';
@@ -349,7 +388,10 @@ class Controller_Auth extends Controller_Site {
 	}
  
  
-	/*
+
+	/**
+	 *  action_reset_ok()
+	 *
 	 * Display activated message after successful password reset
 	 */
 	public function action_reset_ok() 
@@ -362,7 +404,10 @@ class Controller_Auth extends Controller_Site {
 	
 	
 	
-	/*
+
+	/**
+	 *  action_access()
+	 *
 	 * Display access barred message when user has tried to view a forbidden page
 	 */
 	public function action_access() {

@@ -4,13 +4,18 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
  class Arr extends Kohana_Arr{
 
-	/*
+	/**
+	 *  xss()
+	 *
 	 * catch all xss sanitization for $_POST or $_GET arrays
+	 *
+	 * @param array
+	 * @return array
 	 */
 	public static function xss(array $array){
 

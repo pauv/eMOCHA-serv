@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Admin extends Controller_Site {
@@ -12,6 +12,11 @@ class Emocha_Controller_Admin extends Controller_Site {
 	// only users with admin role can access this page
 	public $roles_required = array('admin');
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -23,10 +28,23 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index() {
 		 Request::instance()->redirect('admin/new_users');
 	}
 	
+	
+	/**
+	 *  action_new_users()
+	 *
+	 * List new users pending confirmation
+	 *
+	 * @param string
+	 */
 	public function action_new_users($action_taken='') {
 		
 		$this->template->title = 'New users';
@@ -36,7 +54,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	}
 	
-	
+	/**
+	 *  action_confirm_user()
+	 *
+	 * Confirm user
+	 *
+	 * @param int
+	 */
 	public function action_confirm_user($id) {
 		
 		if($id) {
@@ -47,7 +71,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
-	
+	/**
+	 *  action_delete_user()
+	 *
+	 * Delete user
+	 *
+	 * @param int
+	 */
 	public function action_delete_user($id) {
 		
 		if($id) {
@@ -58,6 +88,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
+	/**
+	 *  action_delete_user_confirm()
+	 *
+	 * Confirm deletion of user
+	 *
+	 * @param int
+	 */
 	public function action_delete_user_confirm($id) {
 		
 		$this->template->title = 'Delete user';
@@ -66,7 +103,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
-	
+	/**
+	 *  action_forms()
+	 *
+	 * List forms
+	 *
+	 * @param string
+	 */
 	public function action_forms($action=false) {
 		$this->template->title = 'Forms';
 		$data['forms'] = ORM::factory('form')->find_all();
@@ -74,7 +117,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 		$this->template->content = View::factory('admin/forms', $data);
 	}
 	
-	
+	/**
+	 *  action_edit_form()
+	 *
+	 * Edit form details
+	 *
+	 * @param int
+	 */
 	public function action_edit_form($id=false)
 	{	
 		$this->template->title = 'Edit form';
@@ -104,8 +153,6 @@ class Emocha_Controller_Admin extends Controller_Site {
 			
 			$vars = array_merge($post, $_FILES);
  			
- 			//var_dump($vars);
- 			//exit;
  			
 			//Load the validation rules, filters etc...
 			$validation = $form->validate($vars, $mode);	
@@ -187,7 +234,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 
 
 
-	// confirm delete request
+	/**
+	 *  action_delete_form()
+	 *
+	 * Delete form
+	 *
+	 * @param int
+	 */
 	public function action_delete_form ($id=false) {
 	
 		$this->template->title = 'Delete form';
@@ -202,7 +255,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	// confirmed: delete both file and db record
+	/**
+	 *  action_delete_form_confirmed()
+	 *
+	 * Confirm deletion of form
+	 *
+	 * @param int
+	 */
 	public function action_delete_form_confirmed ($id=false) {
 	
 		if(!$id) {
@@ -217,7 +276,14 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
-	
+	/**
+	 *  action_form_files()
+	 *
+	 * List files for a form
+	 *
+	 * @param int
+	 * @param string
+	 */
 	public function action_form_files($id, $action=false)
 	{	
 		$this->template->title = 'Form files';
@@ -229,7 +295,14 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	
+	/**
+	 *  action_edit_form_file()
+	 *
+	 * Edit file for a form
+	 *
+	 * @param int
+	 * @param int
+	 */
 	public function action_edit_form_file($form_id, $id=false)
 	{	
 		$this->template->title = 'Edit form file';
@@ -260,9 +333,7 @@ class Emocha_Controller_Admin extends Controller_Site {
 			$content->form_vals = $post;
 			
 			$vars = array_merge($post, $_FILES);
- 			
- 			//var_dump($vars);
- 			//exit;
+
  			
 			//Load the validation rules, filters etc...
 			$validation = $form_file->validate($vars, $mode);	
@@ -344,7 +415,14 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	// confirm delete request
+	/**
+	 *  action_delete_form_file()
+	 *
+	 * Delete file for a form
+	 *
+	 * @param int
+	 * @param int
+	 */
 	public function action_delete_form_file ($form_id, $id=false) {
 	
 		$this->template->title = 'Delete form file';
@@ -359,7 +437,14 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	// confirmed: delete both file and db record
+	/**
+	 *  action_delete_form_file_confirmed()
+	 *
+	 * Confirm deletion of file for a form
+	 *
+	 * @param int
+	 * @param int
+	 */
 	public function action_delete_form_file_confirmed ($form_id, $id=false) {
 	
 		if(!$id) {
@@ -376,7 +461,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	
 	
-	// phones list
+	/**
+	 *  action_phones()
+	 *
+	 * List phones
+	 *
+	 * @param string
+	 */
 	public function action_phones($action=false) {
 	
 		$this->template->title = 'Phones';
@@ -386,7 +477,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	
+	/**
+	 *  action_edit_phone()
+	 *
+	 * Edit phone details
+	 *
+	 * @param int
+	 */
 	public function action_edit_phone($id=false)
 	{	
 		$this->template->title = 'Edit phone';
@@ -412,10 +509,6 @@ class Emocha_Controller_Admin extends Controller_Site {
  			$post = Arr::xss($_POST);
 			$content->form_vals = $post;
 			
- 			/*if(!$_POST['password']) {
- 				$errors = array(Kohana::message('phone', 'enter_password'));
- 			}*/
- 			
 			
 			/*
 			 * Check for errors
@@ -445,7 +538,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	
 	
 	
-	// confirm delete request
+	/**
+	 *  action_delete_phone()
+	 *
+	 * Delete phone
+	 *
+	 * @param int
+	 */
 	public function action_delete_phone ($id=false) {
 	
 		$this->template->title = 'Delete phone';
@@ -460,7 +559,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	// confirmed: delete
+	/**
+	 *  action_delete_phone_confirmed()
+	 *
+	 * Confirm deletion of phone
+	 *
+	 * @param int
+	 */
 	public function action_delete_phone_confirmed ($id=false) {
 	
 		if(!$id) {
@@ -476,9 +581,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	
-	// ALARMS
-	
+	/**
+	 *  action_alarms()
+	 *
+	 * List alarms
+	 *
+	 * @param string
+	 */
 	public function action_alarms($action=false) {
 		$this->template->title = 'Alarms';
 		$content = $this->template->content = View::factory('admin/alarms');
@@ -487,9 +596,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
-	/*
-	edit and save alarm
-	*/
+	/**
+	 *  action_alarm()
+	 *
+	 * Edit alarm details
+	 *
+	 * @param int
+	 */
 	public function action_alarm($id) {
 		$this->template->curr_nav = 'alarms';
 		$alarm = ORM::factory('alarm', $id);
@@ -544,10 +657,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	
-	
-	// CONFIGS
-	
+	/**
+	 *  action_configs()
+	 *
+	 * List configs
+	 *
+	 * @param string
+	 */
 	public function action_configs($action=false) {
 		$this->template->title = 'configs';
 		$content = $this->template->content = View::factory('admin/configs');
@@ -556,10 +672,14 @@ class Emocha_Controller_Admin extends Controller_Site {
 		
 	}
 	
-	/*
-	edit and save config
-	*/
 	
+	/**
+	 *  action_edit_config()
+	 *
+	 * Edit config details
+	 *
+	 * @param int
+	 */
 	public function action_edit_config($id=false)
 	{	
 		$this->template->title = 'Edit config';
@@ -645,7 +765,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 
 
 	
-	// confirm delete request
+	/**
+	 *  action_delete_config()
+	 *
+	 * Delete config variable
+	 *
+	 * @param int
+	 */
 	public function action_delete_config ($id=false) {
 	
 		$this->template->title = 'Delete config';
@@ -660,7 +786,13 @@ class Emocha_Controller_Admin extends Controller_Site {
 	}
 	
 	
-	// confirmed: delete both file and db record
+	/**
+	 *  action_delete_config_confirmed()
+	 *
+	 * Confirm deletion of config
+	 *
+	 * @param int
+	 */
 	public function action_delete_config_confirmed ($id=false) {
 	
 		if(!$id) {

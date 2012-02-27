@@ -4,12 +4,20 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
  class Api
 { 
     
+    	/**
+		 *  get_server_updated_times ()
+		 *
+		 * Get last updated times for key data
+		 * so that the client knows whether to download updates
+		 *
+		 * @return array
+		 */
     	public static function get_server_updated_times () {
     	
     		$times = array();

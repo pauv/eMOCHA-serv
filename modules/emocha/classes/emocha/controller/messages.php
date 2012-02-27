@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Messages extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -20,12 +25,22 @@ class Emocha_Controller_Messages extends Controller_Site {
 
 	}
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		Request::instance()->redirect('messages/send');
 	}
 	
 	
+	/**
+	 *  action_send()
+	 *
+	 * Send C2dm message to all enabled phones
+	 */
 	public function action_send()
 	{
 	

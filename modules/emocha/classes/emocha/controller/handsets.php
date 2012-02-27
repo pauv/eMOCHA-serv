@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Handsets extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -19,10 +24,22 @@ class Emocha_Controller_Handsets extends Controller_Site {
 
 	}
 	
+	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index() {
 		Request::instance()->redirect('handsets/phones');
 	}
 	
+	
+	/**
+	 *  action_phones()
+	 *
+	 * List all phones
+	 */
 	public function action_phones() {
 	
 		$this->template->title = 'Phones';
@@ -31,6 +48,12 @@ class Emocha_Controller_Handsets extends Controller_Site {
 
 	}
 	
+	
+	/**
+	 *  action_location()
+	 *
+	 * Display phone locations based on last connect gps
+	 */
 	public function action_location() {
 		
 		$this->template->title = 'Locations';	
@@ -44,6 +67,14 @@ class Emocha_Controller_Handsets extends Controller_Site {
 									));		
 	}
 	
+	
+	/**
+	 *  _get_gmaps_js()
+	 *
+	 * Format googlemaps javascript
+	 *
+	 * @param array
+	 */
 	protected function _get_gmaps_js($phones) {
 		
 		$markerDataJS = '';
@@ -76,6 +107,12 @@ class Emocha_Controller_Handsets extends Controller_Site {
 		return $markerDataJS;
 	}
 	
+	
+	/**
+	 *  action_add()
+	 *
+	 * Add a phone
+	 */
 	public function action_add() {
 		$this->template->title = 'Add handset';
 		$this->template->content = View::factory('handsets/add');

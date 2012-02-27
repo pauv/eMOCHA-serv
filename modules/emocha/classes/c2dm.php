@@ -4,16 +4,21 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class C2dm 
     { 
     
-    	/*
-    	 * Authorize with google
-    	 * return Auth key or false
-    	 */
+
+    	/**
+		 *  client_auth()
+		 *
+		 * Authorize with google and return auth key
+		 *
+		 * @param array
+		 * @return string or bool
+		 */
     	public static function client_auth() {
     	
 			$ch = curl_init();
@@ -50,10 +55,19 @@ class C2dm
 			return FALSE;
 		} 
 		
-		/*
-    	 * Send c2dm message
-    	 * return response with message id or false
-    	 */
+
+    	/**
+		 *  send_message()
+		 *
+		 * Send c2dm message
+		 *
+		 * @param string
+		 * @param string
+		 * @param object
+		 * @param string
+		 *
+		 * @return string or bool
+		 */
 		public static function send_message($auth_key, $alert, $phone, $collapse_key) {
 			$ch = curl_init();
 		
@@ -97,9 +111,17 @@ class C2dm
 		} 
 		
 		
-		/*
-		 * Log c2dm error
+		 /**
+		 *  log_error()
 		 *
+		 * Log c2dm sending error
+		 *
+		 * @param string
+		 * @param string
+		 * @param string
+		 * @param string
+		 * @param string
+		 * @param int
 		 */
 		 public static function log_error($type, $curl_error, $http_code, $response, $data, $phone_id=0) {
 		 	$err = ORM::factory('c2dm_error');
