@@ -16,7 +16,14 @@ class Model_Phone_Location extends ORM {
 												)
 							);
 							
-
+	
+	/**
+	 * get_dates_array()
+	 *
+	 * Get distinct dates for location data
+	 *
+	 * @return array
+	 */
 	public static function get_dates_array() {
 		
 			$dates = array();
@@ -29,8 +36,12 @@ class Model_Phone_Location extends ORM {
 	}
 	
 	
-	/*
-	 * Format array as text file
+	/**
+	 * export_csv()
+	 *
+	 * Format text file of data
+	 *
+	 * @return string
 	 */
 	public static function export_csv() {
 	

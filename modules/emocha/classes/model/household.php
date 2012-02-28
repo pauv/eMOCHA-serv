@@ -16,15 +16,20 @@ class Model_Household extends ORM_Encrypted {
 							);
 
 	
-	// fields to be stored encrypted in DB
+	// fields to be stored AES encrypted in DB
 	protected $_encrypted = array('village_code', 'gps', 'gps_long', 'gps_lat');
 	
 	
 	
-	/*
-	Save a household object
-	from uploaded form data
-	*/
+
+	/**
+	 * save_from_form_data()
+	 *
+	 * Save a household object from uploaded form data
+	 *
+	 * @param object
+	 * @return object
+	 */
 	public static function save_from_form_data($form) {
 		$household = ORM::factory('household')
 						->where('code', '=', $form->household_code)
@@ -54,13 +59,15 @@ class Model_Household extends ORM_Encrypted {
 	
 	
 	
-	
-	
-	/*
-	Search for households with filters
-	@param array $_POST
-	@return array households
-	*/
+
+	/**
+	 * search()
+	 *
+	 * Search for households with filters
+	 *
+	 * @param array
+	 * @return array
+	 */
 	public static function search ($post = array()) {
 	
 		$sql = "SELECT code FROM households WHERE ";

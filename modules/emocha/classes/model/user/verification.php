@@ -83,6 +83,8 @@ class Model_User_Verification extends ORM {
     
     
 	/**
+	 * get_from_request()
+	 *
 	 * @param  array: array containing encrypted code
 	 * @param string:	type of verification
 	 * Both must be correct and 

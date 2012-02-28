@@ -18,6 +18,12 @@ class Model_Alarm extends ORM {
 	public $num_alerts = 0;
 	public $actions_taken_msg = '';
 
+	/**
+	 * check()
+	 * 
+	 * Check condition met or not for all alarms
+	 * Then perform appropriate actions
+	 */
 	public function check() {
 		foreach ($this->alarm_conditions->find_all() as $condition) {
 			

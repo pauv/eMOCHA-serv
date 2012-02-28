@@ -14,10 +14,12 @@ class Model_Alarm_Condition extends ORM {
 	
 	public $value_found;
 	
-	/*
+	/**
 	 * check()
-	 * check condition
-	 * @return bool (true if condition met)
+	 * 
+	 * Check condition met or not
+	 *
+	 * @return bool
 	 */
 	public function check() {
 	

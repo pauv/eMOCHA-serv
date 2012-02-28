@@ -11,9 +11,14 @@
  
  
  
- 	/*
- 	 * Validation for creating new user
- 	 */
+ 	/**
+	 * validate_create()
+	 * 
+	 * Validate create new user
+	 *
+	 * @param array
+	 * @return array
+	 */
 	public function validate_create(& $array) 
 	{
 		// Initialise the validation library and use some rules
@@ -49,9 +54,14 @@
 		return $array;
 	}
 	
-	/*
- 	 * Validation for resetting password
- 	 */
+	/**
+	 * validate_reset_password()
+	 * 
+	 * Validate resetting password
+	 *
+	 * @param array
+	 * @return array
+	 */
 	public function validate_reset_password(& $array) 
 	{
 		// Initialise the validation library and use some rules
@@ -65,9 +75,15 @@
 		return $array;
 	}
 	
-	/*
- 	 * Validation for editing user account details
- 	 */
+	
+	/**
+	 * validate_edit()
+	 * 
+	 * Validate edit user
+	 *
+	 * @param array
+	 * @return array
+	 */
 	public function validate_edit(& $array) 
 	{
 		// Initialise the validation library and use some rules
@@ -89,7 +105,10 @@
 		return $array;
 	}
 	
+	
 	/**
+	 * email_change_available()
+	 *
 	 * Email change validation callback
 	 * @param    Validate  $array   validate object
 	 * @param    string    $field   field name
@@ -114,6 +133,8 @@
 	
 	
 	/**
+	 * login()
+	 *
 	 * Validates login information from an array, and optionally redirects
 	 * after a successful login.
 	 *
@@ -154,7 +175,9 @@
 	
 	
 	
-	/*
+	/**
+	 * send_verification_email()
+	 *
 	 * Send and record activation code for sign-up or password change
 	 * @return bool	success or failure
 	 */
@@ -173,8 +196,10 @@
 		
 	}
 	
-	 /*
-	 * set user account as verified
+	/**
+	 * activate()
+	 *
+	 * Activate user account (via activation code)
 	 */
 	public function activate() {
 
@@ -183,8 +208,10 @@
 		
 	}
 	
-	/*
-	 * set user account as verified
+	/**
+	 * confirm()
+	 *
+	 * Confirm user account (via admin) and send confirmation
 	 */
 	public function confirm() {
 
@@ -203,10 +230,12 @@
 	}
 	
 		
-	/*
-	* checks for an in-process email change
-	* @return string email address
-	*/
+	/**
+	 * awaiting_email_change()
+	 *
+	 * checks for an in-process email change
+	 * @return string email address
+	 */
 	public function awaiting_email_change () {
 	
 		$verification = ORM::factory('user_verification')
@@ -222,7 +251,11 @@
 	}
 	
 	
-	
+	/**
+	 * get_unconfirmed_users()
+	 *
+	 * @return array
+	 */
 	public static function get_unconfirmed_users() {
 	
 		$users = ORM::factory('user')

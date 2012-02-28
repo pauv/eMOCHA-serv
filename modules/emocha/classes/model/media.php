@@ -56,9 +56,12 @@ class Model_Media extends ORM {
 
 
 	
-	
-	/* get allowed file extension for this type of file
-	 * return string or false
+	/**
+	 * get_allowed_file_type()
+	 *
+	 * Get allowed file extension for this type of file
+	 *
+	 * @return string or bool
 	 */
 	public function get_allowed_file_type() {
 		if(array_key_exists($this->type, $this->file_types)){
@@ -67,8 +70,13 @@ class Model_Media extends ORM {
 		return false;
 	}
 	
-	/* get whether this file type takes a thumbnail
-	 * return bool
+
+	/**
+	 * get_thumbnail_allowed()
+	 *
+	 * Get whether this file type takes a thumbnail
+	 *
+	 * @return bool
 	 */
 	public function get_thumbnail_allowed() {
 		if(in_array($this->type, $this->thumbnail_allowed)){
@@ -78,9 +86,16 @@ class Model_Media extends ORM {
 	}
 	
 	
-	/* get unique filename
+
+	/**
+	 * get_unique_file_name()
+	 *
+	 * Get unique filename
 	 * recursively checks for a valid unique name
-	 * return string
+	 *
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	public function get_unique_file_name($folder, $name) {
 	
@@ -97,7 +112,11 @@ class Model_Media extends ORM {
 	}
 	
 	
-	// override delete method to handle files
+	/**
+	 * delete()
+	 * 
+	 * Override delete method to handle files on disk
+	 */
 	public function delete($id = NULL) {
 	
 		if($this->file->loaded()){
@@ -111,7 +130,13 @@ class Model_Media extends ORM {
 	}
 	
 	
-	// format for api response
+	/**
+	 * api_array()
+	 * 
+	 * Get array of variables for api return
+	 * 
+	 * @return array
+	 */
 	public function api_array() {
 		$arr = array();
 		$arr['id'] = $this->id;

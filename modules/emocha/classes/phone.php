@@ -10,6 +10,13 @@
 class Phone 
     {   	    
     
+    	/**
+		 * get_id_val_array()
+		 *
+		 * Useful for dropdowns
+		 * 
+		 * @return array
+		 */
    		public static function get_id_val_array() {
 			$arr = array(''=>'');
 			$phones = ORM::factory('phone')->find_all();
@@ -19,12 +26,26 @@ class Phone
 			return $arr;
 		}
        
+       
+        /**
+		 * get_phone_list()
+		 *
+		 * Get all phones
+		 * 
+		 * @return array
+		 */
         public static function get_phone_list() {
         	return ORM::factory('phone')->find_all();
         }
         
 
-		        
+		/**
+		 * get_gps_phone_list()
+		 *
+		 * Get all phones with gps data
+		 * 
+		 * @return array
+		 */  
         public static function get_gps_phone_list() {
         	return ORM::factory('phone')
         			->where('gps', 'LIKE', '% %')
@@ -33,9 +54,15 @@ class Phone
         
         
         
-        /*
-         * Activate phone
-         */
+        /**
+		 * activate_phone()
+		 *
+		 * Activate phone
+		 * 
+		 * @param string
+		 * @param bool
+		 * @return array
+		 */
 		public static function activate($imei, $auto_validate=FALSE) {
         	
         	// check valid code
@@ -94,9 +121,14 @@ class Phone
 
 		}
 		
-		/*
+
+		/**
+		 * is_imei_valid()
+		 *
 		 * Check for IMEI type id validity
 		 * (used in GSM phones)
+		 * 
+		 * @return bool
 		 */
 		public static function is_imei_valid($imei) {
 			if(!ctype_digit($imei)) {
@@ -131,9 +163,14 @@ class Phone
 		}
 		
 		
-		/*
+
+		/**
+		 * is_cdma_valid()
+		 *
 		 * Check for ESN or MEID type id validity
 		 * (used in CDMA phones)
+		 * 
+		 * @return bool
 		 */
 		public static function is_cdma_valid($id) {
 			return ( preg_match('/^[0-9a-fA-F]{8}$/', $id) || // 8 digit hex (esn)
@@ -143,10 +180,14 @@ class Phone
 		}
 		
 		
-        /*
-         * Get phone based on usr
-         * return mixed - phone object or false
-         */
+  
+        /**
+		 * get_by_user()
+		 *
+		 * Get phone based on usr
+         *
+		 * @return object or false
+		 */
         public static function get_by_user($usr) {
         
         	if(! $usr) return FALSE;
@@ -159,10 +200,13 @@ class Phone
 			return $phone->loaded() ? $phone: FALSE;
 		}
 		
-        /*
-         * Get phone based on usr and password
-         * return mixed - phone object or false
-         */
+        /**
+		 * get_by_user_password()
+		 *
+		 * Get phone based on usr
+         *
+		 * @return object or false
+		 */
         public static function get_by_user_password($usr, $pwd = '') {
         
         	if(! $usr || ! $pwd) return FALSE;

@@ -10,7 +10,15 @@
 class File extends Kohana_File{
 
 
-
+	/**
+	 * list_files_in_ftp_upload()
+	 *
+	 * List files in ~/sdcard/upload folder
+	 * which is used for uploading large files for the 'edu section'
+	 *
+	 * @param array
+	 * @return array
+	 */
 	public static function list_files_in_ftp_upload($exts) {
 		$directory = "sdcard/upload/";
 		$files = array();
@@ -24,9 +32,15 @@ class File extends Kohana_File{
    	}
    	
    	
-   	/* get unique filename
+	/**
+	 * get_unique_file_name()
+	 *
+	 * Get unique filename
 	 * recursively checks for a valid unique name
-	 * return string
+	 *
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	public static function get_unique_file_name($folder, $name) {
 	

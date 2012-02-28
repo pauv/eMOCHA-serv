@@ -10,7 +10,11 @@
 class Model_File extends ORM {
 
 
-	// override delete method to handle files
+	/**
+	 * delete()
+	 * 
+	 * Override delete method to handle files on disk
+	 */
 	public function delete($id = NULL) {
 	
 		$full_path = DOCROOT.$this->path;
@@ -22,6 +26,13 @@ class Model_File extends ORM {
 	}
 	
 	
+	/**
+	 * api_array()
+	 * 
+	 * Get array of variables for api return
+	 * 
+	 * @return array
+	 */
 	 public function api_array () {
     	$arr = Array(
     				"id"		=> $this->id,

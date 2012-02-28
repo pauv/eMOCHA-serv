@@ -10,6 +10,16 @@
 class Json 
     { 
     
+    	/**
+		 * response()
+		 *
+		 * Create API response array
+		 *
+		 * @param string
+		 * @param string
+		 * @param string
+		 * @return array
+		 */
     	public static function response($status, $msg, $extra = '') {
 			$r = array('data' => array(
 				'status' => $status,
@@ -22,6 +32,16 @@ class Json
 			return $r;
 		} 
 		
+		/**
+		 * response_array()
+		 *
+		 * Create json API response
+		 *
+		 * @param string
+		 * @param string
+		 * @param string
+		 * @return string
+		 */
 		public static function response_array($status, $msg, $extra = array(), $name, $sub_name) {
 			$r = array(
 				'status' => $status,

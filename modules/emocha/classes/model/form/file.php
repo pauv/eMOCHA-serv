@@ -1,17 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
- * Form File Model
+ * Form File Model (models extra files connected to a specific form)
  *
  * @package    eMOCHA
  * @author     George Graham
  * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
-
- /*
- Models extra files connected to a specific form
- e.g. images
- */
 class Model_Form_File extends ORM {
 
 	// this relationship is really a 'has_one' relationship
@@ -27,7 +22,13 @@ class Model_Form_File extends ORM {
 												)
 							);	
 							
-							
+	/**
+	 * api_array()
+	 * 
+	 * Get array of variables for api return
+	 * 
+	 * @return array
+	 */					
 	 public function api_array () {
 	 	
     	$arr = Array(
@@ -40,9 +41,15 @@ class Model_Form_File extends ORM {
     }
 	
 	
-	/*
- 	 * Validation for editing form details
- 	 */
+	/**
+	 * validate()
+	 * 
+	 * Validate edit details
+	 *
+	 * @param array
+	 * @param string
+	 * @return array
+	 */
 	public function validate(& $array, $mode) 
 	{
 		// Initialise the validation library and use some rules
@@ -74,7 +81,11 @@ class Model_Form_File extends ORM {
 		return $array;
 	}
 	
-	// override delete method to handle files
+	/**
+	 * delete()
+	 * 
+	 * Override delete method to handle files on disk
+	 */
 	public function delete($id = NULL) {
 	
 		if($this->file->loaded()){

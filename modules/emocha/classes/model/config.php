@@ -9,9 +9,15 @@
  */ 
 class Model_Config extends ORM {
 
-	/*
- 	 * Validation for editing config details
- 	 */
+	/**
+	 * validate()
+	 * 
+	 * Validate edit details
+	 *
+	 * @param array
+	 * @param string
+	 * @return array
+	 */
 	public function validate(& $array, $mode) 
 	{
 		// Initialise the validation library and use some rules

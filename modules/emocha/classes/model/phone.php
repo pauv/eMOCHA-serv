@@ -20,7 +20,17 @@ class Model_Phone extends ORM {
 	
 	
 	
-	// activate phone via admin
+	/**
+	 * edit()
+	 *
+	 * Edit phone details
+	 * 
+	 * @param string
+	 * @param int
+	 * @param string
+	 * @param string
+	 * @param int
+	 */
 	public function edit($imei, $validated, $password, $comments, $c2dm_disable) {
         
         if(!$this->loaded()) {
@@ -44,16 +54,25 @@ class Model_Phone extends ORM {
 	}
 	
 	
-	
+	/**
+	 * set_gps()
+	 *
+	 * Update gps and last connect value
+	 * 
+	 * @param string
+	 */
 	public function set_gps($gps = '') {
 		$gps = trim($gps);
-		//$gps = preg_replace('/[^0-9.,:-]/', '', $gps);
 		$this->gps = $gps;
 		$this->last_connect_ts = time();
 		$this->save();					        	
 	}
 	
-	
+	/**
+	 * get_last_upload_ts()
+	 *
+	 * @return int
+	 */
     public function get_last_upload_ts() {
    		$result = DB::select('last_modified')
    						->from('uploaded_data')
@@ -70,7 +89,14 @@ class Model_Phone extends ORM {
 
    	}
    	
-   	
+   	/**
+	 * save_locations()
+	 *
+	 * Save uploaded gps data 
+	 *
+	 * @param string
+	 * @return int
+	 */
    	public function save_locations($file_path) {
 		$handle = @fopen($file_path, "r");
 		if (! $handle) {
@@ -114,6 +140,20 @@ class Model_Phone extends ORM {
 		}
 	}
 	
+	
+	
+	/**
+	 * send_alert()
+	 *
+	 * Send c2dm alert to phone
+	 *
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return bool
+	 */
 	public function send_alert($auth_key, $collapse_key, $message_type, $form_code='', $message='') {
 		
 		// create alert record
@@ -135,14 +175,24 @@ class Model_Phone extends ORM {
 
 	}
 	
+	
+	/**
+	 * log_alert()
+	 *
+	 * Log c2dm alert
+	 *
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @param string
+	 * @return bool
+	 */
 	public function log_alert($message_type, $form_code='', $message='', $response='') {
-		//if($message_type=='form_reminder') {
-			$alert = ORM::factory('phone_alert');
-			$alert->phone_id = $this->id;
-			$alert->message_type = $message_type;
-			$alert->form_code = $form_code;
-			$alert->response = $response;
-			return $alert->save();
-		//}
+		$alert = ORM::factory('phone_alert');
+		$alert->phone_id = $this->id;
+		$alert->message_type = $message_type;
+		$alert->form_code = $form_code;
+		$alert->response = $response;
+		return $alert->save();
 	}
 }
