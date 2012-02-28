@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Stats extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -20,13 +25,23 @@ class Emocha_Controller_Stats extends Controller_Site {
 
 	}
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index() {
 		Request::instance()->redirect('stats/datagrid');
 	}
 	
 	
-	/*
-	 * export form and results as html table
+
+	/**
+	 *  action_export()
+	 *
+	 * Export form and results as html table
+	 * 
+	 * @param int
 	 */
 	public function action_export($form_id=false) {
 
@@ -47,8 +62,13 @@ class Emocha_Controller_Stats extends Controller_Site {
 				
 	}
 	
-	/*
-	 * export form and results as ajax table
+
+	/**
+	 *  action_exportgrid()
+	 *
+	 * Export form and results as ajax table
+	 * 
+	 * @param int
 	 */
 	public function action_exportgrid($form_id=false) {
 
@@ -74,9 +94,14 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	
-	/*
-	 * export form and results as tab separated file for spreadsheets
+
+	/**
+	 *  action_export_as_csv()
+	 *
+	 * Export form and results as tab separated file for spreadsheets
 	 * enforces immediate download
+	 * 
+	 * @param int
 	 */
 	public function action_export_as_csv($form_id=false) {
 		
@@ -96,10 +121,13 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	
 	
-	
-	
-	
-	// ajax call
+	/**
+	 *  action_single_form()
+	 *
+	 * Display results for a specific form data
+	 * 
+	 * @param int
+	 */
 	public function action_single_form($id) {
 	
 		 $this->auto_render=FALSE;
@@ -114,6 +142,11 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  action_referrals()
+	 *
+	 * List referrals
+	 */
 	public function action_referrals() {
 
 		$this->template->title = 'Log referral visit';
@@ -138,20 +171,16 @@ class Emocha_Controller_Stats extends Controller_Site {
 				}
 			}
 		}
-		
-				
-		
 
 	}
 	
-	public function action_excel($fname) {
-		$this->load->model('uploaded_data');
-		$this->uploaded_data->export_to_excel($fname);
-	}
 	
-	
-	 
-	 public function action_data()
+	/**
+	 *  action_data()
+	 *
+	 * List form data results
+	 */
+	public function action_data()
 	{
 		
 		$this->template->title = 'Data by patient';
@@ -177,7 +206,13 @@ class Emocha_Controller_Stats extends Controller_Site {
 
 	
 	
-	// ajax call
+	/**
+	 *  action_patient()
+	 *
+	 * Display patient details
+	 * 
+	 * @param string
+	 */
 	public function action_patient($code) {
 	
 		$this->auto_render=FALSE;
@@ -186,9 +221,14 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	
-	/*
-	 * Demo of presenting households on a map
-	 * */
+	
+	/**
+	 *  action_housholds()
+	 *
+	 * List households
+	 * 
+	 * @param string
+	 */
 	public function action_households($order_by = 'village') {
 	
 		$this->template->title = 'Data by household';
@@ -212,8 +252,12 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	}
 	 
-	 /*
-	 * View data in ajax grid 
+
+
+	/**
+	 *  action_datagrid()
+	 *
+	 * View data in ajax grid
 	 */
 	 public function action_datagrid()
 	{
@@ -224,9 +268,12 @@ class Emocha_Controller_Stats extends Controller_Site {
 	}
 	
 	
-	/*
+
+	/**
+	 *  action_map()
+	 *
 	 * Demo of presenting households on a map
-	 * */
+	 */
 	public function action_map() {
 	
 		$households = ORM::factory('household')->find_all();
@@ -255,6 +302,15 @@ class Emocha_Controller_Stats extends Controller_Site {
 	
 	}
 	
+	
+	
+	/**
+	 *  action_patient_image()
+	 *
+	 * Display patient image
+	 *
+	 * @param int
+	 */
 	public function action_patient_image ($patient_id) {
 		$this->auto_render = FALSE;
 		$template = View::factory('stats/patient_image');
@@ -262,7 +318,10 @@ class Emocha_Controller_Stats extends Controller_Site {
 		$this->request->response = $template->render();
 	}
 	
-	/*
+
+	/**
+	 *  action_timegraph()
+	 *
 	 * Demo charting of data input by date
 	 */
 	 public function action_timegraph() {
@@ -270,8 +329,11 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 	$content->points = Stats::get_count_patients_by_date();
 	 }
 	 
-	 /*
-	 * Demo charting of data input by date
+	 
+	/**
+	 *  action_timegraph()
+	 *
+	 * Demo symptoms piechart
 	 */
 	 public function action_piechart() {
 	 	$content = $this->template->content = View::factory('stats/pies');

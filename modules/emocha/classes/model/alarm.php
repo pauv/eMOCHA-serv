@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
 class Model_Alarm extends ORM {
@@ -18,6 +18,12 @@ class Model_Alarm extends ORM {
 	public $num_alerts = 0;
 	public $actions_taken_msg = '';
 
+	/**
+	 * check()
+	 * 
+	 * Check condition met or not for all alarms
+	 * Then perform appropriate actions
+	 */
 	public function check() {
 		foreach ($this->alarm_conditions->find_all() as $condition) {
 			

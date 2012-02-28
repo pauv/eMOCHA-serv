@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
 class Model_Alarm_Action extends ORM {
@@ -13,12 +13,14 @@ class Model_Alarm_Action extends ORM {
 								'alarm' => array(),
 								'user' => array()
 							);
-	/*
+	/**
 	 * execute()
-	 * check condition
-	 * @return string/bool (status message or false)
-	 */								
-									
+	 *
+	 * Execute action and return status message
+	 *
+	 * @param string
+	 * @return string or bool
+	 */															
 	public function execute($msg='') {
 	
 		// currently just hard coding

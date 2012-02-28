@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Model_User_Verification extends ORM {
@@ -83,6 +83,8 @@ class Model_User_Verification extends ORM {
     
     
 	/**
+	 * get_from_request()
+	 *
 	 * @param  array: array containing encrypted code
 	 * @param string:	type of verification
 	 * Both must be correct and 

@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
 class Model_Phone_Location extends ORM {
@@ -16,7 +16,14 @@ class Model_Phone_Location extends ORM {
 												)
 							);
 							
-
+	
+	/**
+	 * get_dates_array()
+	 *
+	 * Get distinct dates for location data
+	 *
+	 * @return array
+	 */
 	public static function get_dates_array() {
 		
 			$dates = array();
@@ -29,8 +36,12 @@ class Model_Phone_Location extends ORM {
 	}
 	
 	
-	/*
-	 * Format array as text file
+	/**
+	 * export_csv()
+	 *
+	 * Format text file of data
+	 *
+	 * @return string
 	 */
 	public static function export_csv() {
 	

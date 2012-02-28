@@ -4,16 +4,20 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Sdcard {
    	
    	
-   	
-    /* get files by type  - forms/library/courses etc
-	 * param string
-	 * return array
+   
+	/**
+	 * get_file_list_from_db_by_type()
+	 *
+	 * Get files by type  - forms/library/courses etc
+	 * 
+	 * @param string
+	 * @return array
 	 */
 	public static function get_file_list_from_db_by_type($type) {
 	
@@ -26,8 +30,12 @@ class Sdcard {
 	}
 	
 	
-	/* get all files
-	 * return array
+	/**
+	 * get_file_list_from_db_all()
+	 *
+	 * Get all files
+	 * 
+	 * @return array
 	 */
 	public static function get_file_list_from_db_all() {
 	
@@ -39,13 +47,27 @@ class Sdcard {
 	}
 	
 	
-	
+	/**
+	 * get_file_list_from_ftp_upload()
+	 *
+	 * Get files in ~/sdcard/upload folder
+	 * 
+	 * @param string
+	 * @return array
+	 */
 	public static function get_file_list_from_ftp_upload($ext) {
 		$directory = "sdcard/upload/";
    		$files = glob($directory . "*.".$ext);
    		return $files;
    	}
    	
+   	/**
+	 * get_last_server_update()
+	 *
+	 * Get timestamp files last updated
+	 * 
+	 * @return int
+	 */
    	public static function get_last_server_update() {
    		$result = DB::select('ts')
    						->from('files')
@@ -83,10 +105,16 @@ class Sdcard {
    	}
 
    	
-   	
-   	/* get unique filename
+
+	/**
+	 * get_unique_file_name()
+	 *
+	 * get unique filename
 	 * recursively checks for a valid unique name
-	 * return string
+	 * 
+	 * @param string
+	 * @param string
+	 * @return string
 	 */
 	public static function get_unique_file_name($folder, $name) {
 	

@@ -4,11 +4,16 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */    
 class Controller_Account extends Controller_Site {
 	
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -19,13 +24,22 @@ class Controller_Account extends Controller_Site {
 
 	}
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		// redirect to the login page as default
 		Request::instance()->redirect('account/details');
 	}
 	
-	
+	/**
+	 *  details()
+	 *
+	 * Display user's account details
+	 */
 	public function action_details()
 	{	
 		$this->template->title = 'Account details';
@@ -35,7 +49,11 @@ class Controller_Account extends Controller_Site {
  
 	}
 	
-	
+	/**
+	 *  edit_details()
+	 *
+	 * Edit user's account details
+	 */
 	public function action_edit_details()
 	{	
 		$this->template->title = 'Edit account details';
@@ -83,7 +101,11 @@ class Controller_Account extends Controller_Site {
 		}
 	}
 	
-	
+	/**
+	 *  change_password()
+	 *
+	 * Change user's password
+	 */
 	public function action_change_password()
 	{	
 		$this->template->title = 'Change password';

@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
 class Model_Alarm_Condition extends ORM {
@@ -14,10 +14,12 @@ class Model_Alarm_Condition extends ORM {
 	
 	public $value_found;
 	
-	/*
+	/**
 	 * check()
-	 * check condition
-	 * @return bool (true if condition met)
+	 * 
+	 * Check condition met or not
+	 *
+	 * @return bool
 	 */
 	public function check() {
 	

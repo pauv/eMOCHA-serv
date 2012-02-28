@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Model_Patient extends ORM_Encrypted {
@@ -17,7 +17,6 @@ class Model_Patient extends ORM_Encrypted {
 								'form_datas'=>array('foreign_key'=>'patient_code')
 							);
 							
-	//protected $_load_with = array('household');
 	
 	// fields to be stored encrypted in DB
 	protected $_encrypted = array('first_name', 'last_name', 'age', 'sex');
@@ -27,10 +26,15 @@ class Model_Patient extends ORM_Encrypted {
 	public $map_long;
 	
 	
-	/*
-	Save a patient object
-	from uploaded form data
-	*/
+
+	/**
+	 * save_from_form_data()
+	 *
+	 * Save a patient object from form data
+	 *
+	 * @param object
+	 * @return object
+	 */
 	public static function save_from_form_data($form) {
 		$patient = ORM::factory('patient')
 						->where('code', '=', $form->patient_code)
@@ -56,13 +60,15 @@ class Model_Patient extends ORM_Encrypted {
 	}
 	
 	
-	/*
-	Log when a patient visited the clinic
-	with a referral slip
-	@param string
-	@param int
-	@return bool
-	*/
+	/**
+	 * log_referral_visit()
+	 * 
+	 * Log when a patient visited the clinic with a referral slip
+	 *
+	 * @param string
+	 * @param int
+	 * @return bool
+	 */
 	public function log_referral_visit($referral_id, $form_data_id) {
 		
 		// update xml
@@ -81,10 +87,13 @@ class Model_Patient extends ORM_Encrypted {
 	}
 	
 	
-	/*
-	Get web path to patient's image
-	@return string
-	*/
+	/**
+	 * get_profile_image()
+	 *
+	 * Get web path to patient's image
+	 * 
+	 * @return string
+	 */
 	public function get_profile_image() {
 		$files_folder = 'sdcard/emocha/patient_files';
 		$abs_files_folder = DOCROOT.$files_folder;
@@ -97,10 +106,14 @@ class Model_Patient extends ORM_Encrypted {
 		return FALSE;
 	}
 	
-	/*
-	save patient's image
-	@return bool
-	*/
+	
+	/** 
+	 * save_profile_image()
+	 *
+	 * Save patient's image
+	 *
+	 * @return bool
+	 */
 	public function save_profile_image($file) {
 		$files_folder = 'sdcard/emocha/patient_files';
 		$patient_files_folder = DOCROOT.$files_folder.'/'.$this->code;
@@ -121,22 +134,29 @@ class Model_Patient extends ORM_Encrypted {
 						->find();
 	}
 	
-	/*
-	Get xml node value from core patient data
-	param string
-	return string
-	*/
+	
+	/**
+	 * get_core_form_val()
+	 *
+	 * Get xml node value from core patient data
+	 * 
+	 * @param string
+	 * @return string
+	 */
 	public function get_core_form_val ($node) {
 		$core_form = $this->get_core_form_data();
 		return $core_form->get_xml_node($node);
 	}
 	
 	
-	/*
-	Search for patients with filters
-	@param array $_POST
-	@return array patients
-	*/
+	/**
+	 * search()
+	 *
+	 * Search for patients with filters
+	 * 
+	 * @param array $_POST
+	 * @return array patients
+	 */
 	public static function search ($post = array()) {
 	
 		$sql = "SELECT code FROM patients WHERE ";
@@ -172,13 +192,16 @@ class Model_Patient extends ORM_Encrypted {
 	}
 	
 	
-	/*
-	List patients with order by
-	@param int limit
-	@param int offset
-	@param string orderby
-	@return array patients
-	*/
+	/**
+	 * get_list()
+	 *
+	 * List patients with order by
+	 * 
+	 * @param int limit
+	 * @param int offset
+	 * @param string orderby
+	 * @return array patients
+	 */
 	public static function get_list($limit, $offset, $ord) {
 		
 			$patients = array();
@@ -214,6 +237,12 @@ class Model_Patient extends ORM_Encrypted {
 			return $patients;
 	}
 	
+	
+	/**
+	 * get_code_val_array()
+	 *
+	 * @return array
+	 */
 	public static function get_code_val_array() {
 		$arr = array(''=>'');
 		$patients = ORM::factory('patient')->find_all();
@@ -224,7 +253,13 @@ class Model_Patient extends ORM_Encrypted {
 	}
 	
 	
-	
+	/**
+	 * get_count()
+	 *
+	 * Count all patients
+	 *
+	 * @return int
+	 */
 	public static function get_count() {
 		$count = ORM::factory('patient')
 					->count_all();
@@ -233,11 +268,14 @@ class Model_Patient extends ORM_Encrypted {
 	}
 	
 	
-	/*
-	reassign map coordinates to make them unique
-	@param array 
-	@return array
-	*/
+	/**
+	 * map_patients()
+	 *
+	 * Reassign map coordinates to make them unique
+	 *
+	 * @param array 
+	 * @return array
+	 */
 	public static function map_patients ($patients) {
 		$mapped_patients = array();
 		$increment = 0;

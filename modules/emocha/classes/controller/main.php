@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Controller_Main extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -21,54 +26,25 @@ class Controller_Main extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		Request::instance()->redirect('main/map');
 	}
 	
-	
-	/*
-	 * Demo of presenting data in a map.
-	 * The data can be filtered with some HTML inputs.
-	 * The data in this example has previously been read
-	 * from xml files and introduced in an MySQL database.
-	 * This demo is very inefficient.
-	 * A much better way to do this would be introducing all
-	 * XML data into an eXist database, which allows us to
-	 * directly query and filter this data.
-	 * 
-	public function action_datasel() {
-	
-		
-		// xss clean post vars
- 		$post = Arr::xss($_POST);
- 		
-		$dataList = Model_Form_Data::get_table_data(
-			Arr::get($post, 'gender'),
-			Arr::get($post, 'tb'),
-			Arr::get($post, 'hiv'),
-			Arr::get($post, 'age_min'),
-			Arr::get($post, 'age_max'),
-			Arr::get($post, 'temp_min'),
-			Arr::get($post, 'temp_max')
-		);
-		$markerDataJS = '';
-		foreach ($dataList as $row) {
-			$markerDataJS .= $this->_get_gmaps_js($row);			
-		}
-		$content = $this->template->content = View::factory('main/datasel');
-		$content->gmaps_js = View::factory('googlemaps/gmaps_js', array(
-									'markerDataJS' => $markerDataJS,
-									'google_maps_key' => Kohana::config('googlemaps.key')
-									));
-		
-	}
-	
-	*/
-	
-	/*
-	 * Demo of presenting households on a map
-	 * */
+
+	/**
+	 *  action_map()
+	 *
+	 * Display households on map
+	 *
+	 * @param string
+	 * @param string
+	 */
 	public function action_map($map_type='households', $selected_code=false) {
 	
 		$this->template->title = 'Data Map';
@@ -135,12 +111,22 @@ class Controller_Main extends Controller_Site {
 	
 	
 	
-	
+	/**
+	 *  action_alarms()
+	 *
+	 * Display alarms
+	 */
 	public function action_alarms() {
 		$this->template->title = 'Alarms';
 		$content = $this->template->content = View::factory('main/alarms');
 	}
 	
+	
+	/**
+	 *  action_messages()
+	 *
+	 * Display messages
+	 */
 	public function action_messages() {
 		$this->template->title = 'Messages';
 		$content = $this->template->content = View::factory('main/messages');
@@ -148,6 +134,12 @@ class Controller_Main extends Controller_Site {
 	
 	
 	
+	/**
+	 *  _get_gmaps_js()
+	 *
+	 * Format googlemaps javascript
+	 *
+	 */
 	// TODO: there is a similar function in the handsets controller
 	// find whatever they have in common and place it in a library or controller.
 	private function _get_gmaps_js($row) {

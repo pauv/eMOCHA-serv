@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Controller_Test extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -19,12 +24,23 @@ class Controller_Test extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		$content = $this->template->content = View::factory('tests/index');
 		
 	}
 	
+	
+	/**
+	 *  action_api()
+	 *
+	 * Forms for making test api calls
+	 */
 	public function action_api()
 	{
 		$content = $this->template->content = View::factory('tests/api');
@@ -38,6 +54,11 @@ class Controller_Test extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  action_alarms()
+	 *
+	 * List alarms
+	 */
 	public function action_alarms()
 	{
 		$content = $this->template->content = View::factory('tests/alarms');
@@ -46,7 +67,11 @@ class Controller_Test extends Controller_Site {
 	}
 	
 	
-	
+	/**
+	 *  action_sms()
+	 *
+	 * Send an sms
+	 */
 	public function action_sms()
 	{
 	
@@ -90,15 +115,13 @@ class Controller_Test extends Controller_Site {
 	}
 	
 	
-	
-	
-	public function action_cdma () {
-    		$r = Phone::is_cdma_valid('123345efa5223');
-    		echo Kohana::debug($r);
-    	}
+
     	
-    	
-    
+    /**
+	 *  action_times()
+	 *
+	 * Test server times compared to database times
+	 */
 	public function action_times () {
 			$str = '';
     		$str .= "Timezone is ".date_default_timezone_get()."<br />";

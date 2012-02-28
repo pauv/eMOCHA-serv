@@ -4,7 +4,7 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Model_Form extends ORM {
@@ -33,12 +33,15 @@ class Model_Form extends ORM {
 	// load these relationships by default
 	protected $_load_with = array ('file');										
 	
-	
-	/*
- 	 * return list of forms as id=>val
+
+	/**
+	 * get_id_val_array()
+	 * 
+	 * Return list of forms as id=>val
  	 * (useful for dropdowns)
- 	 */
-	
+ 	 * 
+ 	 * @return array
+	 */
 	public static function get_id_val_array() {
 		$arr = array();
 		$forms = ORM::factory('form')->find_all();
@@ -49,10 +52,13 @@ class Model_Form extends ORM {
 	}
 	
 	
-	/*
- 	 * get name with suffix
- 	 */
-	
+	/**
+	 * get_short_name()
+	 * 
+	 * Get name of file with suffix
+ 	 * 
+ 	 * @return string
+	 */
 	public function get_short_name() {
 		$arr = explode('.',$this->name);
 		if(isset($arr[0])) {
@@ -62,9 +68,15 @@ class Model_Form extends ORM {
 	}
 	
 	
-	/*
- 	 * Validation for editing form details
- 	 */
+	/**
+	 * validate()
+	 * 
+	 * Validate edit details
+	 *
+	 * @param array
+	 * @param string
+	 * @return array
+	 */
 	public function validate(& $array, $mode) 
 	{
 		// Initialise the validation library and use some rules
@@ -111,10 +123,12 @@ class Model_Form extends ORM {
 	}
 	
 	/**
-	 * Code validation callback
+	 * code_unique()
+	 *
+	 * Code uniqueness check
+	 *
 	 * @param    Validate  $array   validate object
 	 * @param    string    $field   field name
-	 * @param    array     $errors  current validation errors
 	 * @return   array
 	 */
 	public function code_unique(Validate $array, $field)
@@ -133,7 +147,11 @@ class Model_Form extends ORM {
 	}
 	
 	
-	// override delete method to handle files
+	/**
+	 * delete()
+	 * 
+	 * Override delete method to handle files on disk
+	 */
 	public function delete($id = NULL) {
 	
 		if($this->file->loaded()){
@@ -148,6 +166,7 @@ class Model_Form extends ORM {
 		/*
 		 * read from data a single instance result file
 		 * into one row
+		 * TODO: REMOVE? (this function also in form exporter)
 		 */
 		private function _get_row($row_num, $obj, $parent_id) {
 			foreach($obj as $key => $val) {
@@ -161,7 +180,13 @@ class Model_Form extends ORM {
 	
 		}
 		
-		
+		/**
+		 * get_config()
+		 * 
+		 * Get array of variables for api return
+		 * 
+		 * @return array
+		 */
 		public function get_config() {
 			$config = array();
 			$config['id'] = $this->id;
@@ -173,9 +198,7 @@ class Model_Form extends ORM {
 			$config['label'] = $this->label;
 			$config['template'] = $this->file->api_array();
 			$config['files'] = array();
-			/*echo "<hr>";
-			echo $this->name."<br>";
-			echo Kohana::debug($this->form_files->find_all());*/
+
 			foreach ($this->form_files->find_all() as $form_file) {
 				if ($form_file->loaded()) {
 					$config['files'][] = $form_file->api_array();

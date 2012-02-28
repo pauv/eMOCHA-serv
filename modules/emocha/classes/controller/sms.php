@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Controller_Sms extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -20,12 +25,23 @@ class Controller_Sms extends Controller_Site {
 
 	}
 	
+	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		Request::instance()->redirect('sms/send');
 	}
 	
 	
+	/**
+	 *  action_send()
+	 *
+	 * Send sms to a specific telephone number
+	 */
 	public function action_send($recipients='patients')
 	{
 	

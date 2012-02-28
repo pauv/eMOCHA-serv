@@ -4,12 +4,17 @@
  *
  * @package    eMOCHA
  * @author     George Graham
- * @copyright  2010-2012 George Graham - george@ccghe.net
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Edu extends Controller_Site {
 
 
+	/**
+	 *  before()
+	 *
+	 * Run before any action
+	 */
 	public function before()
 	{
 		parent::before();
@@ -20,12 +25,24 @@ class Emocha_Controller_Edu extends Controller_Site {
 
 	}
 	
+	/**
+	 *  index()
+	 *
+	 * Default action
+	 */
 	public function action_index()
 	{
 		Request::instance()->redirect('edu/courses');
 	}
 	
 	
+	/**
+	 *  action_courses()
+	 *
+	 * List files for 'courses'
+	 *
+	 * @param string
+	 */
 	public function action_courses($action=false) {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'courses')->find_all();
 		$data['section'] = 'courses';
@@ -34,6 +51,13 @@ class Emocha_Controller_Edu extends Controller_Site {
 		$this->template->content = View::factory('edu/file_list', $data);
 	}
 	
+	/**
+	 *  action_lectures()
+	 *
+	 * List files for 'lectures'
+	 *
+	 * @param string
+	 */
 	public function action_lectures($action=false) {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'lectures')->find_all();
 		$data['section'] = 'lectures';
@@ -42,6 +66,13 @@ class Emocha_Controller_Edu extends Controller_Site {
 		$this->template->content = View::factory('edu/file_list', $data);
 	}
 	
+	/**
+	 *  action_library()
+	 *
+	 * List files for 'library'
+	 *
+	 * @param string
+	 */
 	public function action_library($action=false) {
 		$data['medias'] = ORM::factory('media')->where('type', '=', 'library')->find_all();
 		$data['section'] = 'library';
@@ -51,6 +82,14 @@ class Emocha_Controller_Edu extends Controller_Site {
 	}
 	
 	
+	/**
+	 *  action_form()
+	 *
+	 * Display form for uploading a file
+	 *
+	 * @param string
+	 * @param array
+	 */
 	function action_form($section=false, $errors=array()) {
 		
 		if(! $section) {
@@ -75,7 +114,13 @@ class Emocha_Controller_Edu extends Controller_Site {
 	}
 	
 	
-	
+	/**
+	 *  action_upload()
+	 *
+	 * Submit file for upload
+	 *
+	 * @param string
+	 */
 	function action_upload($section=false) {
 	
 		if(! $section) {
@@ -94,7 +139,7 @@ class Emocha_Controller_Edu extends Controller_Site {
 		
 		
 		###############################
-		## fiel selected from ftp folder
+		## file selected from ftp folder
 		###############################
 		
 		if($ftp_file = Arr::get($_POST, 'ftp_file')) {
@@ -273,7 +318,14 @@ class Emocha_Controller_Edu extends Controller_Site {
 	
 	
 	
-	// confirm delete request
+	/**
+	 *  action_delete()
+	 *
+	 * Request confirmation to delete file
+	 *
+	 * @param string
+	 * @param int
+	 */
 	public function action_delete ($section=false, $id=false) {
 	
 		if(! $section || !$id) {
@@ -289,7 +341,14 @@ class Emocha_Controller_Edu extends Controller_Site {
 	}
 	
 	
-	// confirmed: delete both file and db record
+	/**
+	 *  action_delete_confirmed()
+	 *
+	 * Delete file
+	 *
+	 * @param string
+	 * @param array
+	 */
 	public function action_delete_confirmed ($section=false, $id=false) {
 	
 		if(! $section || !$id) {

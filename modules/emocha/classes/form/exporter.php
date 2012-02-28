@@ -1,9 +1,12 @@
-<?php
-
-	/*
-     * Class used to convert an XML tree-like structure into a two dimensional
-     * array.
-     */
+<?php defined('SYSPATH') or die('No direct script access.');
+/**
+ * Form helper used to convert an XML tree-like structure into a two dimensional array
+ *
+ * @package    eMOCHA
+ * @author     George Graham
+ * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
+ * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
+ */ 
 	class Form_Exporter {
 	
 		private $form; // form object to be converted
@@ -23,7 +26,15 @@
 
 		public $data_as_array = array();
 	
-		
+	
+		/**
+		 * _construct()
+		 *
+		 * Load form
+		 *
+		 * @param object
+		 * @return string
+		 */
 		function __construct($form) {
 			
 			$this->form = $form;
@@ -31,7 +42,6 @@
 			$this->def_form_path = DOCROOT."sdcard/emocha/odk/forms/".$this->form->name;
 			
 			$file_content = implode('', file($this->def_form_path));
-			//$xml = @simplexml_load_string($file_content);
 			
 			// split up template to handle long files
 			// maybe this could be done better with an xml query
@@ -39,12 +49,17 @@
 			$b = explode('</instance>', $a[1]);
 			$this->def_form_xml = @simplexml_load_string($b[0]);
 			
-			//preg_match("/<instance>(.*)<\/instance>/ms", $file_content, $foundA);
-			//$this->def_form_xml = @simplexml_load_string($foundA[1]);
-			
 			$this->file_found = $this->def_form_xml ? true : false;
 		}
 		
+		
+		/**
+		 * get_form_path()
+		 *
+		 * Get disk path to form template
+		 *
+		 * @return string
+		 */
 		function get_form_path() {
 			return $this->def_form_path;
 		}
@@ -52,9 +67,11 @@
 		
 		
 		
-		
-		/*
-		 * Get display independent array representation of data
+
+		/**
+		 * load_data_as_array()
+		 *
+		 * Create display independent array representation of data
 		 */
 		public function load_data_as_array() {            		
 											
@@ -64,10 +81,14 @@
 		}
 	
 	
-		
-		/*
-    	 * Format array as html table
-    	 */
+
+    	/**
+		 * get_as_html_table()
+		 *
+		 * Format data array as html table
+		 *
+		 * @return string
+		 */
     	function get_as_html_table() {
     	
     		$this->load_data_as_array();
@@ -103,10 +124,16 @@
     		
     	}
     	
-    	
-    	/*
-    	 * Format array as text file
-    	 */
+
+    	/**
+		 * get_as_csv()
+		 *
+		 * Format data array as tab separated text file
+		 *
+		 * @param string
+		 * @param string
+		 * @return string
+		 */
     	function get_as_csv($separator="\t", $line_break="\n") {
     	
     		$this->load_data_as_array();
@@ -129,8 +156,11 @@
     	}
 		
 		
-		/*
-		 * read columns from xml template
+
+		/**
+		 * get_data_columns()
+		 *
+		 * Read columns from xml template
 		 */
 		function get_data_columns() {
 			if ($this->file_found) {
@@ -138,8 +168,15 @@
 			} 
 		}
 		
-		/*
-		 * read columns from xml template
+
+		/**
+		 * _get_columns()
+		 *
+		 * Read columns from xml template
+		 *
+		 * @param object
+		 * @param int
+		 * @return array
 		 */
 		private function _get_columns($obj, $parent_id) {
 			if ($this->file_found) {
@@ -163,8 +200,13 @@
 			}
 		}
 		
-		/*
-		 * read instance files into an array or arrays
+
+		/**
+		 * get_data_rows()
+		 *
+		 * Read data files into an array or arrays
+		 *
+		 * @return array
 		 */
 		function get_data_rows() {
 			
@@ -191,10 +233,16 @@
 			return $this->rows;
 		}			
 
-		
-		/*
-		 * read from data a single instance result file
+
+		/**
+		 * _get_row()
+		 *
+		 * Read from data a single instance result file
 		 * into one row
+		 *
+		 * @param int
+		 * @param object
+		 * @param int
 		 */
 		private function _get_row($row_num, $obj, $parent_id) {
 			foreach($obj as $key => $val) {
