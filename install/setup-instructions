@@ -1,0 +1,148 @@
+EMOCHA INSTALLATION INSTRUCTIONS (SERVER SIDE)
+
+
+#### REQUIREMENTS ####
+
+The application is programmed in PHP and MySQL and runs within a Web Server. The typical server setup is a LAMP platform (http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29), and the following instructions assume a LInux/Unix type OS and an Apache Web Server.
+
+Note: Most commercial LAMP web hosting solutions will by default already fit the requirements, but please use the following checklist to be sure. If you are installing the PHP and MySQL yourself, pay attention to the version numbers and the non-default requirements.
+
+# PHP #
+Version 5.2.3 or higher (http://php.net/downloads.php)
+
+Default requirements:
+PCRE with UTF-8 support (http://php.net/pcre)
+SPL (http://php.net/spl)
+Reflection (http://php.net/reflection)
+Filter (http://php.net/filter)
+Iconv (http://php.net/iconv)
+Mbstring not overloading String functions (http://php.net/mbstring)
+Ctype (http://php.net/ctype)
+
+Non-default requirements:
+MySQL (default in version 5.3 up) (http://php.net/manual/en/mysql.installation.php)
+cURL (http://php.net/manual/en/curl.installation.php)
+GD (http://php.net/manual/en/image.installation.php)
+
+Note: Automatic diagnostics for PHP requirements are provided in the application install script (explained further down the page)
+
+# MySQL #
+Version 5.1.5 or higher (http://dev.mysql.com/downloads/mysql/)
+
+Default requirements:
+Xml functions (http://dev.mysql.com/doc/refman/5.1/en/xml-functions.html)
+Aes encryption (http://dev.mysql.com/doc/refman/5.5/en/encryption-functions.html)
+
+# Apache #
+Version 1.3 or higher (http://httpd.apache.org/)
+
+Non-default requirements:
+mod_rewrite enabled (http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html)
+
+
+#### INSTALLATION ####
+
+Unzip the emocha_install.zip file, resulting in a folder 'emocha_install'. All paths in the following instructions are relative to the 'emocha_install' root folder.
+
+# DATABASE #
+Create a database, e.g. ‘emocha’ with collation set to utf8_unicode_ci. Import table structure to this database by running the SQL set-up script (install/db_setup.sql). This import script also contains some basic configuration variables for the client in the configs table [see the client documentation for more info].
+
+Note: You can administer MySQL from the command line or a web admin tool like phpMyAdmin (http://www.phpmyadmin.net). Further information on MySQL administration can be found on the web (e.g. http://dev.mysql.com/tech-resources/articles/mysql_intro.html)
+
+# FILES #
+Add the files on your web server. There are different ways to structure a Kohana application. In our set-up we place all the files inside our webroot and have our applications running in subdirectories. This allows us to run multiple application version on the same webserver using the same core module. Eg. 'http://server.org/app1', 'http://server.org/app2', etc. To follow the same set-up add the contents of the 'emocha_install' folder to your root folder. The files include only one application subdirectory called 'emocha', so if you kept this name you would access the application at 'http://server.org/emocha'. If you wanted to run more versions you could duplicate this folder. The following instructions assume you keep to this structure. 
+
+Note: If you want to structure your project differently, have a look at the kohana documentation (http://kohanaframework.org/3.0/guide/kohana/) and bear in mind you will have to edit your .htaccess and bootstrap.php files differently.
+
+1) Run the test script for diagnostics on your php set-up. E.g. go to http://server.org/emocha
+The script will test whether you have the required php extensions for Kohana to run, and also prompt you if necessary to make your 'emocha/cache' and 'emocha/logs' directories writeable by php.
+Of the optional extensions MySQL, GD, and cURL are required for emocha. Once the script passes, you can delete the file ('emocha/install.php').
+
+2) Edit application files
+All files that require editing are mentioned in the instructions and contain 'EDIT' in the file where you should edit them.
+
+.htaccess files:
+- The 'emocha' folder contains an .htaccess ('emocha/.htaccess') file that you can leave as is, if you keep the same folder stucture and names. Otherwise you'll need to change the 'RewriteBase' variable.
+- if the other system and modules folders are inside the webroot then you may want to add .htaccess files to prevent web access to these folders.
+(http://www.htaccess-guide.com/)
+
+Application bootstrap file:
+'emocha/application/bootstrap.php' 
+Edit the timezone of your application (date_default_timezone_set). More details of valid timezones are at http://php.net/timezones
+Edit the base url of the application (base_url). In our example this would be ‘http://www.server.org/emocha/’.
+
+3) Prepare content folders
+The 'emocha/sdcard' folder is used for content files which are downloaded or uploaded by client devices. The folder has the following subdirectories:
+
+emocha
+emocha/odk
+emocha/odk/custom-resources
+emocha/odk/form_files
+emocha/odk/forms
+emocha/patient_files
+emocha/training
+emocha/training/courses
+emocha/training/lectures
+emocha/training/library
+upload
+All need to be writable by php scripts
+
+'upload' needs to be writable by php and also ftp/sftp (this is used for uploading big files to the media area)
+
+
+#### CONFIGURATION ####
+
+Config files can either be in your 'modules/emocha/config' folder or your 'emocha/application/config' folder. The install files have all the config files in the 'emocha/application/config' folder, and they are application specific. They contain 'EDIT' in the file where you should edit them. If you decide to run more than one application, you can move shared config files to 'modules/emocha/config' to avoid duplication.
+
+database.php:
+Edit the database details for your MySQL database connection: server, username, password, database.
+
+auth.php:
+Edit the salt pattern for web user password hashing: keep the number of numbers in the sequence and keep the numbers in ascending order but modify some of them to make the pattern unique.
+
+email.php:
+It is possible to use smtp, native php, or sendmail email functionality. To use smtp which is perhaps the most reliable for email delivery, set up an smtp email account on your server and enter the details:  hostname, username, password.
+ 
+emocha.php: 
+Edit site name and email address of site administrator for alerts.
+
+googlemaps.php:
+Edit client key for your domain, which you get from http://code.google.com/apis/maps/signup.html
+
+upload.php:
+Leave this as is. It sets the path for web file uploads.
+
+encryption.php:
+Edit arbitrary 15 character AES encryption key for storing sensitive data in the database.
+
+api.php: 
+Edit authentication to usr_password or usr_only depending on the level of api security required:
+usr_password - user has to enter password
+usr_only - no password required
+Note: This setting depends on the client. Consult the client documentation. usr_password is the standard. 
+
+c2dm.php:
+Edit google account details for c2dm message transmission (http://code.google.com/android/c2dm/):
+user - the google account email address
+password - the password for the google account
+Note: To use c2dm you must first set-up a google account and register your application at http://code.google.com/android/c2dm/signup.html
+[This google account must also be defined separately as part of the client configuration. The variable  is ‘c2dm_sender_id’ and is in the configs table of the database, the value should be the google email address. See the client documentation for more information.]
+
+#### FINAL SET-UP AND TESTING ####
+
+Test the app:
+Go to http://server.org/emocha
+
+If the login page loads with no problems you are almost complete.
+
+First user:
+An initial admin user will need to be created (manually in part).
+- sign up via the application 'register' page, this will create an unactivated user in the database
+- after submitting the register details, go to your database admin and manually set the user data in the users table: both 'activated' and 'confirmed' should be '1'.
+- manually give the user an admin role by adding a row to the roles_users table: user id=? and role id=2 (where ? is the id of your initial user in the users table, probably '1')
+The user should now be able to log in and have admin permissions. From now on you can administer other users via the application when they register.
+
+
+#### HOW TO USE ####
+
+Please consult the user guide. (coming soon)
