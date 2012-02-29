@@ -1,0 +1,82 @@
+This is a brief explanation of the api.
+
+Further info could be gained by looking at the source code:
+https://github.com/emocha/eMOCHA-serv/blob/master/modules/emocha/classes/emocha/controller/api.php
+
+or testing the api via the test page, e.g.
+https://secure.emocha.org/demo/test/api
+
+
+INTRO
+
+Input is via a post request to a given api url.
+Output is a json formatted string.
+
+AUTHENTICATION
+
+Once the phone is activated in the system it appends post variables
+'usr' and 'pwd' to each request.
+usr: matches an md5 hash of the imei
+pwd: a password string as chosen by the user/web admin
+
+FUNCTIONS
+
+[base_url]/api/check_user
+Check user passes authentication
+
+[base_url]/api/get_config_by_key
+Get single config value by key
+Post: 'key'
+
+[base_url]/api/get_config_by_keys
+Get multiple config values by key
+Post: 'keys' (comma separated)
+
+[base_url]/api/activate_phone
+Activate new phone
+Post: 'imei'
+
+[base_url]/api/get_server_update_times
+Get last update values for server configs and media
+
+[base_url]/api/get_form_config
+Get config for each form
+
+[base_url]/api/get_media
+Get list of media to download
+
+[base_url]/api/upload_form_data
+Upload data for one filled out form
+Post: 'household_code', 'patient_code', 'xml_content', 'file_path',
+'last_modified', 'image'
+(in theory only 'xml_content' is compulsory, see below for more
+detailed explanation of this function)
+
+[base_url]/api/upload_form_file
+Upload file connected to form data
+Post: 'form_code', 'household_code', 'patient_code', file'
+
+[base_url]/api/upload_phone_locations
+Upload list of phone locations
+Post: 'data'
+
+[base_url]/api/upload_register_c2dm
+Register phone's c2dm registration id
+Post: 'registration_id'
+
+RESPONSE MESSAGES
+
+Example error message:
+{"status":"ERR","msg":"unknown user","ts":1330084176 }
+
+Example success message ([..data] depends on function, view api test
+page to see all responses)
+{"status":"OK","msg":"get_server_updated_times","ts":1330084176, [...data] }
+
+
+UPLOADING DATA
+
+The upload_form_data() function allows the data to be uploaded in xml.
+The data is stored as xml in the database, therefore no special
+formatting is required. Only in special form cases (patient or
+household forms) is data extracted for relational database storage.
