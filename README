@@ -25,15 +25,15 @@ modules
 system
 
 App versions:
-app-example (use this for a clean install and remove the other app folders:)
+basic (use this for a clean install and remove the other app folders:)
 af
 demo
 exact
 fxb
 uw
 
-DB scripts:
-install
+Installer:
+An easier installer with setup instructions can be found in 'install'
 
 -
 
