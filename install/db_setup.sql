@@ -1,23 +1,6 @@
--- phpMyAdmin SQL Dump
--- version 3.3.3
--- http://www.phpmyadmin.net
---
--- Host: localhost:/tmp/mysql_sandbox15147.sock
--- Generation Time: Feb 07, 2012 at 04:08 AM
--- Server version: 5.1.47
--- PHP Version: 5.3.4
+
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `emocha_demo`
---
 
 -- --------------------------------------------------------
 
@@ -91,6 +74,8 @@ CREATE TABLE IF NOT EXISTS `configs` (
   `label` varchar(50) NOT NULL,
   `content` text NOT NULL,
   `description` text NOT NULL,
+	`type` ENUM( 'android', 'server', 'platform' ) NOT NULL,
+	`mandatory` tinyint(1) NOT NULL,
   `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
@@ -416,21 +401,27 @@ INSERT INTO `roles` (`id`, `name`, `description`) VALUES
 -- Dumping data for table `configs`
 --
 
-INSERT INTO `configs` (`id`, `label`, `content`, `description`, `last_modified`) VALUES
-(1, 'device_password_on', '0', 'Is password enabled in the device?', CURRENT_TIMESTAMP),
-(2, 'device_password', 'emocha', 'Default password in case device_passord_on is true', CURRENT_TIMESTAMP),
-(3, 'interval_update_gps', '7200', 'Interval between GPS updates', CURRENT_TIMESTAMP),
-(4, 'interval_config_update', '60', 'Interval between config updates', CURRENT_TIMESTAMP),
-(5, 'interval_upd_download', '60', 'Interval between data uploading', CURRENT_TIMESTAMP),
-(6, 'self_signed_ssl', '0', 'Server has a self signed SSL certificate?', CURRENT_TIMESTAMP),
-(7, 'max_distance_from_household', '200', 'Max distance between households. See filter_by_gps_location', CURRENT_TIMESTAMP),
-(8, 'filter_by_gps_location', '0', 'Household list is filtered by gps location?', CURRENT_TIMESTAMP),
-(9, 'default_gps_location', '0 0 0 0', 'Default GPS location', CURRENT_TIMESTAMP),
-(10, 'patient_description_field', 'first_name,last_name', 'Patient description field', CURRENT_TIMESTAMP),
-(11, 'household_description_field', 'gps_description', 'House hold description field', CURRENT_TIMESTAMP),
-(12, 'user_session_timeout', '3600', 'User session timeout', CURRENT_TIMESTAMP),
-(13, 'contact_consultation', '+256777667444', 'Contact consultation', CURRENT_TIMESTAMP),
-(14, 'contact_hospital', '+256777667444', 'Contact hospital', CURRENT_TIMESTAMP),
-(15, 'app_time_zone', 'America/New_York', 'Where the application runs from', CURRENT_TIMESTAMP),
-(16, 'pn_allowed_delay', '3600', 'Allowed delay to reply a push notification (form reminder)', CURRENT_TIMESTAMP),
-(17, 'c2dm_sender_id', 'DO NOT LEAVE IT EMPTY', 'C2DM''s sender id', CURRENT_TIMESTAMP);
+INSERT INTO `configs` (`label`, `content`, `description`, `type`, `mandatory`, `last_modified`) VALUES
+('app_time_zone', 'America/New_York', 'Where the application runs from', 'platform', 1, CURRENT_TIMESTAMP),
+('application_type', 'DO NOT LEAVE IT EMPTY', 'application type (app_type_households, app_type_patients_only, app_type_forms_only)', 'platform', 1, CURRENT_TIMESTAMP),
+('authentication', 'usr_password', 'Authentication system: how data is uploaded/download to/from the server (usr_password, usr_only)', 'platform',1, CURRENT_TIMESTAMP),
+('version_name', 'VERSION_NAME', 'Application''s name', 'server', 0, CURRENT_TIMESTAMP),
+('admin_alerts_to ', 'some@email.com', 'Admin alerts are sent to this address', 'server', 0, CURRENT_TIMESTAMP),
+('device_password_on', '0', 'Is password enabled in the device?', 'android', 0, CURRENT_TIMESTAMP),
+('device_password', 'emocha', 'Default password in case device_passord_on is true', 'android', 0, CURRENT_TIMESTAMP),
+('interval_update_gps', '7200', 'Interval between GPS updates', 'android', 0, CURRENT_TIMESTAMP),
+('interval_config_update', '60', 'Interval between config updates', 'android', 0, CURRENT_TIMESTAMP),
+('interval_upd_download', '60', 'Interval between data uploading', 'android', 0, CURRENT_TIMESTAMP),
+('self_signed_ssl', '0', 'Server has a self signed SSL certificate?', 'android', 0, CURRENT_TIMESTAMP),
+('max_distance_from_household', '200', 'Max distance between households. See filter_by_gps_location', 'android', 0, CURRENT_TIMESTAMP),
+('filter_by_gps_location', '0', 'Household list is filtered by gps location?', 'android', 0, CURRENT_TIMESTAMP),
+('default_gps_location', '0 0 0 0', 'Default GPS location', 'android', 0, CURRENT_TIMESTAMP),
+('patient_description_field', 'first_name,last_name', 'Patient description field', 'android', 0, CURRENT_TIMESTAMP),
+('household_description_field', 'gps_description', 'House hold description field', 'android', 0, CURRENT_TIMESTAMP),
+('user_session_timeout', '3600', 'User session timeout', 'android', 0, CURRENT_TIMESTAMP),
+('contact_consultation', '+256777667444', 'Contact consultation', 'android', 0, CURRENT_TIMESTAMP),
+('contact_hospital', '+256777667444', 'Contact hospital', 'android', 0, CURRENT_TIMESTAMP),
+('pn_allowed_delay', '3600', 'Allowed delay to reply a push notification (form reminder)', 'android', 0, CURRENT_TIMESTAMP),
+('c2dm_sender_id', 'DO NOT LEAVE IT EMPTY', 'C2DM''s sender id', 'android', 0, CURRENT_TIMESTAMP),
+('records_per_page', '25', 'max records displayed per page', 'android', 0, CURRENT_TIMESTAMP),
+('main_menu_list', 'Enter Data,Training,Settings,Help', 'main menu list to be displayed in the device. Allowed values are: Enter Data, Training, Settings, Help, Communication', 'android', 0, CURRENT_TIMESTAMP);

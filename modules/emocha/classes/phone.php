@@ -105,7 +105,13 @@ class Phone
 			}
 			// versions requiring manual validation
 			else {
-				$to = Kohana::config('emocha.admin_alerts_to');
+				//get admin email from DB:
+				$admin_email = ORM::factory('config')
+												->where('label','=',Kohana::config('values.admin_alerts_to'))
+												->and_where('type','=',Kohana::config('values.server'))
+												->find();
+				
+				$to = $admin_email->content;
 				$from = Kohana::config('email.options.username');
 				$subject = 'Phone activation requested';
 				$message = "Sent from: ".Url::site();
