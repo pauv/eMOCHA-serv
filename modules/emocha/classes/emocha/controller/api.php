@@ -437,92 +437,6 @@ class Emocha_Controller_Api extends Controller {
 	}
 ///////////// Upload form data ///////////////////    
     
-	/**
-	 * action_upload_form_data()
-	 *
-	 * Upload data for one filled out form
-	 *
-	 */
-//    function action_upload_form_data() {
-//    
-//		if(! Arr::get($_POST,"xml_content")) {
-//			$json = View::factory('json/display', Json::response('ERR', 'xml_content is empty'))->render();
-//			$this->request->response = $json;
-//			return;
-//		}
-//		
-//		$form = ORM::factory('form')->where('code','=',Arr::get($_POST,"form_code"))->find();
-//		if(! $form->loaded()) {
-//			$json = View::factory('json/display', Json::response('ERR', 'invalid form code'))->render();
-//			$this->request->response = $json;
-//			return;
-//		}
-//		
-//		
-//		/*
-//		Try to load existing form data record
-//		*/
-//		$form_data = Model_Form_Data::get_by_key_data(
-//							Arr::get($_POST,"household_code",''),
-//							Arr::get($_POST,"patient_code",''),
-//							$form->id
-//							);
-//		
-//		
-//		/*
-//		Update form data values
-//		*/
-//		$form_data->household_code = Arr::get($_POST,"household_code");
-//		$form_data->patient_code = Arr::get($_POST,"patient_code");
-//		$form_data->creator_phone_id = $this->phone->id;
-//		$form_data->form_id = $form->id;
-//		$form_data->uploader_phone_id = $this->phone->id;
-//		$form_data->xml_content = Arr::get($_POST,"xml_content");
-//		$form_data->file_path = Arr::get($_POST,"file_path");
-//		$form_data->last_modified = Arr::get($_POST,"last_modified");
-//		
-//		
-//		/*
-//		Save household and patient data if necessary
-//		*/
-//		if($form->code=='hcore') {
-//			$household = Model_Household::save_from_form_data($form_data);
-//		}
-//		if($form->code=='pcore') {
-//			$patient = Model_Patient::save_from_form_data($form_data);
-//			/*
-//			Deal with patient image upload
-//			TODO: develop a system for dealing with multiple files from any form
-//			*/
-//			if(isset($_FILES['image'])){
-//				$validation = Validate::factory($_FILES)
-//					->rules('image', array(
-//											'upload::valid'=>NULL, 
-//											'upload::type'=>array(array('jpg')), 
-//											'upload::size'=>array('2M')
-//											));
-//				if ($validation->check()){
-//					$patient->save_profile_image($_FILES['image']);
-//				}
-//			}
-//		}
-//	
-//
-//		/*
-//		Insert or update the form data as the case may be
-//		*/
-//		if ($form_data->save()) {
-//			
-//			$json = View::factory('json/display', Json::response('OK', 'data_uploaded'))->render();
-//		} 
-//		else {
-//			$json = View::factory('json/display', Json::response('ERR', 'affected=0'))->render();
-//		}
-//			
-//		//echo View::factory('profiler/stats');
-//		$this->request->response = $json;
-//		
-//	}
 	
 	/**
 	 * action_upload_form_file()
@@ -680,8 +594,5 @@ class Emocha_Controller_Api extends Controller {
 		$this->request->response = $json;
 		
 	}
-	
-	
-	
 
 }
