@@ -1,1 +1,5 @@
-[^.]*
+##skip all files except the following:
+*
+!/.gitignore*
+!values.php
+!errors.php

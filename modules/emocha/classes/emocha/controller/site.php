@@ -4,7 +4,9 @@
  *
  * @package    eMOCHA
  * @author     George Graham
+ * @author     Pau Varela
  * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
+ * @copyright  2012 Pau Varela- pau.varela@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 
@@ -46,6 +48,18 @@ class Emocha_Controller_Site extends Controller_Template
 			}
 		}
 		
+		//get version_name
+		$version_name = ORM::factory('config')
+										->where('label','=',Kohana::config('values.version_name'))
+										->and_where('type','=',Kohana::config('values.server'))
+										->find();
+		if ($version_name->loaded() AND $version_name->content)
+		{
+			$this->template->version_name = $version_name->content;
+		} else 
+		{
+			$this->template->version_name = Kohana::config('values.version_name');
+		}
 		
 		// Check user auth
 		if ($this->login_required) {

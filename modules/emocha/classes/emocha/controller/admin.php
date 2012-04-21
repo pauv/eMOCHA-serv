@@ -655,32 +655,48 @@ class Emocha_Controller_Admin extends Controller_Site {
 		}
 		
 	}
-	
-	
+//////////////////////// configs //////////////////////////	
 	/**
-	 *  action_configs()
+	 *  action_choose_config_type()
 	 *
-	 * List configs
+	 * Choose config type to be edited
 	 *
-	 * @param string
 	 */
-	public function action_configs($action=false) {
-		$this->template->title = 'configs';
-		$content = $this->template->content = View::factory('admin/configs');
-		$content->configs = ORM::factory('config')->find_all();
-		$content->action = $action;
-		
+	public function action_choose_config_type()
+	{
+		$this->template->title = 'Choose config type';
+		$content = $this->template->content = View::factory('admin/choose_config_type');
 	}
 	
 	
+  /**
+   *  action_configs()
+   *
+   * List configs by type
+   *
+   * @param string	type: config type
+   * @param string	action: 
+   */
+  public function action_configs($type=false, $action=false) {
+    $this->template->title = 'Configs: '.$type.' values';
+    $content = $this->template->content = View::factory('admin/configs');
+    $content->configs = ORM::factory('config')->where('type','=',$type)->find_all();
+
+		//set values to the view
+    $content->action = $action;
+		$content->type = $type;
+  }
+
+
 	/**
 	 *  action_edit_config()
 	 *
 	 * Edit config details
 	 *
+   * @param string	type: config type
 	 * @param int
 	 */
-	public function action_edit_config($id=false)
+	public function action_edit_config($type=false, $id=false)
 	{	
 		$this->template->title = 'Edit config';
 		$this->template->curr_nav = 'configs';
@@ -698,23 +714,17 @@ class Emocha_Controller_Admin extends Controller_Site {
 		//If there is a post and $_POST is not empty
 		if ($_POST)
 		{
-		
 			$errors = array();
 			
  			// xss clean post vars
  			$post = Arr::xss($_POST);
- 			// return posted values to config
- 			// in case of error
+ 			// return posted values to config in case of error
 			$content->form_vals = $post;
 			
 			$vars = array_merge($post, $_FILES);
  			
- 			//var_dump($vars);
- 			//exit;
- 			
 			//Load the validation rules, filters etc...
 			$validation = $config->validate($vars, $mode);	
-			
  
 			//If the validation data validates using the rules setup in the user model
 			if ( ! $validation->check())
@@ -723,31 +733,38 @@ class Emocha_Controller_Admin extends Controller_Site {
 			}
 			else 
 			{
-			
-				$config->values($validation);
-	
+				// time zone extra validation: not sure this the rightest way (static method?)
+				if($config->type == Kohana::config('values.platform') AND $config->label == Kohana::config('values.app_time_zone'))
+				{
+					$validation->rule('content','Model_Config::validate_time_zone');
+					if ( ! $validation->check()) 
+					{
+						$errors = array(Kohana::message('admin', 'invalid_time_zone'));
+					}
+					else 
+					{
+						$config->values($validation);
+					}
+				} else 
+				{
+					$config->values($validation);
+				}
 			}
-			
-			
 			/*
 			 * Check for errors
 			 */
 			if (count($errors)) {
 			
 				$content->errors = $errors;
-			
 			}
-			
 			else 
 			{
+				$config->type = $type; 
 				$config->save();
-				Request::instance()->redirect('admin/configs/saved');
-				
+				Request::instance()->redirect('admin/configs/'.$type.'/saved');
+				//Request::instance()->redirect('admin/configs/saved');
 			}
-			
-	
 		}
-		
 		else 
 		{
 			// assign current config data
@@ -755,14 +772,11 @@ class Emocha_Controller_Admin extends Controller_Site {
 			
 		}
 		
-		
 		// assign vars to config
 		$content->mode = $mode;
 		$content->id = $id ? $id:'';
-		
+		$content->type = $type;
 	}
-
-
 
 	
 	/**
@@ -770,41 +784,37 @@ class Emocha_Controller_Admin extends Controller_Site {
 	 *
 	 * Delete config variable
 	 *
+   * @param string	type: config type
 	 * @param int
 	 */
-	public function action_delete_config ($id=false) {
+	public function action_delete_config ($type=false, $id=false) {
 	
-		$this->template->title = 'Delete config';
+		$this->template->title = 'Delete '.$type.' config';
 		$this->template->curr_nav = 'configs';
 		if(!$id) {
-			Request::instance()->redirect('admin/configs');
+			Request::instance()->redirect('admin/configs/'.$type);
 		}
 		
 		$content = $this->template->content = View::factory('admin/delete_config_confirm');
 		$content->config = ORM::factory('config', $id);
-
 	}
-	
-	
+
 	/**
 	 *  action_delete_config_confirmed()
 	 *
 	 * Confirm deletion of config
 	 *
+   * @param string	type: config type
 	 * @param int
 	 */
-	public function action_delete_config_confirmed ($id=false) {
+	public function action_delete_config_confirmed ($type=false, $id=false) {
 	
 		if(!$id) {
-			redirect('admin/configs');
+			redirect('admin/configs/'.$type);
 		}
 		
 		$config = ORM::factory('config', $id);
 		$config->delete();
-		Request::instance()->redirect('admin/configs/deleted');
-		
-		
+		Request::instance()->redirect('admin/configs/'.$type.'/deleted');
 	}
-	
-
 } 

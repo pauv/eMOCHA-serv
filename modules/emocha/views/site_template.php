@@ -20,7 +20,7 @@
 				</td>
 			
 			<td id="login" align="right">
-				<h3><?php echo Kohana::config('emocha.version_name'); ?></h3>
+				<h3><?php echo $version_name; ?></h3>
 				<?php if(isset($logged_in)) { ?>				
 					<?php if($logged_in) { ?>
 						Logged in as: <?php echo $user->username ?>&nbsp;&nbsp;&nbsp;&nbsp;

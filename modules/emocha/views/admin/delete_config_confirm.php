@@ -4,10 +4,10 @@ Do you really want to delete the config '<?php echo $config->label; ?>'?
 </p>
 
 <p>
-<?php echo Html::anchor('admin/delete_config_confirmed/'.$config->id, 'Yes') ?>
+<?php echo Html::anchor('admin/delete_config_confirmed/'.$config->type.'/'.$config->id, 'Yes') ?>
 </p>
 
 <p>
-<?php echo Html::anchor('admin/configs', 'No, cancel') ?>
+<?php echo Html::anchor('admin/configs/'.$config->type, 'No, cancel') ?>
 </p>
 </div>

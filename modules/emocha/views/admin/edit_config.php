@@ -9,7 +9,7 @@ if(isset($errors)) {
 }
 ?>
 
-<?php echo Form::open('admin/edit_config/'.$id, array(
+<?php echo Form::open('admin/edit_config/'.$type.'/'.$id, array(
 													'enctype'=>'multipart/config-data'
 													));?>
 
@@ -31,9 +31,28 @@ if(isset($errors)) {
         <tr>
 
             <td>Content</td>
+						<td>
+<?php
+	if ($type == Kohana::config('values.platform') AND Arr::get($form_vals,'label') == Kohana::config('values.application_type'))
+	{
+		echo Form::select('content', 
+											array(Kohana::config('values.app_type_households')=>Kohana::config('values.app_type_households'),
+														Kohana::config('values.app_type_patients_only')=>Kohana::config('values.app_type_patients_only'),
+														Kohana::config('values.app_type_forms_only')=>Kohana::config('values.app_type_forms_only')),
+											Arr::get($form_vals, 'content',''));
 
-            <td><?php echo Form::input('content', Arr::get($form_vals, 'content', '')); ?></td>
-
+	} elseif ($type == Kohana::config('values.platform') AND Arr::get($form_vals,'label') == Kohana::config('values.authentication'))
+	{
+		echo Form::select('content', 
+											array(Kohana::config('values.usr_only')=>Kohana::config('values.usr_only'),
+														Kohana::config('values.usr_password')=>Kohana::config('values.usr_password')),
+											Arr::get($form_vals, 'content',''));
+	} else 
+	{
+            echo Form::input('content', Arr::get($form_vals, 'content', ''));
+	}
+?>
+						</td>
         </tr>
         
         
