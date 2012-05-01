@@ -1,11 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Stats extends Emocha_Controller_Stats {
-
+/*
 	public function action_index() {
 		Request::instance()->redirect('stats/data');
 	}
-	
+*/	
 	/*
 	 * Get list of all patients for Stats page
 	 */

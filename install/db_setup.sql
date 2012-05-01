@@ -406,7 +406,7 @@ INSERT INTO `configs` (`label`, `content`, `description`, `type`, `mandatory`, `
 ('application_type', 'DO NOT LEAVE IT EMPTY', 'application type (app_type_households, app_type_patients_only, app_type_forms_only)', 'platform', 1, CURRENT_TIMESTAMP),
 ('authentication', 'usr_password', 'Authentication system: how data is uploaded/download to/from the server (usr_password, usr_only)', 'platform',1, CURRENT_TIMESTAMP),
 ('version_name', 'VERSION_NAME', 'Application''s name', 'server', 0, CURRENT_TIMESTAMP),
-('admin_alerts_to ', 'some@email.com', 'Admin alerts are sent to this address', 'server', 0, CURRENT_TIMESTAMP),
+('admin_alerts_to', 'some@email.com', 'Admin alerts are sent to this address', 'server', 0, CURRENT_TIMESTAMP),
 ('device_password_on', '0', 'Is password enabled in the device?', 'android', 0, CURRENT_TIMESTAMP),
 ('device_password', 'emocha', 'Default password in case device_passord_on is true', 'android', 0, CURRENT_TIMESTAMP),
 ('interval_update_gps', '7200', 'Interval between GPS updates', 'android', 0, CURRENT_TIMESTAMP),

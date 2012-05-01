@@ -4,11 +4,12 @@
  *
  * @package    eMOCHA
  * @author     George Graham
+ * @author     Pau Varela
  * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
+ * @copyright  2012 Pau Varela - pau.varela@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
 class Emocha_Controller_Stats extends Controller_Site {
-
 
 	/**
 	 *  before()
@@ -20,22 +21,103 @@ class Emocha_Controller_Stats extends Controller_Site {
 		parent::before();
 		
 		$this->template->title = 'Stats';
-		$this->template->nav = View::factory('stats/nav');
 		$this->template->curr_menu = 'stats';
 
+		//choose navigation bar according to application type
+		$app_type = $this->get_application_type();
+		if (isset($app_type)) 
+		{
+			$this->template->application_type = $app_type; //set for the next controller methods
+
+			if ($app_type == Kohana::config('values.app_type_households')) 
+			{
+
+				$this->template->nav = View::factory('stats/nav');
+			} elseif ($app_type == Kohana::config('values.app_type_patients_only'))
+			{
+
+				$this->template->nav = View::factory('stats/nav_patients_only');
+			} elseif ($app_type == Kohana::config('values.app_type_forms_only')){
+
+				$this->template->nav = View::factory('stats/nav_forms_only');
+			} else
+			{
+				$this->template->nav = View::factory('stats/nav_error');
+				$this->template->nav->errors = array(Kohana::message('platform', 'application_type_missing'));
+			}
+		} else
+		{
+				$this->template->nav = View::factory('stats/nav_error');
+				$this->template->nav->errors = array(Kohana::message('platform', 'invalid_application_type'));
+		}
 	}
 	
+	private function get_application_type()
+	{
+    //get application_type
+    $app_type = ORM::factory('config')
+                ->where('label','=',Kohana::config('values.application_type'))
+                ->and_where('type','=',Kohana::config('values.platform'))
+                ->find();
+
+    if($app_type->loaded() AND $app_type->content)
+			return $app_type->content;
+		else 
+			return NULL;
+	}
+
 	/**
 	 *  index()
 	 *
-	 * Default action
+	 * chooses where to redirect according to the application_type
 	 */
 	public function action_index() {
-		Request::instance()->redirect('stats/datagrid');
+		$app_type = $this->template->application_type;
+
+		if (isset($app_type))
+		{
+
+			if ($app_type == Kohana::config('values.app_type_households')) 
+			{
+
+				Request::instance()->redirect('stats/datagrid');
+
+			} elseif ($app_type == Kohana::config('values.app_type_patients_only'))
+			{
+
+				Request::instance()->redirect('stats/data_patients_only');
+
+			} elseif ($app_type == Kohana::config('values.app_type_forms_only')){
+
+				Request::instance()->redirect('stats/data_forms_only');
+
+			} else
+			{
+				return; //do something?? (error should have been printed already!)
+			}
+		} else {
+			return; //do something?? (error should have been printed already!)
+		}
+		//Request::instance()->redirect('stats/datagrid');
 	}
 	
-	
+	public function action_data_patients_only()
+	{
+		$this->template->title = 'Data by patient';
+		$content = $this->template->content = View::factory('stats/data_patients_only');
+		
+		// xss clean post vars
+ 		$request = Arr::xss($_REQUEST);
+ 		$ord = Arr::get($request, 'ord', 'code');
 
+		$content->patients = ORM::factory('patient')->find_all();
+	}	
+
+	public function action_data_forms_only()
+	{
+		$content = $this->template->content = View::factory('stats/data_forms_only');
+		$content->patients = ORM::factory('patient')->find_all();
+	}
 	/**
 	 *  action_export()
 	 *
@@ -130,7 +212,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 */
 	public function action_single_form($id) {
 	
-		 $this->auto_render=FALSE;
+		$this->auto_render=FALSE;
 		$form_data = ORM::factory('form_data', $id);
 		$html = $form_data->display_result();
 		$data =  array(
@@ -138,7 +220,28 @@ class Emocha_Controller_Stats extends Controller_Site {
 			'msg' => 'testing',
 			'html' => $html
 		);
-		$this->request->response = View::factory('stats/form_display', array('form_data'=>$form_data, 'data'=>$data));
+		$app_type = $this->template->application_type;
+		if (isset($app_type))
+		{
+			if ($app_type == Kohana::config('values.app_type_households')) 
+			{
+
+				$this->request->response = View::factory('stats/form_display', array('form_data'=>$form_data, 'data'=>$data));
+
+			} elseif ($app_type == Kohana::config('values.app_type_patients_only'))
+			{
+
+				$this->request->response = View::factory('stats/patients_only_form_display', array('form_data'=>$form_data, 'data'=>$data));
+
+			} elseif ($app_type == Kohana::config('values.app_type_forms_only')){
+
+				$this->request->response = View::factory('stats/forms_only_form_display', array('form_data'=>$form_data, 'data'=>$data));
+
+			} else
+			{
+				return; //do something?? (error should have been printed already!)
+			}
+		}
 	}
 	
 	
