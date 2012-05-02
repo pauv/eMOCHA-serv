@@ -103,23 +103,12 @@ Edit the salt pattern for web user password hashing: keep the number of numbers 
 email.php:
 It is possible to use smtp, native php, or sendmail email functionality. To use smtp which is perhaps the most reliable for email delivery, set up an smtp email account on your server and enter the details:  hostname, username, password.
  
-emocha.php: 
-Edit site name and email address of site administrator for alerts.
-
 googlemaps.php:
 Edit client key for your domain, which you get from http://code.google.com/apis/maps/signup.html
-
-upload.php:
-Leave this as is. It sets the path for web file uploads.
 
 encryption.php:
 Edit arbitrary 15 character AES encryption key for storing sensitive data in the database.
 
-api.php: 
-Edit authentication to usr_password or usr_only depending on the level of api security required:
-usr_password - user has to enter password
-usr_only - no password required
-Note: This setting depends on the client. Consult the client documentation. usr_password is the standard. 
 
 c2dm.php:
 Edit google account details for c2dm message transmission (http://code.google.com/android/c2dm/):
