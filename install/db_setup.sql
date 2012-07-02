@@ -332,6 +332,22 @@ CREATE TABLE IF NOT EXISTS `uploaded_data` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `form_data_files`
+--
+
+CREATE TABLE IF NOT EXISTS `form_data_files` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `form_data_id` int(11) NOT NULL,
+  `filename` varchar(200) NOT NULL COMMENT 'path to the file',
+  `type` varchar(50) NOT NULL,
+  `xpath` varchar(100) COMMENT 'xpath node name the file points to (if any)',
+  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='contains files related to form data (e.g: pictures, signatures, audio files, etc..)';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 

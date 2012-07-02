@@ -20,5 +20,8 @@ return array(
 	//server config values:
 	'version_name' => 'version_name',
 	'admin_alerts_to' => 'admin_alerts_to',
-	'available_languages' => 'available_languages'
+	'available_languages' => 'available_languages',
+
+	//paths
+	'form_file_data_path' => DOCROOT.'sdcard/emocha/odk/form_data/'
 );

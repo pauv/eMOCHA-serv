@@ -322,9 +322,9 @@ class Emocha_Controller_Api extends Controller {
 			$this->_process_extra_data($form->code,$form_data);
 		}
 
-		//common: Insert or update the form data as the case may be
+		//common: Insert or update the form data as the case may be; return form_data_id so devices can use it...
 		if ($form_data->save()) {
-			$json = View::factory('json/display', Json::response('OK', 'data_uploaded'))->render();
+			$json = View::factory('json/display', Json::response('OK', 'data_uploaded', array('form_data_id'=>$form_data->id)))->render();
 		} 
 		else {
 			$json = View::factory('json/display', Json::response('ERR', 'affected=0'))->render();
@@ -342,7 +342,7 @@ class Emocha_Controller_Api extends Controller {
 
     $form = ORM::factory('form')->where('code','=',Arr::get($_POST,"form_code"))->find();
     if(! $form->loaded()) {
-      $json = View::factory('json/display', Json::response('ERR', 'invalid form code'))->render();
+      $json = View::factory('json/display', Json::response('ERR', Kohana::config('errors.invalid_fcode')))->render();
       $this->request->response = $json;
       return NULL;
     }
@@ -436,11 +436,97 @@ class Emocha_Controller_Api extends Controller {
     }
 	}
 ///////////// Upload form data ///////////////////    
+
+
+	/**
+	 * action_upload_form_data_file()
+	 *
+	 * 
+	 * Upload file connected to form data, creating a record in the form_data_file table.
+	 * unique key is form_data_file and xpath's node to the xform question.
+	 * params: form_data_id, filename, data (filebody), type, xpath, last_modified
+	 */
+ 	function action_upload_form_data_file() {
+		
+		//check input parameters 
+    $fd = ORM::factory('form_data')->where('id','=',Arr::get($_POST,"form_data_id"))->find();
+		if(! $fd->loaded()) 
+		{
+			$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.invalid_fdata_id')))->render();
+			return;
+		}
+		
+    if(! Arr::get($_POST,"xpath")) {
+			$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.empty_xpath')))->render();
+			return;
+		}
+
+		//get or create form_data_file
+		$fdf = $this->get_form_data_file(Arr::get($_POST,"form_data_id"),Arr::get($_POST,"xpath"));
+
+		//fill the object
+		$fdf->form_data_id = Arr::get($_POST,"form_data_id");
+		$fdf->filename = $fdf->get_fdf_path($fd).Arr::get($_POST,"filename");
+		$fdf->type = Arr::get($_POST,"type");
+		$fdf->xpath = Arr::get($_POST,"xpath");
+		$fdf->last_modified = Arr::get($_POST,"last_modified");
+
+		//save data & upload file
+		if($fdf->save())
+		{
+			//upload file
+    	if(isset($_FILES['data']))
+			{
+				//1.- validate
+				$validation = Validate::factory($_FILES)
+					->rules('data', array(
+											'upload::valid'=>NULL, 
+											//TODO define allowed file types
+											'upload::type'=>array(array('3gp','mp4','m4a','aac','flac','mp3','ogg','wav','jpg','gif','bmp','webm','png')), 
+											'upload::size'=>array('32M')
+											));
+				if (! $validation->check())
+				{
+					$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.wrong_file')))->render();
+					return;
+				}
+
+				//2.- save file
+				if($fdf->save_file($_FILES['data']))
+				{
+					$this->request->response = View::factory('json/display', Json::response('OK', 'file saved'))->render();
+					return;
+				}
+				else
+				{
+					$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.error_saving_fdf')))->render();
+					return;
+				}
+			}
+		}
+		else
+		{
+			$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.error_saving_fdf')))->render();
+			return;
+		}
+	}
     
-	
+	//get existent form_data_file, based on key (form_data_id,xpath), or create a new one
+	private function get_form_data_file($form_data_id=-1, $xpath='') {
+	 	$fdf = ORM::factory('form_data_file')
+         ->where('form_data_id','=', $form_data_id)
+         ->and_where('xpath','=', $xpath)
+         ->find();
+
+		if($fdf->loaded())
+			return $fdf;
+		else
+			return ORM::factory('form_data_file');
+	}
 	/**
 	 * action_upload_form_file()
 	 *
+	 * TO DEPRECATE? (pau: used only in test/api.php; also new form_data_file table has been added..)
 	 * Upload file connected to form data
 	 *
 	 */
@@ -449,7 +535,7 @@ class Emocha_Controller_Api extends Controller {
     	// load associated form
     	$form = ORM::factory('form')->where('code','=',Arr::get($_POST,"form_code"))->find();
 		if(! $form->loaded()) {
-			$json = View::factory('json/display', Json::response('ERR', 'invalid form code'))->render();
+			$json = View::factory('json/display', Json::response('ERR', Kohana::config('errors.invalid_fcode')))->render();
 			$this->request->response = $json;
 			return;
 		}

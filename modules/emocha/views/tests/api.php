@@ -98,6 +98,23 @@
 	image: <input type="file" name="image" /><br/>
 	<input type="submit" />
 </form>
+<!-- upload_form_data_file -->
+<h2>upload_form_data_file</h2>
+<?php echo Form::open('/api/upload_form_data_file', array(
+													'enctype'=>'multipart/form-data'
+													));?>
+	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+	pwd: <input type="text" name="pwd" value="123456" /><br/>
+	device_id: <input type="text" name="device_id" value="<?php echo $usr; ?>" /><br/>
+	form_data_id: <input type="text" name="form_data_id" value="-1" /><br/>
+	filename: <input type="text" name="filename"></input><br>
+	type: <input type="text" name="type" value="signature" /><br/>
+	xpath: <input type="text" name="xpath" value="/data/signature" /><br/>
+	last_modified: <input type="text" name="last_modified" value="<?php echo date('YmdHis'); ?>" /><br/>
+	data: <input type="file" name="data" /><br/>
+	<input type="submit" />
+</form>
+<!-- END upload_form_data_file -->
 
 <h2>log_reminder (Exact only)</h2>
 <?php echo Form::open('/api/log_reminder', array(
