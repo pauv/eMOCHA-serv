@@ -136,4 +136,5 @@ class Controller_Test extends Controller_Site {
 			$this->template->content = $str;
     	}
 	
+
 }
