@@ -23,5 +23,8 @@ return array(
 	'available_languages' => 'available_languages',
 
 	//paths
-	'form_file_data_path' => DOCROOT.'sdcard/emocha/odk/form_data/'
+	'form_file_data_path' => 'sdcard/emocha/odk/form_data/',
+
+	//form data file types
+	'type_signature' => 'signature'
 );

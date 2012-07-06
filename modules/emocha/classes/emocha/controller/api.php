@@ -456,13 +456,13 @@ class Emocha_Controller_Api extends Controller {
 			return;
 		}
 		
-    if(! Arr::get($_POST,"xpath")) {
+    if(! Arr::get($_POST,"xpath") AND !Arr::get($_POST,"type") == Kohana::config('values.type_signature')) {
 			$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.empty_xpath')))->render();
 			return;
 		}
 
 		//get or create form_data_file
-		$fdf = $this->get_form_data_file(Arr::get($_POST,"form_data_id"),Arr::get($_POST,"xpath"));
+		$fdf = $this->get_form_data_file(Arr::get($_POST,"form_data_id"),Arr::get($_POST,"xpath"),Arr::get($_POST,"type"));
 
 		//fill the object
 		$fdf->form_data_id = Arr::get($_POST,"form_data_id");
@@ -512,16 +512,25 @@ class Emocha_Controller_Api extends Controller {
 	}
     
 	//get existent form_data_file, based on key (form_data_id,xpath), or create a new one
-	private function get_form_data_file($form_data_id=-1, $xpath='') {
-	 	$fdf = ORM::factory('form_data_file')
-         ->where('form_data_id','=', $form_data_id)
-         ->and_where('xpath','=', $xpath)
-         ->find();
-
-		if($fdf->loaded())
-			return $fdf;
-		else
+	private function get_form_data_file($form_data_id=-1, $xpath='', $type='') {
+		//case 'signature' is slightly different, since a form might have several signatures associated (a question can't)
+		//right now, always create a new entry, without updating. TODO: create a way to update, using filename (would that be unique enough?)
+		if ($type == Kohana::config('values.type_signature')) 
+		{
 			return ORM::factory('form_data_file');
+		} 
+		else 
+		{
+	 		$fdf = ORM::factory('form_data_file')
+    	     ->where('form_data_id','=', $form_data_id)
+    	     ->and_where('xpath','=', $xpath)
+    	     ->find();
+
+			if($fdf->loaded())
+				return $fdf;
+			else
+				return ORM::factory('form_data_file');
+		}
 	}
 	/**
 	 * action_upload_form_file()
