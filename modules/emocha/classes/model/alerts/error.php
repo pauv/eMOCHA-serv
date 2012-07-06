@@ -7,6 +7,6 @@
  * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */ 
-class Model_C2dm_Error extends ORM {
+class Model_Alerts_Error extends ORM {
 
 }

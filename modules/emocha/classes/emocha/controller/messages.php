@@ -39,8 +39,9 @@ class Emocha_Controller_Messages extends Controller_Site {
 	/**
 	 *  action_send()
 	 *
-	 * Send C2dm message to all enabled phones
+	 * Send Gcm message to all enabled phones
 	 */
+	 
 	public function action_send()
 	{
 	
@@ -53,15 +54,17 @@ class Emocha_Controller_Messages extends Controller_Site {
 			if($message = trim($post['message'])) {
 			
 				// get the auth key
-				$auth_key = C2dm::client_auth();
+				//$auth_key = C2dm::client_auth();
+				$auth_key = Kohana::config('gcm.auth_key');
+				//$auth_key = Config::get('platform', 'google_api_auth_key');
 				
 				// set collapse key
 				$collapse_key = 'ck'.time();
 				
 				// iterate phones
 				$phones = ORM::factory('phone')
-							->where('c2dm_registration_id','!=','')
-							->and_where('c2dm_disable', '=', 0)
+							->where('alerts_id','!=','')
+							->and_where('enable_alerts', '=', 1)
 							->find_all();
 				$phone_response = '';
 				foreach($phones as $phone) {
@@ -78,10 +81,6 @@ class Emocha_Controller_Messages extends Controller_Site {
 				$content->message = $message;
 			}
 		}
-		
-
-		
 	}
-	
-	
+
 }
