@@ -137,4 +137,16 @@ class Controller_Test extends Controller_Site {
     	}
 	
 
+
+		/**
+	 *  action_api()
+	 *
+	 * Forms for making test api calls
+	 */
+	public function action_xform()
+	{
+		$this->auto_render = FALSE;
+		$content = View::factory('tests/xform')->render();
+		echo $content;
+	}
 }
