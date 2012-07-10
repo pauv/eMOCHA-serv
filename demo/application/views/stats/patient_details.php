@@ -3,7 +3,7 @@
 }
 				
 else {
-	echo '<img src="/images/icons/patient_100.png" width=100 align="left">';
+	echo '<img src="' . Kohana::config('assets.images_folder') . '/icons/patient_100.png" width=100 align="left">';
 }
 ?>
 

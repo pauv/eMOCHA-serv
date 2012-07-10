@@ -4,8 +4,8 @@
 >
   <head>
     <title>XForms input and output controls</title>
-    <script src="/js/backplane/backplane.js" type="text/javascript">/**/</script>
-	<link rel="stylesheet" href="/js/backplane/assets/backplane.css"></link>
+    <script src="<?php echo Kohana::config('assets.javascript_folder'); ?>/backplane/backplane.js" type="text/javascript">/**/</script>
+	<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/backplane/assets/backplane.css"></link>
   </head>
   <body>
     <xf:model>

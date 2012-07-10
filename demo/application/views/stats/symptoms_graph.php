@@ -1,9 +1,9 @@
-<script language="JavaScript" src="/js/jqplot/jquery.jqplot.min.js"></script>
-<script language="javascript" type="text/javascript" src="/js/jqplot/plugins/jqplot.dateAxisRenderer.js"></script>
-<script language="javascript" type="text/javascript" src="/js/jqplot/plugins/jqplot.ohlcRenderer.js"></script>
-<script language="javascript" type="text/javascript" src="/js/jqplot/plugins/jqplot.json2.js"></script>
-<script language="javascript" type="text/javascript" src="/js/jqplot/plugins/jqplot.ciParser.js"></script>
-   <link rel="stylesheet" type="text/css" href="/js/jqplot/jquery.jqplot.css" />
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/jquery.jqplot.min.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/plugins/jqplot.dateAxisRenderer.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/plugins/jqplot.ohlcRenderer.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/plugins/jqplot.json2.js"></script>
+<script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/plugins/jqplot.ciParser.js"></script>
+   <link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/jquery.jqplot.css" />
 
 
 

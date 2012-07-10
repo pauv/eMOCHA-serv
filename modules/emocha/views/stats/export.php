@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/stats_export.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/stats_export.css">
 
 <div id="datalist">
 <h3>This is the list of existing forms. Please click on one to show a table with all received data.</h3>

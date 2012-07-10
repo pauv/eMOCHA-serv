@@ -42,5 +42,5 @@ to the server in the form of XML files.
 	</tr>
 </table>
 
-<script src="/js/slimbox2.js" type="text/javascript"></script>
-<link rel="stylesheet" type="text/css" href="/css/slimbox2.css">
+<script src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slimbox2.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/slimbox2.css">

@@ -34,7 +34,7 @@ Household code:<br/>
 			}
 		}
 		?><div class="stats_household">
-			<h3><img src="/images/icons/household_32.png" class="title_icon"><?php echo $household->code; ?></h3>
+			<h3><img src="<?php echo Kohana::config('assets.images_folder'); ?>/icons/household_32.png" class="title_icon"><?php echo $household->code; ?></h3>
 			<?php
 				$files = $household->form_datas->find_all();
 				if (count($files)) {
@@ -50,7 +50,7 @@ Household code:<br/>
 			?>
 			<?php
 			foreach($household->patients->find_all() as $patient) { ?>
-				<div class="stats_patient"><img src="/images/icons/patient_32.png" class="title_icon">
+				<div class="stats_patient"><img src="<?php echo Kohana::config('assets.images_folder'); ?>/icons/patient_32.png" class="title_icon">
 					<?php echo $patient->first_name.' '.$patient->last_name .' <small>('.$patient->code.')</small>';
 				?>
 				<?php
