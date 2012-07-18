@@ -464,50 +464,54 @@ class Emocha_Controller_Api extends Controller {
 		//get or create form_data_file
 		$fdf = $this->get_form_data_file(Arr::get($_POST,"form_data_id"),Arr::get($_POST,"xpath"),Arr::get($_POST,"type"));
 
-		//fill the object
-		$fdf->form_data_id = Arr::get($_POST,"form_data_id");
-		$fdf->filename = $fdf->get_fdf_path($fd).Arr::get($_POST,"filename");
-		$fdf->type = Arr::get($_POST,"type");
-		$fdf->xpath = Arr::get($_POST,"xpath");
-		$fdf->last_modified = Arr::get($_POST,"last_modified");
-
-		//save data & upload file
-		if($fdf->save())
+		if (file_exists($fdf->filename))
 		{
-			//upload file
-    	if(isset($_FILES['data']))
-			{
-				//1.- validate
-				$validation = Validate::factory($_FILES)
-					->rules('data', array(
-											'upload::valid'=>NULL, 
-											//TODO define allowed file types
-											'upload::type'=>array(array('3gp','mp4','m4a','aac','flac','mp3','ogg','wav','jpg','gif','bmp','webm','png')), 
-											'upload::size'=>array('32M')
-											));
-				if (! $validation->check())
-				{
-					$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.wrong_file')))->render();
-					return;
-				}
+			unlink($fdf->filename);
+		}
 
-				//2.- save file
-				if($fdf->save_file($_FILES['data']))
+		//upload file & save data
+  	if(isset($_FILES['data']))
+		{
+			//1.- validate
+			$validation = Validate::factory($_FILES)
+				->rules('data', array(
+										'upload::valid'=>NULL, 
+										//TODO define allowed file types
+										'upload::type'=>array(array('3gp','mp4','m4a','aac','flac','mp3','ogg','wav','jpg','gif','bmp','webm','png')), 
+										'upload::size'=>array('32M')
+										));
+			if (! $validation->check())
+			{
+				$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.wrong_file')))->render();
+				return;
+			}
+
+			//2.- save file
+			if($fdf->save_file($_FILES['data'], $fdf->get_fdf_path($fd).Arr::get($_POST,"filename")))
+			{
+				//fill the object
+				$fdf->form_data_id = Arr::get($_POST,"form_data_id");
+				$fdf->filename = $fdf->get_fdf_path($fd).Arr::get($_POST,"filename");
+				$fdf->type = Arr::get($_POST,"type");
+				$fdf->xpath = Arr::get($_POST,"xpath");
+				$fdf->last_modified = Arr::get($_POST,"last_modified");
+
+				if($fdf->save())
 				{
 					$this->request->response = View::factory('json/display', Json::response('OK', 'file saved'))->render();
 					return;
 				}
-				else
+				else 
 				{
 					$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.error_saving_fdf')))->render();
 					return;
 				}
 			}
-		}
-		else
-		{
-			$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.error_saving_fdf')))->render();
-			return;
+			else
+			{
+				$this->request->response = View::factory('json/display', Json::response('ERR', Kohana::config('errors.error_getting_fdf')))->render();
+				return;
+			}
 		}
 	}
     
