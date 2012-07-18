@@ -1,6 +1,6 @@
 
 <div id="inner_content">
-<b>Send C2dm alert to all phones</b>
+<b>Send alert to all alert-enabled phones</b>
 
 <?php if($response) { ?>
 	<br /><br />

@@ -1,8 +1,8 @@
-<link rel="stylesheet" href="/js/slickgrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="/js/slickgrid/css/smoothness/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="/js/slickgrid/slick.base.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="/js/slickgrid/slick.pager.css" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="/js/slickgrid/slick.columnpicker.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.grid.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/css/smoothness/jquery-ui-1.8.5.custom.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.base.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.pager.css" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.columnpicker.css" type="text/css" media="screen" charset="utf-8" />
 <style>
 		.cell-title {
 			font-weight: bold;
@@ -27,14 +27,14 @@
             -moz-border-radius: 10px;
         }
 	</style>
-<script language="JavaScript" src="/js/slickgrid/lib/jquery.event.drag-2.0.min.js"></script>
-<script language="JavaScript" src="/js/slickgrid/lib/jquery.event.drop-2.0.min.js"></script>
-<script language="JavaScript" src="/js/slickgrid/lib/jquery-ui-1.8.5.custom.min.js"></script>
-<script language="JavaScript" src="/js/slickgrid/slick.grid.js"></script>
-<script language="JavaScript" src="../slick.editors.js"></script>
-<script language="JavaScript" src="/js/slickgrid/slick.model.js"></script>
-<script language="JavaScript" src="/js/slickgrid/slick.pager.js"></script>
-<script language="JavaScript" src="/js/slickgrid/slick.columnpicker.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/lib/jquery.event.drag-2.0.min.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/lib/jquery.event.drop-2.0.min.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/lib/jquery-ui-1.8.5.custom.min.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.grid.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slick.editors.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.model.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.pager.js"></script>
+<script language="JavaScript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/slickgrid/slick.columnpicker.js"></script>
 
 <div id="patient_image" style="position:absolute; z-index:10"></div>
 <div id="inner_content">
@@ -177,7 +177,7 @@
 				data[<?php echo $i; ?>] = {
 					id: "id_<?php echo $i; ?>",
 					img: '<?php if($profile_image = $patient->get_profile_image()) {
-							echo '<a href="'.Url::site('stats/patient_image').'/'.$patient->id.'" target="_blank"><img src="/images/icons/patient_32.png" width=20></a>';
+							echo '<a href="'.Url::site('stats/patient_image').'/'.$patient->id.'" target="_blank"><img src="' . Kohana::config('assets.images_folder') . '/icons/patient_32.png" width=20></a>';
 						} ?>',
                     village_code: "<?php echo $patient->household->village_code; ?>",
                     household_code: "<?php echo $patient->household_code; ?>",

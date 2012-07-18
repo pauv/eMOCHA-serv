@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/stats_datasel.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/stats_datasel.css">
 
 &nbsp;
 <div class="stats_summary" >
@@ -16,7 +16,7 @@ Total reminders ignored: <b><?php echo ORM::factory('form_data')->where('rejecte
 
 			<?php
 			foreach($patients as $patient) { ?>
-				<div class="stats_patient"><img src="/images/icons/patient_32.png" class="title_icon">
+				<div class="stats_patient"><img src="<?php echo Kohana::config('assets.images_folder'); ?>/icons/patient_32.png" class="title_icon">
 				<a href="javascript:;" onclick="$('#dates_<?php echo $patient->id; ?>').toggle();hide_xml();"><?php echo $patient->code; ?></a>
 					Total forms: <b><?php echo $patient->form_datas->count_all(); ?></b>,
 					Late: <b><?php echo $patient->form_datas->where('rejected','=','late')->count_all(); ?></b>,

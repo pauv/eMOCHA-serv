@@ -51,9 +51,9 @@ if(isset($errors)) {
         
         <tr>
 
-            <td>Disable c2dm</td>
+            <td>Enable alerts</td>
 
-            <td><?php echo Form::select('c2dm_disable', array('0','1'), Arr::get($form_vals, 'c2dm_disable', '')); ?></td>
+            <td><?php echo Form::select('enable_alerts', array('0','1'), Arr::get($form_vals, 'enable_alerts', '')); ?></td>
 
         </tr>
        

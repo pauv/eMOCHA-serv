@@ -3,3 +3,5 @@
 !/.gitignore*
 !values.php
 !errors.php
+!assets.php
+

@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>eMOCHA - <?php echo $title; ?></title>
-	<link rel="stylesheet" type="text/css" href="/css/reset.css">
-	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/reset.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/main.css">
 	<link rel="shortcut icon" href="favicon.ico">
-	<script src="/js/jquery-1.4.3.min.js" type="text/javascript"></script>
-	<script src="/js/main.js" type="text/javascript"></script>
+	<script src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jquery-1.4.3.min.js" type="text/javascript"></script>
+	<script src="<?php echo Kohana::config('assets.javascript_folder'); ?>/main.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -15,8 +15,8 @@
 <div id="header">
 	<table>
 		<tr>
-			<td><img src="/images/banner_cut.gif">
-				<img src="/images/eMOCHA_logo.png" />
+			<td><img src="<?php echo Kohana::config('assets.images_folder'); ?>/banner_cut.gif">
+				<img src="<?php echo Kohana::config('assets.images_folder'); ?>/eMOCHA_logo.png" />
 				</td>
 			
 			<td id="login" align="right">

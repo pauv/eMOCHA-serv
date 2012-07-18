@@ -31,7 +31,7 @@ class Model_Phone extends ORM {
 	 * @param string
 	 * @param int
 	 */
-	public function edit($imei, $validated, $password, $comments, $c2dm_disable) {
+	public function edit($imei, $validated, $password, $comments, $enable_alerts) {
         
         if(!$this->loaded()) {
         	$this->creation_ts = time();
@@ -40,7 +40,7 @@ class Model_Phone extends ORM {
         $this->imei_md5 = md5($imei);
         $this->validated = $validated;
         $this->comments = $comments;
-        $this->c2dm_disable = $c2dm_disable;
+        $this->enable_alerts = $enable_alerts;
         $this->save();
         
         // update the password
@@ -165,7 +165,7 @@ class Model_Phone extends ORM {
 		
 		if($alert->save()) {
 			// try to send
-			if($response = C2dm::send_message($auth_key, $alert, $this, $collapse_key)) {
+			if($response = Alerts::send_message($auth_key, $alert, $this, $collapse_key)) {
 				$alert->response = $response;
 				$alert->sent = 1;
 				return $alert->save();
@@ -179,7 +179,7 @@ class Model_Phone extends ORM {
 	/**
 	 * log_alert()
 	 *
-	 * Log c2dm alert
+	 * Log Gcm alert
 	 *
 	 * @param string
 	 * @param string

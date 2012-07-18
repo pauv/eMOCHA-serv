@@ -7,7 +7,7 @@
 
 			<?php
 			foreach($patients as $patient) { ?>
-				<div class="stats_patient"><img src="/images/icons/patient_32.png" class="title_icon">
+				<div class="stats_patient"><img src="<?php echo Kohana::config('assets.images_folder'); ?>/icons/patient_32.png" class="title_icon">
 					<?php echo $patient->code;
 				?>
 				<?php

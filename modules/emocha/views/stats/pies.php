@@ -1,8 +1,8 @@
  <!-- BEGIN: load jqplot -->
-  <script language="javascript" type="text/javascript" src="/js/jqplot/jquery.jqplot.js"></script>
-  <script language="javascript" type="text/javascript" src="/js/jqplot/plugins/jqplot.pieRenderer.js"></script>
-   <link rel="stylesheet" type="text/css" href="/js/jqplot/jquery.jqplot.css" />
-<!--  <link rel="stylesheet" type="text/css" href="/js/jqplot/examples/examples.css" />-->
+  <script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/jquery.jqplot.js"></script>
+  <script language="javascript" type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/plugins/jqplot.pieRenderer.js"></script>
+   <link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/jquery.jqplot.css" />
+<!--  <link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/examples/examples.css" />-->
 
   <!-- END: load jqplot -->
 

@@ -632,12 +632,12 @@ class Emocha_Controller_Api extends Controller {
 	
 	
 	/**
-	 * action_register_c2dm()
+	 * action_register_gcm()
 	 *
-	 * Register phone's c2dm registration id
+	 * Register phone's gcm registration id
 	 *
 	 */
-    function action_register_c2dm() {
+    function action_register_alerts_id() {
 
 		if(! $reg = trim(Arr::get($_POST,"registration_id",''))) {
 			$json = View::factory('json/display', Json::response('ERR', 'registration_id is empty'))->render();
@@ -646,7 +646,7 @@ class Emocha_Controller_Api extends Controller {
 		}
 		
 		$phone = $this->phone;
-		$phone->c2dm_registration_id = $reg;
+		$phone->alerts_id = $reg;
 		
 		if($phone->save()) {
 			$json = View::factory('json/display', Json::response('OK', 'registration id saved'))->render();

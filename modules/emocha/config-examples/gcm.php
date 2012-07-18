@@ -1,9 +1,9 @@
 <?php defined('SYSPATH') OR die('No direct access allowed.');
 
+// auth key for google account
 return array(
 	
 
-	'user' => '',
-	'password' => ''
+	'auth_key' => ''
 				
 );

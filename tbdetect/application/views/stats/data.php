@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css" href="/css/stats_datasel.css">
+<link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.css_folder'); ?>/stats_datasel.css">
 
 &nbsp;
 <div class="stats_summary" >

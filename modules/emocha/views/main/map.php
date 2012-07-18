@@ -1,5 +1,5 @@
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=<?php echo $google_maps_key; ?>" type="text/javascript"></script>
-<script src="/js/markerclusterer_packed.js" type="text/javascript"></script>
+<script src="<?php echo Kohana::config('assets.javascript_folder'); ?>/markerclusterer_packed.js" type="text/javascript"></script>
  <script type="text/javascript">
  	
 
@@ -9,7 +9,7 @@
 	var hhIcon = new GIcon(G_DEFAULT_ICON);
 	// HOUSEHOLDS
 	<?php if ($map_type=='households') { ?>
-		hhIcon.image = "/images/icons/household_map.png";
+		hhIcon.image = "<?php echo Kohana::config('assets.images_folder'); ?>/icons/household_map.png";
 		hhIcon.iconSize = new GSize(25, 23);
 	<?php } ?>
 	hhIcon.shadow = null;
