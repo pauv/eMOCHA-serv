@@ -436,11 +436,36 @@ class Emocha_Controller_Stats extends Controller_Site {
 	/**
 	 *  action_timegraph()
 	 *
-	 * Demo symptoms piechart
+	 * piechart from nodes specified in config
 	 */
-	 public function action_piechart() {
-	 	$content = $this->template->content = View::factory('stats/pies');
-	 	$content->totals = Stats::get_symptom_totals();
-	 	$content->title = "Symptoms pie chart";
+	 public function action_piecharts() {
+	 	$content = $this->template->content = View::factory('stats/piecharts');
+	 	$nodes = ORM::factory('stats_config')->where('type','=','piechart')->find_all();
+	 	$totals = array();
+
+		foreach($nodes as $node) {
+			$totals[$node->title] = Stats::get_piechart($node->form_id, $node->node);
+		}
+
+	 	$content->totals = $totals;
+	 	$content->title = "Pie charts";
+	 }
+	 
+	 
+	 /*
+	 * Demo charting of data input by date
+	 */
+	 public function action_dategraphs() {
+	 	$content = $this->template->content = View::factory('stats/dategraphs');
+	 	$nodes = ORM::factory('stats_config')->where('type','=','dategraph')->find_all();
+	 	$totals = array();
+
+		foreach($nodes as $node) {
+			echo "x";
+			$totals[$node->title] = Stats::get_dategraph($node->form_id, $node->node);
+		}
+
+	 	$content->totals = $totals;
+	 	$content->title = "Date graphs";
 	 }
 }

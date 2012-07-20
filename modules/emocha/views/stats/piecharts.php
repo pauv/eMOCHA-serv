@@ -5,14 +5,19 @@
 <!--  <link rel="stylesheet" type="text/css" href="<?php echo Kohana::config('assets.javascript_folder'); ?>/jqplot/examples/examples.css" />-->
 
   <!-- END: load jqplot -->
+<div id="inner_content">
 
-
-<script id="example_1" type="text/javascript">$(document).ready(function(){
+<? 
+$count = 0;
+foreach ($totals as $pie_name=>$vals) { 
+	$count++;
+?>
+<script type="text/javascript">$(document).ready(function(){
 	jQuery.jqplot.config.enablePlugins = true;
-	plot1 = jQuery.jqplot('chart1', 
+	plot1 = jQuery.jqplot('chart<?php echo $count; ?>', 
 		[[<?php
 			$js = '';
-			foreach($totals as $key=>$val) {
+			foreach($vals as $key=>$val) {
 			 	$js .= "['".$key."', ".$val."],";
 			 }
 			 $js = substr($js, 0, -1);
@@ -26,12 +31,14 @@
 	);
 });
 </script>
+<b><?php echo $pie_name; ?></b>
+
+<div id="chart<?php echo $count; ?>" style="margin-top:20px; margin-left:20px; width:460px; height:300px;"></div>
+<?php } ?>
 
 
-<div id="inner_content">
-<b><?php echo $title; ?></b>
 
-<div id="chart1" style="margin-top:20px; margin-left:20px; width:460px; height:300px;"></div>
+
 
 </div>
     
