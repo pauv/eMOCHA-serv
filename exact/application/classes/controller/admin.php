@@ -12,7 +12,7 @@ class Controller_Admin extends Emocha_Controller_Admin {
 	
 	public function action_patients($action=false) {
 		$this->template->title = 'Studies/patients';
-		$data['patients'] = ORM::factory('patient')->find_all();
+		$data['patients'] = ORM::factory('patient')->where('active','=',1)->find_all();
 		$data['action'] = $action;
 		$this->template->content = View::factory('admin/patients', $data);
 	}
@@ -113,7 +113,9 @@ class Controller_Admin extends Emocha_Controller_Admin {
 		}
 		
 		$content = $this->template->content = View::factory('admin/delete_patient_confirm');
-		$content->patient = ORM::factory('patient', $id);
+		$content->patient = ORM::factory('patient')
+						->where('id','=',$id)
+						->find();
 
 	}
 	
@@ -125,8 +127,11 @@ class Controller_Admin extends Emocha_Controller_Admin {
 			redirect('admin/patients');
 		}
 		
-		$patient = ORM::factory('patient', $id);
-		$patient->delete();
+		$patient = ORM::factory('patient')
+						->where('id','=',$id)
+						->find();
+		$patient->active = 0;
+		$patient->save();
 		Request::instance()->redirect('admin/patients/deleted');
 		
 		

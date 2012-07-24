@@ -28,13 +28,56 @@ class Model_Patient extends ORM {
 		// Initialise the validation library and use some rules
 		$array = Validate::factory($array)
 						->rule('phone_id', 'not_empty')
-						->rules('email', array('not_empty'=>Null,'email'=>Null));
+						->rules('email', array('not_empty'=>Null,'email'=>Null))
+						->callback('phone_id', array($this, 'imei_available'));
 		
 		if($mode=='create') {
 			$array->rule('code', 'not_empty');
+			$array->callback('code', array($this, 'code_unique'));
 		}
  
 		return $array;
+	}
+	
+	
+	/**
+	 * Check if code is not already taken
+	 *
+	 * @param    Validate  $array   validate object
+	 * @param    string    $field   field name
+	 */
+	public function code_unique(Validate $array, $field)
+	{
+		$exists = (bool) DB::select(array('COUNT("*")', 'total_count'))
+						->from($this->_table_name)
+						->where('code',   '=',   $array[$field])
+						->and_where('id',     '!=',   $this->id)
+						->execute($this->_db)
+						->get('total_count');
+ 
+		if ($exists)
+			$array->error($field, 'code_unique', array($array[$field]));
+	}
+	
+	
+	/**
+	 * Check if imei is not already taken by an active patient
+	 *
+	 * @param    Validate  $array   validate object
+	 * @param    string    $field   field name
+	 */
+	public function imei_available(Validate $array, $field)
+	{
+		$exists = (bool) DB::select(array('COUNT("*")', 'total_count'))
+						->from($this->_table_name)
+						->where('phone_id',   '=',   $array[$field])
+						->and_where('id',     '!=',   $this->id)
+						->and_where('active',     '=',   1)
+						->execute($this->_db)
+						->get('total_count');
+ 
+		if ($exists)
+			$array->error($field, 'imei_available', array($array[$field]));
 	}
 	
 	

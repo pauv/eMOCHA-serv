@@ -28,6 +28,7 @@ class Controller_Api extends Emocha_Controller_Api {
 		// load the study/patient from the phone id
 		$patient = ORM::factory('patient')
 						->where('phone_id','=',$this->phone->id)
+						->and_where('active','=',1)
 						->find();
 		if(! $patient->loaded()) {
 			$json = View::factory('json/display', Json::response('ERR', 'no corresponding study id found'))->render();
@@ -101,6 +102,7 @@ class Controller_Api extends Emocha_Controller_Api {
 		// load the study/patient from the phone id
 		$patient = ORM::factory('patient')
 						->where('phone_id','=',$this->phone->id)
+						->and_where('active','=',1)
 						->find();
 		if(! $patient->loaded()) {
 			$json = View::factory('json/display', Json::response('ERR', 'no corresponding study id found'))->render();
