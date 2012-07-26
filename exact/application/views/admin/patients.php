@@ -16,7 +16,7 @@
 
 <tr>
 	<th>Code</th>
-	<th></th>
+	<th>Phone</th>
 	<th></th>
 	<th></th>
 
@@ -45,7 +45,7 @@
 			?>
 <tr class="<?php echo ($count%2 ? "odd":"even"); ?>">
 	<td><?php echo $patient->code; ?> </td>
-	</td> </td>
+	<td><?php echo $patient->phone->imei; ?>  </td>
 	<td><?php echo Html::anchor('admin/edit_patient/'.$patient->id, 'edit') ?></td>
 	<td><?php echo Html::anchor('admin/delete_patient/'.$patient->id, 'delete') ?></td>
 </tr>

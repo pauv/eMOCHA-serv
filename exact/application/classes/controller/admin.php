@@ -61,6 +61,19 @@ class Controller_Admin extends Emocha_Controller_Admin {
 			if ( ! $validation->check())
 			{
 				$errors = $validation->errors('patient');
+				
+				// customise phone_id error
+				// to show patient already using phone
+				if(isset($errors['phone_id'])) {
+					$phone_patient = ORM::factory('patient')
+						->where('phone_id','=',$post['phone_id'])
+						->and_where('active','=',1)
+						->find();
+					if($phone_patient->loaded()) {
+						$errors['phone_id'] .= " (patient code: ".$phone_patient->code.")";
+					}
+				}
+				
 			}
 			else 
 			{

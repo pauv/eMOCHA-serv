@@ -6,6 +6,7 @@ class Model_Patient extends ORM {
 	protected $_has_many = array (
 								'form_datas'=>array('foreign_key'=>'patient_code')
 							);
+	protected $_belongs_to = array('phone' => array('model' => 'phone', 'foreign_key' => 'phone_id'));
 	
 	
 	
