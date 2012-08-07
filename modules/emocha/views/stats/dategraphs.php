@@ -14,12 +14,7 @@ $count = 0;
 
 foreach ($totals as $chart_name=>$vals) { 
 	$count++;
-	/*
-	An array of points for each symptom:
-	This could be coded much more streamlined
 	
-	$vals[case][date]=num
-	*/
 ?><script class="code" type="text/javascript">$(document).ready(function(){
 	points<?php echo $count; ?> = [];
 <?php
