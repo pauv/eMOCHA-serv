@@ -494,7 +494,7 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 * demo of stack graph from nodes specified in config (using d3)
 	 */
 	 public function action_formtree($form_id) {
-	 	$content = $this->template->content = View::factory('stats/formtree2');
+	 	$content = $this->template->content = View::factory('stats/formtree');
 	 	
 	 	$form = ORM::factory('form', $form_id);
 	 	$form = ORM::factory('form', $form_id);
