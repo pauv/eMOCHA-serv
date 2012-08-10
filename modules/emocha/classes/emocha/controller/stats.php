@@ -469,4 +469,54 @@ class Emocha_Controller_Stats extends Controller_Site {
 	 	$content->totals = $totals;
 	 	$content->title = "Date graphs";
 	 }
+	 
+	 /*
+	 *  action_stack()
+	 * 
+	 * demo of stack graph from nodes specified in config (using d3)
+	 */
+	 public function action_stack() {
+	 	$content = $this->template->content = View::factory('stats/dategraphs');
+	 	$nodes = ORM::factory('stats_config')->where('type','=','stack')->find_all();
+	 	$totals = array();
+
+		foreach($nodes as $node) {
+			$totals[$node->title] = Stats::get_dategraph($node->form_id, $node->node);
+		}
+
+	 	$content->totals = $totals;
+	 	$content->title = "Date graphs";
+	 }
+	 
+	  /*
+	 *  action_stack()
+	 * 
+	 * demo of stack graph from nodes specified in config (using d3)
+	 */
+	 public function action_formtree($form_id) {
+	 	$content = $this->template->content = View::factory('stats/formtree2');
+	 	
+	 	$form = ORM::factory('form', $form_id);
+	 	$form = ORM::factory('form', $form_id);
+		$form_exporter = new Form_Exporter($form);
+	 	$xml = $form_exporter->get_xml();
+
+	 	$xml_array = $this->xml_children($xml);
+	 	$content->data = json_encode($xml_array);
+
+	 }
+	 
+	 public function xml_children($xml) {
+	 	$arr = array();
+	 	$arr['name'] = $xml->getName();
+	 	if(count($xml->children())) {
+	 		$arr['children'] = array();
+	 	}
+		foreach ($xml->children() as $gen) {
+			array_push($arr['children'], $this->xml_children($gen));
+		}
+		return $arr;
+	 }
+	 
+	
 }

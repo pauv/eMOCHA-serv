@@ -167,6 +167,16 @@
 				return $this->_get_columns($this->def_form_xml, '');
 			} 
 		}
+		/**
+		 * get_xml()
+		 *
+		 * Read  xml template
+		 */
+		function get_xml() {
+			if ($this->file_found) {
+				return $this->def_form_xml;
+			} 
+		}
 		
 
 		/**
@@ -199,6 +209,33 @@
 				return $this->columns;
 			}
 		}
+		
+		
+		/**
+		 * get_tree()
+		 *
+		 * Read nodes from xml template
+		 *
+		 * @param object
+		 * @param int
+		 * @return array
+		 */
+		 /*
+		public function _get_tree($obj, $parent_id) {
+			if ($this->file_found) {
+				// fill remaining columns by reading xml tree
+				foreach($obj as $key => $val) {
+					$id = ($parent_id ? "$parent_id." : '').$key; 
+					if (count($val) > 0) {
+						$this->_get_columns($val, $id);
+					} else {
+						array_push($this->columns, $id);
+					}
+				}
+				return $this->columns;
+			}
+		}
+		*/
 		
 
 		/**
