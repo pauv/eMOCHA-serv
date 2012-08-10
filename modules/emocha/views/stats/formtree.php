@@ -18,7 +18,7 @@
 </style>
 
 <div id="chart"></div>
-<script type="text/javascript" src="/js/d3/d3.v2.min.js"></script>
+<script type="text/javascript" src="<?php echo Kohana::config('assets.javascript_folder'); ?>/d3/d3.v2.min.js"></script>
 <script type="text/javascript">
     
     var width = 960,
