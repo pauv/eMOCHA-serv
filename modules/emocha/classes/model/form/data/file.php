@@ -27,10 +27,10 @@ class Model_Form_Data_File extends ORM {
 	 * @return: true if saved, false otherwise
 	 * 
 	 */
-	public function save_file($data) {
+	public function save_file($data,$full_path) {
 		//get paths ready
-		$filename = basename($this->filename);
-		$dir = dirname($this->filename);
+		$filename = basename($full_path);
+		$dir = dirname($full_path);
 		if (!is_dir($dir))
 		{
 			if (!mkdir($dir,0755,TRUE))
