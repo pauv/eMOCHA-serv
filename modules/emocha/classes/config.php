@@ -17,13 +17,13 @@ class Config
 	 *
 	 * @param string
 	 * @param string
+	 * @param string
 	 *
 	 * @return string
-	 * NOTE: this is just rough, need to finish config conversation to finalise
 	 */
- 	public static function get($type='', $label='') {
+ 	public static function get($type='', $label='', $default='') {
  	
- 		$content = '';
+ 		$content = $default;
  		if($type && $label) {
 			$config = ORM::factory('config')
 					->where('type','=',$type)

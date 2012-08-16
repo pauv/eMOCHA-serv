@@ -22,6 +22,10 @@ class Emocha_Controller_Messages extends Controller_Site {
 		$this->template->title = 'Messages';
 		$this->template->nav = View::factory('messages/nav');
 		$this->template->curr_menu = 'messages';
+		
+		if(! $this->enable_alerts) {
+			echo "alerts are disabled"; exit;
+		}
 
 	}
 	

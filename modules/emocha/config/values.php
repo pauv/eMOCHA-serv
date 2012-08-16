@@ -10,6 +10,7 @@ return array(
 	'app_type_households' => 'app_type_households',
 	'app_type_patients_only' => 'app_type_patients_only',
 	'app_type_forms_only' => 'app_type_forms_only',
+	'enable_alerts' => 'enable_alerts',
 
 	'authentication' => 'authentication',
 	'usr_only' => 'usr_only',

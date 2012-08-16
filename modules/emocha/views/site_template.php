@@ -35,7 +35,9 @@
 	</table>
 	<div id="menu">
 	<?php if($logged_in) {
-		echo View::factory('menu')->bind('is_admin_user', $is_admin_user);
+		echo View::factory('menu')
+		->bind('is_admin_user', $is_admin_user)
+		->bind('enable_alerts', $enable_alerts);
 		} ?>
 	</div>
 </div>
@@ -88,7 +90,6 @@
 			$('#nav LI').click(li_click);
 		});
 	</script>
-
 </div>
 </body>
 </html>

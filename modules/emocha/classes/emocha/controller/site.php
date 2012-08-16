@@ -49,7 +49,7 @@ class Emocha_Controller_Site extends Controller_Template
 		}
 		
 		//get version_name
-		$version_name = ORM::factory('config')
+		/*$version_name = ORM::factory('config')
 										->where('label','=',Kohana::config('values.version_name'))
 										->and_where('type','=',Kohana::config('values.server'))
 										->find();
@@ -60,6 +60,14 @@ class Emocha_Controller_Site extends Controller_Template
 		{
 			$this->template->version_name = Kohana::config('values.version_name');
 		}
+		*/
+		
+		// LOAD CONFIG VALUES
+		// get version name
+		$this->template->version_name = Config::get('server',Kohana::config('values.version_name'));
+		// get whether alerts are enabled
+		$this->template->enable_alerts= $this->enable_alerts = Config::get('platform',Kohana::config('values.enable_alerts'), 1);
+		
 		
 		// Check user auth
 		if ($this->login_required) {
