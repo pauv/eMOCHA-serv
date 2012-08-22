@@ -36,11 +36,14 @@ class Alerts
 			$data = array('registration_ids' => array($phone->alerts_id),
 			'collapse_key' => $collapse_key,
 			'delay_while_idle' => false,
-			'data.alert_id' => $alert->id,
-			'data.message_type' => $alert->message_type,
-			'data.form_code' => $alert->form_code,
-			'data.message' => urlencode($alert->message),
-			'data.pn_sent' => date('YmdHis'));
+			'data' => array(
+						'alert_id' => $alert->id,
+						'message_type' => $alert->message_type,
+						'form_code' => $alert->form_code,
+						'message' => urlencode($alert->message),
+						'pn_sent' => date('YmdHis')
+						)
+					);
 			
 			
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
