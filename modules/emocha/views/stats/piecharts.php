@@ -7,7 +7,7 @@
   <!-- END: load jqplot -->
 <div id="inner_content">
 
-<? 
+<?php
 $count = 0;
 foreach ($totals as $pie_name=>$vals) { 
 	$count++;
