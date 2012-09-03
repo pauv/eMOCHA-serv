@@ -29,7 +29,7 @@ Total forms: <b><?php echo ORM::factory('form_data')->count_all(); ?></b>,
 						if (count($files)) {
 							print sprintf('<ul id="list_%s">', $patient->id.'_'.$date);
 							foreach($files AS $file) { 
-								?><li><a href="javascript:;" onClick="display_xml(<?php echo $file->id; ?>); return false" class="linkToXML"<?php if($file->rejected) echo ' style="color:red;"'; ?>><?php echo $file->get_form_name(); ?></a> <?php echo $file->last_modified; ?></li><?
+								?><li><a href="javascript:;" onClick="display_xml(<?php echo $file->id; ?>); return false" class="linkToXML"<?php if($file->rejected) echo ' style="color:red;"'; ?>><?php echo $file->get_form_name(); ?></a> <?php echo $file->last_modified; ?></li><?php
 							}
 							print '</ul>';
 						}
