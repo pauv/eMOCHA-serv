@@ -427,7 +427,7 @@ class Emocha_Controller_Api extends Controller {
           ->rules('image', array(
                       'upload::valid'=>NULL, 
                       'upload::type'=>array(array('jpg')), 
-                      'upload::size'=>array('2M')
+                      'upload::size'=>array('32M')
                       ));
         if ($validation->check()){
           $patient->save_profile_image($_FILES['image']);
