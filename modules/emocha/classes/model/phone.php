@@ -31,7 +31,7 @@ class Model_Phone extends ORM {
 	 * @param string
 	 * @param int
 	 */
-	public function edit($imei, $validated, $password, $comments, $enable_alerts) {
+	public function edit($imei, $validated, $password, $session_password, $comments, $enable_alerts) {
         
         if(!$this->loaded()) {
         	$this->creation_ts = time();
@@ -43,10 +43,16 @@ class Model_Phone extends ORM {
         $this->enable_alerts = $enable_alerts;
         $this->save();
         
-        // update the password
+        // update the passwords
         if($password) {
 			$sql = "UPDATE ".$this->_table_name."
 					SET pwd = PASSWORD('".$password."')
+					WHERE id=".$this->id;
+			$result = DB::query(Database::UPDATE, $sql)->execute();
+		}
+		 if($session_password) {
+			$sql = "UPDATE ".$this->_table_name."
+					SET session_pwd = PASSWORD('".$session_password."')
 					WHERE id=".$this->id;
 			$result = DB::query(Database::UPDATE, $sql)->execute();
 		}

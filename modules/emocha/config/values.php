@@ -15,6 +15,7 @@ return array(
 	'authentication' => 'authentication',
 	'usr_only' => 'usr_only',
 	'usr_password' => 'usr_password',
+	'usr_password_session' => 'usr_password_session',
 	
 	'app_time_zone' => 'app_time_zone',
 

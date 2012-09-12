@@ -43,6 +43,14 @@ if(isset($errors)) {
         
         <tr>
 
+            <td>User Session Password (leave blank if unchanged)</td>
+
+            <td><?php echo Form::input('session_password'); ?></td>
+
+        </tr>
+        
+        <tr>
+
             <td>Comments</td>
 
             <td><?php echo Form::textarea('comments', Arr::get($form_vals, 'comments', '')); ?></td>

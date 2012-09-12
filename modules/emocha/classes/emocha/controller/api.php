@@ -38,10 +38,16 @@ class Emocha_Controller_Api extends Controller {
 					if ($auth_type->content == Kohana::config('values.usr_only'))
 					{
 						$this->phone = Phone::get_by_user(Arr::get($_POST, 'usr'));
-					} elseif ($auth_type->content == Kohana::config('values.usr_password'))
+					} 
+					elseif ($auth_type->content == Kohana::config('values.usr_password'))
 					{
 						$this->phone = Phone::get_by_user_password(Arr::get($_POST, 'usr'), Arr::get($_POST, 'pwd'));
-					} else 
+					} 
+					elseif ($auth_type->content == Kohana::config('values.usr_password_session'))
+					{
+						$this->phone = Phone::get_by_user_password_session(Arr::get($_POST, 'usr'), Arr::get($_POST, 'pwd'), Arr::get($_POST, 'session_pwd'));
+					} 
+					else 
 					{
 						$json = View::factory('json/display', Json::response('ERR', Kohana::config('errors.wrong_auth_type')))->render();
 						echo $json;

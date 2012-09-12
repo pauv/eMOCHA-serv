@@ -24,11 +24,16 @@ class Model_Phone_Location extends ORM {
 	 *
 	 * @return array
 	 */
-	public static function get_dates_array() {
+	public static function get_dates_array($phone_id=0) {
 		
 			$dates = array();
-			$sql = "SELECT DISTINCT DATE(ts) as mydate FROM phone_locations";
-					$result = DB::query(Database::SELECT, $sql)->execute();
+			if($phone_id) {
+				$sql = "SELECT DISTINCT DATE(ts) as mydate FROM phone_locations WHERE phone_id=".$phone_id;
+			}
+			else {
+				$sql = "SELECT DISTINCT DATE(ts) as mydate FROM phone_locations";
+			}
+			$result = DB::query(Database::SELECT, $sql)->execute();
 			foreach($result->as_array() as $row) {
 				$dates[$row['mydate']] = $row['mydate'];
 			}

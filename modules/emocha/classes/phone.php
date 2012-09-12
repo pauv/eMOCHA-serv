@@ -209,7 +209,7 @@ class Phone
         /**
 		 * get_by_user_password()
 		 *
-		 * Get phone based on usr
+		 * Get phone based on usr and password
          *
 		 * @return object or false
 		 */
@@ -226,5 +226,26 @@ class Phone
 			return $phone->loaded() ? $phone: FALSE;
 		}		
 
+
+	 /**
+		 * get_by_user_password_session()
+		 *
+		 * Get phone based on usr, password, and session password
+         *
+		 * @return object or false
+		 */
+        public static function get_by_user_password_session($usr, $pwd = '', $session_pwd) {
+        
+        	if(! $usr || ! $pwd || ! $session_pwd) return FALSE;
+        	
+			$phone = ORM::factory('phone')
+								->where('imei_md5', '=', $usr)
+								->and_where('pwd', '=', DB::expr("PASSWORD('$pwd')"))
+								->and_where('session_pwd', '=', DB::expr("PASSWORD('$session_pwd')"))
+								->and_where('validated', '=', 1)
+								->find();
+			
+			return $phone->loaded() ? $phone: FALSE;
+		}	
 		
 	}

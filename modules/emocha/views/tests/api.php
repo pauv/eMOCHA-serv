@@ -9,6 +9,8 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+	
 	<input type="submit" />
 </form>
 
@@ -18,6 +20,8 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+	
 	path0: <input type="text" name="path0" value="/sdcard/test.txt" /><br/>	
 	file0: <input type="file" name="file0" /><br/>
 	<input type="submit" />
@@ -30,6 +34,8 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+	
 	<input type="submit" />
 </form>
 
@@ -39,6 +45,7 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	<input type="submit" />
 </form>
 
@@ -48,6 +55,7 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	<input type="submit" />
 </form>
 
@@ -59,6 +67,7 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	<input type="submit" />
 </form>
 
@@ -69,6 +78,7 @@
 													));?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	Language: <?php echo Form::select('language', array('en'=>'en','es'=>'es')); ?><br />
 	<input type="submit" />
 </form>
@@ -158,6 +168,7 @@
 <?php echo Form::open('/api/get_last_upload_ts');?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	<input type="submit" />
 </form>
 
@@ -186,6 +197,7 @@
 <?php echo Form::open('/api/register_alerts_id');?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	registration_id: <textarea name="registration_id"></textarea>
 	<input type="submit" />
 </form>
@@ -195,6 +207,7 @@
 <?php echo Form::open('/api/confirm_alert');?>
 	usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
 	pwd: <input type="text" name="pwd" value="" /><br/>
+	session_pwd: <input type="text" name="session_pwd" value="" /><br/>
 	alert_id: <input type="text" name="alert_id" value="" />
 	<input type="submit" />
 </form>
