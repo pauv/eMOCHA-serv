@@ -1,0 +1,3 @@
+-- EXACT only 
+ALTER TABLE `patients` ADD `activation_ts` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;
+ALTER TABLE `patients` ADD `deactivation_ts` DATETIME NOT NULL;
