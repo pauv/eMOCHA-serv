@@ -103,7 +103,7 @@ class Model_Patient extends ORM {
 	
 	public static function get_code_val_array() {
 			$arr = array(''=>'');
-			$patients = ORM::factory('patient')->find_all();
+			$patients = ORM::factory('patient')->where('active','=',1)->find_all();
 			foreach($patients as $patient) {
 				$arr[$patient->code] = $patient->code;
 			}

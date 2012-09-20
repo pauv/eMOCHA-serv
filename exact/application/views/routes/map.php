@@ -84,18 +84,27 @@
 <div id="inner_content">
 
 <div id="map_canvas" class="column"></div>
-<div id="map_filters" class="column">
-			<h3>Filter</h3>
+<script type="text/javascript">
+
+	function display_form() {
+		patient_code = $('#patient_code').val();
+		url = '<?php echo Url::site('main/map_form') ?>/'+patient_code;
+		$.post(url, function(data) {
+		  $('#map_filters').html(data);
+		});
+
+	}
+</script>
+<div id="map_filters" class="column" id="map_form">
+			
+			
+			<?php echo View::factory('routes/form')
+				->set('patients', $patients)
+				->set('patient_code', $patient_code)
+				->set('dates', $dates)
+				->set('date', $date)
+				->render(); ?>
 				
-				<form method="post" action="<?php echo Url::site('main/map') ?>">
-				Patient<br/>
-				<?php echo Form::select('patient_code', $patients, $patient_code); ?>
-				<br /><br />
-				Date<br/>
-				<?php echo Form::select('date', array_merge(array('0'=>'All'), $dates), $date); ?>
-				<br /><br />
-				<input type="submit" value="search" />
-			</form>
 			
 </div>
 

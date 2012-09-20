@@ -22,7 +22,7 @@ class Controller_Main extends Controller_Site {
 	
 	
 	/*
-	 * Demo of presenting households on a map
+	 * Patients routes
 	 * */
 	public function action_map() {
 		
@@ -40,13 +40,21 @@ class Controller_Main extends Controller_Site {
 				$locations = ORM::factory('phone_location')
 					->where('phone_id','=',$patient->phone_id)
 					->and_where(DB::expr('DATE(ts)'),'=',$post['date'])
-					->order_by('ts', 'ASC')
+					->and_where('ts','>=',$patient->activation_ts);
+				if($patient->active==0) {
+					$locations = $locations->and_where('ts','<=',$patient->deactivation_ts);
+				}
+				$locations = $locations->order_by('ts', 'ASC')
 					->find_all();
 			}
 			else {
 				$locations = ORM::factory('phone_location')
 					->where('phone_id','=',$patient->phone_id)
-					->order_by('ts', 'ASC')
+					->and_where('ts','>=',$patient->activation_ts);
+					if($patient->active==0) {
+						$locations = $locations->and_where('ts','<=',$patient->deactivation_ts);
+					}
+					$locations = $locations->order_by('ts', 'ASC')
 					->find_all();
 			}
 		}
@@ -57,5 +65,25 @@ class Controller_Main extends Controller_Site {
 		$content->patient_code = $patient_code;
 		$content->date = $date;
 	}
+	
+	// ajax form update
+	public function action_map_form($patient_code) {
+		
+		$content = $this->template->content = View::factory('routes/form');
+		$this->auto_render=FALSE;
+		$date = '';
+		
+		$patient = ORM::factory('patient',$patient_code);
+		$phone_id = $patient->phone_id;
+
+		$content->patients = Model_Patient::get_code_val_array();
+		$content->dates = Model_Phone_Location::get_dates_array($phone_id);
+		$content->patient_code = $patient_code;
+		$content->date = $date;
+		
+		echo $content->render();
+	}
+	
+	
 	
 }

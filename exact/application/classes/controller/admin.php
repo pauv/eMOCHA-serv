@@ -144,6 +144,7 @@ class Controller_Admin extends Emocha_Controller_Admin {
 						->where('id','=',$id)
 						->find();
 		$patient->active = 0;
+		$patient->deactivation_ts = date('Y-m-d H:i:s', time());
 		$patient->save();
 		Request::instance()->redirect('admin/patients/deleted');
 		
