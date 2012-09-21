@@ -7,4 +7,5 @@ modules/emocha/config/email.php
 modules/emocha/config/emocha.php
 modules/emocha/config/sms.php
 app-example/sdcard/**/*
+exactpn/
 
