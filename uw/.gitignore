@@ -1,7 +1,0 @@
-sdcard/**/*
-application/config/**/*
-application/bootstrap.php
-application/cache/**/*
-application/logs/**/*
-.htaccess
-
