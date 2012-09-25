@@ -6,7 +6,7 @@
 	<tr>
 		<td colspan="4">No patients found.
 		<br /><br />
-		<button onclick="document.location.href='<?php echo Url::site('admin/edit_config'); ?>';">Add a config</button>
+		<button onclick="document.location.href='<?php echo Url::site('admin/edit_patient'); ?>';">Add a patient</button>
 		</td>
 	</tr>
 <?php		
