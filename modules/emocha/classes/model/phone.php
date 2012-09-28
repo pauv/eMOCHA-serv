@@ -7,7 +7,7 @@
  * @copyright  2010-2012 George Graham - gwgrahamx@gmail.com
  * @license    GNU General Public License - http://www.gnu.org/licenses/gpl.html
  */  
-class Model_Phone extends ORM {
+class Model_Phone extends ORM_Encrypted {
 
 	protected $_table_name = 'phone';
 	protected $_sorting = array('last_connect_ts'=>'DESC');
@@ -18,7 +18,8 @@ class Model_Phone extends ORM {
 								'phone_locations'=>array()
 							);
 	
-	
+	// fields to be stored encrypted in DB
+	protected $_encrypted = array('session_pwd');
 	
 	/**
 	 * edit()
@@ -31,7 +32,7 @@ class Model_Phone extends ORM {
 	 * @param string
 	 * @param int
 	 */
-	public function edit($imei, $validated, $password, $session_password, $comments, $enable_alerts) {
+	public function edit($imei, $validated, $password, $session_pwd, $comments, $enable_alerts) {
         
         if(!$this->loaded()) {
         	$this->creation_ts = time();
@@ -41,18 +42,13 @@ class Model_Phone extends ORM {
         $this->validated = $validated;
         $this->comments = $comments;
         $this->enable_alerts = $enable_alerts;
+        $this->session_pwd = $session_pwd;
         $this->save();
         
         // update the passwords
         if($password) {
 			$sql = "UPDATE ".$this->_table_name."
 					SET pwd = PASSWORD('".$password."')
-					WHERE id=".$this->id;
-			$result = DB::query(Database::UPDATE, $sql)->execute();
-		}
-		 if($session_password) {
-			$sql = "UPDATE ".$this->_table_name."
-					SET session_pwd = PASSWORD('".$session_password."')
 					WHERE id=".$this->id;
 			$result = DB::query(Database::UPDATE, $sql)->execute();
 		}

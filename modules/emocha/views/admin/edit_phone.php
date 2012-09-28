@@ -43,9 +43,9 @@ if(isset($errors)) {
         
         <tr>
 
-            <td>User Session Password (leave blank if unchanged)</td>
+            <td>User Session Password</td>
 
-            <td><?php echo Form::input('session_password'); ?></td>
+            <td><?php echo Form::input('session_pwd', Arr::get($form_vals, 'session_pwd', '')); ?></td>
 
         </tr>
         

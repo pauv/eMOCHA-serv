@@ -53,8 +53,8 @@ class Phone
         }
         
         
-        
-        /**
+		
+		/**
 		 * activate_phone()
 		 *
 		 * Activate phone
@@ -77,10 +77,23 @@ class Phone
 			// check if already in database
 			$phone = ORM::factory('phone')->where('imei', '=', $imei)->find();
 			if ($phone->loaded()) {
-				return array(
-						'msg'=>Kohana::message('phone', 'activate.phone_activation_exists'),
-						'phone_id'=>$phone->id
-						);
+			
+				$auth_type = Config::get('platform', Kohana::config('values.authentication'));
+				// pass session password to phone if required 
+				if($auth_type=='usr_password_session') {
+					return array(
+							'msg'=>Kohana::message('phone', 'activate.phone_activation_exists'),
+							'phone_id'=>$phone->id,
+							'session_pwd'=>$phone->session_pwd
+							);
+				}
+				else {
+					return array(
+							'msg'=>Kohana::message('phone', 'activate.phone_activation_exists'),
+							'phone_id'=>$phone->id
+							);
+				}
+			
 			}				
 			
 			
@@ -234,18 +247,23 @@ class Phone
          *
 		 * @return object or false
 		 */
-        public static function get_by_user_password_session($usr, $pwd = '', $session_pwd) {
+        public static function get_by_user_password_session($usr, $pwd = '', $session_pwd='') {
         
         	if(! $usr || ! $pwd || ! $session_pwd) return FALSE;
         	
 			$phone = ORM::factory('phone')
 								->where('imei_md5', '=', $usr)
 								->and_where('pwd', '=', DB::expr("PASSWORD('$pwd')"))
-								->and_where('session_pwd', '=', DB::expr("PASSWORD('$session_pwd')"))
 								->and_where('validated', '=', 1)
 								->find();
 			
-			return $phone->loaded() ? $phone: FALSE;
+			// check session_pwd once unencrypted
+			if($phone->loaded()) {
+				if($phone->session_pwd == $session_pwd) {
+					return TRUE;
+				}
+			}
+			return FALSE;
 		}	
 		
 	}

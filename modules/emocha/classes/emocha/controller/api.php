@@ -159,7 +159,12 @@ class Emocha_Controller_Api extends Controller {
     		$json = View::factory('json/display', Json::response('ERR', $msg, array('phone_id'=>0)))->render();
     	}
     	else {
-			$json = View::factory('json/display', Json::response('OK', $msg, array('phone_id'=>$phone_id)))->render();
+    		if(isset($result['session_pwd'])) {
+    			$json = View::factory('json/display', Json::response('OK', $msg, array('phone_id'=>$phone_id, 'session_pwd'=>$result['session_pwd'])))->render();
+    		}
+    		else {
+    			$json = View::factory('json/display', Json::response('OK', $msg, array('phone_id'=>$phone_id)))->render();
+    		}
 		}
 		$this->request->response = $json;
 		
