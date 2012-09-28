@@ -67,7 +67,7 @@ class Phone
         	
         	// check valid code
 			if ( ! Phone::is_imei_valid($imei) && ! Phone::is_cdma_valid($imei)) {
-				echo $imei;
+				//echo $imei;
 				return array(
 						'msg'=>Kohana::message('phone', 'activate.phone_activation_bad_imei'),
 						'phone_id'=>0
