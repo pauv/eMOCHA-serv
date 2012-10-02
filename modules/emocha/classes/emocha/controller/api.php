@@ -705,4 +705,60 @@ class Emocha_Controller_Api extends Controller {
 		
 	}
 
+	/*
+	* action_get_contacts()
+	*
+	*	returns a list of contacts associated to the given form, together to the common to all phones contacts (those with public=1)
+	*/
+	public function action_get_contacts() {
+		$phone = $this->phone;
+		$response = array();
+		//get contacts by phone
+		$pcontacts = ORM::factory('phone_contact')->where('phone_id', '=', $phone->id)->find_all();
+		foreach($pcontacts as $pcontact) {
+			$contact = ORM::factory('contact')->where('id','=',$pcontact->contact_id)->find();
+			if ($contact->loaded()) {
+				$response[] = $contact->get_contact();
+			}
+		}
+
+		//get public contacts
+		$pub_contacts =  ORM::factory('contact')->where('public','=',1)->find_all();
+		foreach($pub_contacts as $pub_contact) {
+				$response[] = $pub_contact->get_contact();
+		}
+
+		//build response
+		$json = Json::response_array('OK', 'get_contacts', $response, 'data', 'contacts');
+		$this->request->response = $json;
+	}
+
+
+	/*
+	* action_get_contact_details()
+	*
+	*	returns details of a given contact
+	*/
+	public function action_get_contact_details() {
+		$phone = $this->phone;
+
+		if(! $cid = trim(Arr::get($_POST,"contact_id",''))) {
+			$json = View::factory('json/display', Json::response('ERR', 'contact_id is empty'))->render();
+			$this->request->response = $json;
+			return;
+		}
+
+		$contact = ORM::factory('contact')->where('id','=',$cid)->find();
+		if ($contact->loaded()) {
+			$response = array();
+			$response[] = $contact->get_contact();
+			$json = View::factory('json/display', Json::response('OK', 'get_contact_details', $response))->render();
+			$this->request->response = $json;
+		}	else {
+			//contact does not exist!
+			$json = View::factory('json/display', Json::response('ERR', 'contact_id does not exist'))->render();
+			$this->request->response = $json;
+		}
+
+	}
 }

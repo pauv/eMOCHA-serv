@@ -15,7 +15,8 @@ class Model_Phone extends ORM_Encrypted {
 	
 	protected $_has_many = array (
 								'form_datas'=>array('foreign_key'=>'uploader_phone_id'),
-								'phone_locations'=>array()
+								'phone_locations'=>array(),
+								'contacts' => array('model' => 'contact', 'through' => 'phone_contacts')
 							);
 	
 	// fields to be stored encrypted in DB

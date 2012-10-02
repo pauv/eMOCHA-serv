@@ -348,6 +348,33 @@ CREATE TABLE IF NOT EXISTS `form_data_files` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE IF NOT EXISTS `contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL COMMENT 'contact''s name',
+  `phone_number` varchar(15) NOT NULL COMMENT 'contact''s phone number',
+	`public` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'whether it is visible to all devices (1) or not (0)',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='basic contact details table';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_phone`: tells what contacts have each phone. When contact.public=1, contact should not be inserted.
+--
+
+CREATE TABLE IF NOT EXISTS `phone_contacts` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `phone_id` int(11) NOT NULL,
+  `contact_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='relational table contacts per phone';
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 

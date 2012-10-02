@@ -220,6 +220,30 @@
 	<input type="submit" />
 </form>
 
+<h2>get_contacts</h2>
+<?php echo Form::open('/api/get_contacts');?>
+  usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+  pwd: <input type="text" name="pwd" value="" /><br/>
+  session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+  <input type="submit" />
+</form>
+
+<h2>get_contact_details</h2>
+<?php echo Form::open('/api/get_contact_details');?>
+  usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+  pwd: <input type="text" name="pwd" value="" /><br/>
+  session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+  contact_id: <input type="text" name="contact_id" value="" /><br/>
+  <input type="submit" />
+</form>
+
+<h2>get_patient_staff</h2>
+<?php echo Form::open('/api/get_patient_staff');?>
+  usr: <input type="text" name="usr" value="<?php echo $usr; ?>" /><br/>
+  pwd: <input type="text" name="pwd" value="" /><br/>
+  session_pwd: <input type="text" name="session_pwd" value="" /><br/>
+  <input type="submit" />
+</form>
 
 </body>
 
