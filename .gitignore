@@ -7,4 +7,9 @@ modules/emocha/config/email.php
 modules/emocha/config/emocha.php
 modules/emocha/config/sms.php
 app-example/sdcard/**/*
+fsfbh/
+fsfbc/
+dev/
+emocha_logo.png
+index.html
 
