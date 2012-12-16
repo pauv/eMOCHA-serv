@@ -8,4 +8,9 @@ modules/emocha/config/emocha.php
 modules/emocha/config/sms.php
 app-example/sdcard/**/*
 exactpn/
+fsfbh/
+fsfbc/
+dev/
+emocha_logo.png
+index.html
 

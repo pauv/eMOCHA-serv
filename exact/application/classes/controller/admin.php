@@ -61,19 +61,6 @@ class Controller_Admin extends Emocha_Controller_Admin {
 			if ( ! $validation->check())
 			{
 				$errors = $validation->errors('patient');
-				
-				// customise phone_id error
-				// to show patient already using phone
-				if(isset($errors['phone_id'])) {
-					$phone_patient = ORM::factory('patient')
-						->where('phone_id','=',$post['phone_id'])
-						->and_where('active','=',1)
-						->find();
-					if($phone_patient->loaded()) {
-						$errors['phone_id'] .= " (patient code: ".$phone_patient->code.")";
-					}
-				}
-				
 			}
 			else 
 			{
@@ -126,9 +113,7 @@ class Controller_Admin extends Emocha_Controller_Admin {
 		}
 		
 		$content = $this->template->content = View::factory('admin/delete_patient_confirm');
-		$content->patient = ORM::factory('patient')
-						->where('id','=',$id)
-						->find();
+		$content->patient = ORM::factory('patient', $id);
 
 	}
 	
@@ -140,12 +125,8 @@ class Controller_Admin extends Emocha_Controller_Admin {
 			redirect('admin/patients');
 		}
 		
-		$patient = ORM::factory('patient')
-						->where('id','=',$id)
-						->find();
-		$patient->active = 0;
-		$patient->deactivation_ts = date('Y-m-d H:i:s', time());
-		$patient->save();
+		$patient = ORM::factory('patient', $id);
+		$patient->delete();
 		Request::instance()->redirect('admin/patients/deleted');
 		
 		
