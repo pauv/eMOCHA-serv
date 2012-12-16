@@ -32,6 +32,30 @@ FORM {
     margin: 0px;
 }
 
+.rot0 {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	rotation: 0deg;
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0);
+}
+.rot90 {
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	rotation: 90deg;
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+}
+.rot180 {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	rotation: 180deg;
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+.rot270 {
+	-webkit-transform: rotate(270deg);
+	-moz-transform: rotate(270deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
 input.button {
 	background-color: #669933;
      -moz-border-radius: 5px;
