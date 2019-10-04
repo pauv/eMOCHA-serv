@@ -26,7 +26,7 @@
     "sizzle": "1.1.x"
   },
   "devDependencies": {
-    "uglify-js": "1.2.3",
+    "uglify-js": "3.6.0",
     "vows": "0.6.x",
     "canvas": "0.12.1"
   },
