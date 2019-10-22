@@ -28,7 +28,7 @@
   "devDependencies": {
     "uglify-js": "3.6.0",
     "vows": "0.6.x",
-    "canvas": "0.12.1"
+    "canvas": "2.6.0"
   },
   "scripts": {
     "test": "./node_modules/vows/bin/vows"
